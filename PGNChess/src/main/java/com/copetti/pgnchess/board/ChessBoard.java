@@ -22,4 +22,5 @@ public class ChessBoard {
 	public ChessPiece at(ChessFile c, ChessRank chessRank) {
 		return pieces.get(new ChessSquare(c, chessRank));
 	}
+	
 }

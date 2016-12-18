@@ -6,7 +6,7 @@ import com.copetti.pgnchess.pieces.ChessPiece;
 public class BoardPrinter
 {
 
-	public static String print(ChessBoard board)
+	public String print(ChessBoard board)
 	{
 		String chessBoard = "";
 
@@ -14,18 +14,19 @@ public class BoardPrinter
 		{
 			for( int x = 0; x < 8; ++x )
 			{
-				chessBoard += getString(board, x, y) + " ";
+				chessBoard += getString(board, x, y);
+				chessBoard += x < 7 ? " " : ""; 
 			}
-			chessBoard += System.lineSeparator();
+			chessBoard += y > 0 ?  System.lineSeparator() : "";
 		}
 		return chessBoard;
 	}
 
-	private static String getString(ChessBoard board, int x, int y)
+	private String getString(ChessBoard board, int x, int y)
 	{
 		ChessPiece piece;
-		if ((piece = board.at(x, y)) == null) return "_";
+		if ((piece = board.at(x, y)) == null) return "__";
 
-		return piece.getChessPieceType().getPgnFormat();
+		return piece.getColor().shortString() + piece.getChessPieceType().getPgnFormat();
 	}
 }
