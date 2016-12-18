@@ -9,14 +9,11 @@ import akka.actor.Props;
 import akka.actor.Terminated;
 import scala.concurrent.Future;
 
+public class App {
 
-public class App
-{
-
-	public static void main(String[] args) throws Exception
-	{
+	public static void main(String[] args) throws Exception {
 		System.out.println("Run Forest, Run!");
-
+		System.out.println("This is the beginning!");
 		ActorSystem system = ActorSystem.create("MyActor");
 
 		ActorRef ref = system.actorOf(Props.create(ChessBoard.class));
@@ -24,11 +21,11 @@ public class App
 
 		Future<Terminated> terminate = system.terminate();
 
-		while (!terminate.isCompleted())
-		{
+		while (!terminate.isCompleted()) {
 			System.out.println("Waiting!");
-//			Thread.sleep(100);
+			Thread.sleep(100);
 		}
-		System.out.println("The end!");
+
+		System.out.println("This is the END!");
 	}
 }
