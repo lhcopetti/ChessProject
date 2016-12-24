@@ -9,13 +9,15 @@ import org.junit.Test;
 
 public class UnitVectorInterpolerTest {
 
+	private UnitVectorInterpoler interpoler = new UnitVectorInterpoler();
+
 	@Test
 	public void testGetIntermediatePointsHorizontal() {
 
 		Vector origin = new Vector(0, 0);
 		Vector target = new Vector(7, 0);
 
-		List<Vector> intermediate = UnitVectorInterpoler.getIntermediatePoints(origin, target);
+		List<Vector> intermediate = interpoler.getIntermediatePoints(origin, target);
 
 		assertTrue(intermediate.contains(new Vector(1, 0)));
 		assertTrue(intermediate.contains(new Vector(2, 0)));
@@ -33,7 +35,7 @@ public class UnitVectorInterpolerTest {
 		Vector origin = new Vector(3, 0);
 		Vector target = new Vector(7, 0);
 
-		List<Vector> intermediate = UnitVectorInterpoler.getIntermediatePoints(origin, target);
+		List<Vector> intermediate = interpoler.getIntermediatePoints(origin, target);
 
 		assertTrue(intermediate.contains(new Vector(4, 0)));
 		assertTrue(intermediate.contains(new Vector(5, 0)));
@@ -47,7 +49,7 @@ public class UnitVectorInterpolerTest {
 		Vector origin = new Vector(0, 0);
 		Vector target = new Vector(7, 7);
 
-		List<Vector> intermediate = UnitVectorInterpoler.getIntermediatePoints(origin, target);
+		List<Vector> intermediate = interpoler.getIntermediatePoints(origin, target);
 
 		assertTrue(intermediate.contains(new Vector(1, 1)));
 		assertTrue(intermediate.contains(new Vector(2, 2)));
@@ -64,7 +66,7 @@ public class UnitVectorInterpolerTest {
 		Vector origin = new Vector(7, 0);
 		Vector target = new Vector(0, 7);
 
-		List<Vector> intermediate = UnitVectorInterpoler.getIntermediatePoints(origin, target);
+		List<Vector> intermediate = interpoler.getIntermediatePoints(origin, target);
 
 		assertTrue(intermediate.contains(new Vector(6, 1)));
 		assertTrue(intermediate.contains(new Vector(5, 2)));
@@ -81,17 +83,17 @@ public class UnitVectorInterpolerTest {
 		Vector origin = new Vector(4, 3);
 		Vector target = new Vector(3, 4);
 
-		List<Vector> intermediate = UnitVectorInterpoler.getIntermediatePoints(origin, target);
+		List<Vector> intermediate = interpoler.getIntermediatePoints(origin, target);
 		assertEquals(0, intermediate.size());
 	}
 
 	@Test
 	public void testGetIntermediatePointsInvalidKnight() {
-		
+
 		Vector origin = new Vector(5, 2);
 		Vector target = new Vector(4, 4);
-		
-		List<Vector> intermediate = UnitVectorInterpoler.getIntermediatePoints(origin, target);
+
+		List<Vector> intermediate = interpoler.getIntermediatePoints(origin, target);
 		assertEquals(null, intermediate);
 	}
 
@@ -99,8 +101,8 @@ public class UnitVectorInterpolerTest {
 	public void testGetIntermediatePointsInvalidLongKnight() {
 		Vector origin = new Vector(5, 2);
 		Vector target = new Vector(3, 6);
-		
-		List<Vector> intermediate = UnitVectorInterpoler.getIntermediatePoints(origin, target);
+
+		List<Vector> intermediate = interpoler.getIntermediatePoints(origin, target);
 		assertEquals(null, intermediate);
 	}
 }
