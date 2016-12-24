@@ -6,9 +6,8 @@ import org.junit.Test;
 
 import com.copetti.pgnchess.board.builder.ChessBoardBuilder;
 import com.copetti.pgnchess.pieces.ChessColor;
-import com.copetti.pgnchess.pieces.King;
-import com.copetti.pgnchess.pieces.Pawn;
-import com.copetti.pgnchess.pieces.Queen;
+import com.copetti.pgnchess.pieces.ChessPiece;
+import com.copetti.pgnchess.pieces.ChessPieceType;
 
 public class ChessBoardTest {
 
@@ -17,9 +16,9 @@ public class ChessBoardTest {
 
 		ChessBoardBuilder builder = ChessBoardBuilder.newBuilder();
 
-		builder.fill(new ChessRank(2)).with(new Pawn(ChessColor.BLACK));
-		builder.at(new ChessSquare("d1")).put(new Queen(ChessColor.BLACK));
-		builder.at(new ChessSquare("e1")).put(new King(ChessColor.BLACK));
+		builder.fill(new ChessRank(2)).with(new ChessPiece(ChessPieceType.PAWN, ChessColor.BLACK));
+		builder.at(new ChessSquare("d1")).put(new ChessPiece(ChessPieceType.QUEEN, ChessColor.BLACK));
+		builder.at(new ChessSquare("e1")).put(new ChessPiece(ChessPieceType.KING, ChessColor.BLACK));
 
 		ChessBoard board = builder.build();
 

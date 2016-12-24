@@ -20,7 +20,11 @@ public class ChessBoard {
 	}
 
 	public ChessPiece at(ChessFile c, ChessRank chessRank) {
-		return pieces.get(new ChessSquare(c, chessRank));
+		return at(new ChessSquare(c, chessRank));
 	}
-	
+
+	public ChessPiece at(ChessSquare chessSquare) {
+		return pieces.get(chessSquare);
+	}
+
 }

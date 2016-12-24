@@ -6,9 +6,8 @@ public class VanillaChessFactory implements ChessFactory {
 
 	@Override
 	public ChessBoard newChessBoard() {
-		
+
 		return null;
-		
 	}
 
 }
