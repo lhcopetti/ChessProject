@@ -7,14 +7,14 @@ import java.util.stream.Stream;
 
 import com.copetti.pgnchess.board.ChessBoard;
 import com.copetti.pgnchess.board.ChessSquare;
-import com.copetti.pgnchess.pieces.moves.restriction.MoveRestriction;
+import com.copetti.pgnchess.pieces.moves.prerequisites.MovePrerequisite;
 
 import lombok.Getter;
 
 public class MoveVector {
 
 	private @Getter boolean isRepetable;
-	private List<MoveRestriction> restrictions;
+	private List<MovePrerequisite> prerequisites;
 	private Point offset;
 
 	public MoveVector(int x, int y) {
@@ -26,36 +26,36 @@ public class MoveVector {
 		this.isRepetable = isRepetable;
 		this.offset = offset;
 
-		restrictions = new ArrayList<>();
+		prerequisites = new ArrayList<>();
 	}
 
-	public boolean hasRestriction() {
-		return !restrictions.isEmpty();
+	public boolean hasPrerequisite() {
+		return !prerequisites.isEmpty();
 	}
 
 	public ChessSquare add(ChessSquare chessSquare) {
 		return new ChessSquare(chessSquare.getX() + offset.x, chessSquare.getY() + offset.y);
 	}
 
-	public void addRestriction(MoveRestriction firstMove) {
+	public void addRestriction(MovePrerequisite firstMove) {
 
 		if (firstMove == null)
 			return;
 
-		this.restrictions.add(firstMove);
+		this.prerequisites.add(firstMove);
 	}
 
-	public Stream<MoveRestriction> getStream() {
-		return restrictions.stream();
+	public Stream<MovePrerequisite> getStream() {
+		return prerequisites.stream();
 	}
 
-	public boolean applyRestrictions(ChessSquare self, ChessBoard board) {
+	public boolean checkPrerequisite(ChessSquare self, ChessBoard board) {
 		
-		if (!hasRestriction())
-			return false;
+		if (!hasPrerequisite())
+			return true;
 
 		ChessSquare target = add(self);
-		return restrictions.stream().anyMatch(s -> s.apply(self, board, target));
+		return prerequisites.stream().allMatch(s -> s.apply(self, board, target));
 	}
 	
 }
