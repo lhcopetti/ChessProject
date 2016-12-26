@@ -11,17 +11,21 @@ import com.copetti.pgnchess.pieces.moves.prerequisites.MovePrerequisite;
 
 import lombok.Getter;
 
-public class MoveVector {
+
+public class MoveVector
+{
 
 	private @Getter boolean isRepetable;
 	private List<MovePrerequisite> prerequisites;
 	private Point offset;
 
-	public MoveVector(int x, int y) {
+	public MoveVector(int x, int y)
+	{
 		this(new Point(x, y), false);
 	}
 
-	public MoveVector(Point offset, boolean isRepetable) {
+	public MoveVector(Point offset, boolean isRepetable)
+	{
 
 		this.isRepetable = isRepetable;
 		this.offset = offset;
@@ -29,33 +33,48 @@ public class MoveVector {
 		prerequisites = new ArrayList<>();
 	}
 
-	public boolean hasPrerequisite() {
+	public boolean hasPrerequisite()
+	{
 		return !prerequisites.isEmpty();
 	}
 
-	public ChessSquare add(ChessSquare chessSquare) {
-		return new ChessSquare(chessSquare.getX() + offset.x, chessSquare.getY() + offset.y);
+	public ChessSquare add(ChessSquare chessSquare)
+	{
+		return add(chessSquare, 1);
 	}
 
-	public void addRestriction(MovePrerequisite firstMove) {
+	public ChessSquare add(ChessSquare chessSquare, int i)
+	{
+		return new ChessSquare(chessSquare.getX() + offset.x * i,
+				chessSquare.getY() + offset.y * i);
+	}
 
-		if (firstMove == null)
-			return;
+	public void addPrerequisite(MovePrerequisite firstMove)
+	{
+
+		if (firstMove == null) return;
 
 		this.prerequisites.add(firstMove);
 	}
 
-	public Stream<MovePrerequisite> getStream() {
+	public Stream<MovePrerequisite> getStream()
+	{
 		return prerequisites.stream();
 	}
 
-	public boolean checkPrerequisite(ChessSquare self, ChessBoard board) {
-		
-		if (!hasPrerequisite())
-			return true;
+	public boolean checkPrerequisite(ChessSquare self, ChessBoard board,
+			ChessSquare target)
+	{
 
-		ChessSquare target = add(self);
-		return prerequisites.stream().allMatch(s -> s.apply(self, board, target));
+		if (!hasPrerequisite()) return true;
+
+		return prerequisites.stream()
+				.allMatch(s -> s.apply(self, board, target));
 	}
-	
+
+	public void setRepeatable()
+	{
+		this.isRepetable = true;
+	}
+
 }

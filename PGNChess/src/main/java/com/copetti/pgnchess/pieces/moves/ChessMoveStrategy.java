@@ -1,6 +1,5 @@
 package com.copetti.pgnchess.pieces.moves;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,20 +10,16 @@ import com.copetti.pgnchess.math.UnitVectorInterpoler;
 import com.copetti.pgnchess.math.Vector;
 import com.copetti.pgnchess.pieces.moves.prerequisites.CapturePrerequisite;
 import com.copetti.pgnchess.pieces.moves.prerequisites.EmptySquarePrerequisite;
-import com.copetti.pgnchess.pieces.moves.prerequisites.MovePrerequisite;
 
 
 public abstract class ChessMoveStrategy
 {
-
-	protected List<MoveVector> moves;
 
 	EmptySquarePrerequisite emptyPrerequisite;
 	CapturePrerequisite capturePrerequisite;
 
 	public ChessMoveStrategy()
 	{
-		moves = new ArrayList<>();
 		emptyPrerequisite = new EmptySquarePrerequisite();
 		capturePrerequisite = new CapturePrerequisite();
 	}
@@ -34,29 +29,52 @@ public abstract class ChessMoveStrategy
 
 		Set<ChessSquare> availableMoves = new HashSet<>();
 
-		for( MoveVector m : moves )
+		for( MoveVector m : doGetMoves() )
 		{
+			int repetition = 1;
 
-			if (computeMoveValidity(m, self, board))
-				availableMoves.add(m.add(self));
+			while (true)
+			{
 
+				if (!targetSquareIsWithinBounds(m, self, repetition)) break;
+
+				ChessSquare target = m.add(self, repetition++);
+
+				if (!computeMoveValidity(self, board, target)) break;
+
+				if (!m.checkPrerequisite(self, board, target)) break;
+
+				availableMoves.add(target);
+
+				if (!m.isRepetable()) break;
+			}
 		}
 
 		return availableMoves;
 	}
 
-	private boolean computeMoveValidity(MoveVector moveVector, ChessSquare self,
-			ChessBoard board)
+	private boolean targetSquareIsWithinBounds(MoveVector m, ChessSquare self,
+			int repetition)
 	{
-		ChessSquare target = moveVector.add(self);
+		try
+		{
+			m.add(self, repetition);
+			return true;
+		}
+		catch (IllegalArgumentException e)
+		{
+			return false;
+		}
+	}
 
+	private boolean computeMoveValidity(ChessSquare self, ChessBoard board,
+			ChessSquare target)
+	{
 		if (!computeIntermediateSquares(self, board, target)) return false;
 
 		if (!emptyPrerequisite.apply(self, board, target)
 				&& !capturePrerequisite.apply(self, board, target))
 			return false;
-
-		if (!moveVector.checkPrerequisite(self, board)) return false;
 
 		return true;
 	}
@@ -80,6 +98,6 @@ public abstract class ChessMoveStrategy
 				.allMatch(x -> emptyPrerequisite.apply(self, board, x));
 	}
 
-	protected abstract Set<ChessSquare> doGetMoves();
+	protected abstract Set<MoveVector> doGetMoves();
 
 }

@@ -6,12 +6,15 @@ import com.copetti.pgnchess.board.ChessBoard;
 import com.copetti.pgnchess.board.ChessSquare;
 import com.copetti.pgnchess.pieces.moves.ChessMoveStrategy;
 import com.copetti.pgnchess.pieces.moves.PawnMoveStrategy;
+import com.copetti.pgnchess.pieces.moves.RookMoveStrategy;
 
 import lombok.Getter;
 
-public enum ChessPieceType {
+
+public enum ChessPieceType
+{
 	PAWN("p", new PawnMoveStrategy()), //
-	ROOK("r", null), //
+	ROOK("r", new RookMoveStrategy()), //
 	BISHOP("b", null), //
 	KNIGHT("n", null), //
 	QUEEN("q", null), //
@@ -20,12 +23,14 @@ public enum ChessPieceType {
 	private @Getter String pgnFormat;
 	private ChessMoveStrategy chessMove;
 
-	private ChessPieceType(String pgnFormat, ChessMoveStrategy chessMove) {
+	private ChessPieceType(String pgnFormat, ChessMoveStrategy chessMove)
+	{
 		this.pgnFormat = pgnFormat;
 		this.chessMove = chessMove;
 	}
 
-	public Set<ChessSquare> getMoves(ChessSquare self, ChessBoard board) {
+	public Set<ChessSquare> getMoves(ChessSquare self, ChessBoard board)
+	{
 		return chessMove.getMoves(self, board);
 	}
 
