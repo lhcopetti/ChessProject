@@ -7,61 +7,32 @@ import java.util.function.BinaryOperator;
 import com.copetti.pgnchess.board.ChessBoard;
 import com.copetti.pgnchess.board.ChessSquare;
 
-
-public class CompositePrerequisite extends MovePrerequisite
-{
-
-	private static final BinaryOperator<Boolean> andReduce = new BinaryOperator<Boolean>()
-	{
-
-		@Override
-		public Boolean apply(Boolean t, Boolean u)
-		{
-			return t && u;
-		}
-	};
-
-	private static final BinaryOperator<Boolean> orReduce = new BinaryOperator<Boolean>()
-	{
-
-		@Override
-		public Boolean apply(Boolean t, Boolean u)
-		{
-			return t || u;
-		}
-	};
+public class CompositePrerequisite extends MovePrerequisite {
 
 	private List<MovePrerequisite> prerequisites;
-
 	private BinaryOperator<Boolean> reduceOperator;
 	private Boolean identity;
 
-	private CompositePrerequisite(BinaryOperator<Boolean> reduceOperator,
-			boolean identity)
-	{
+	private CompositePrerequisite(BinaryOperator<Boolean> reduceOperator, boolean identity) {
 		this.identity = identity;
 		this.reduceOperator = reduceOperator;
 		prerequisites = new ArrayList<>();
 	}
 
-	public static CompositePrerequisite newAndPrerequisite()
-	{
-		return new CompositePrerequisite(andReduce, true);
+	public static CompositePrerequisite newAndPrerequisite() {
+		return new CompositePrerequisite((x, y) -> x && y, true);
 	}
 
-	public static CompositePrerequisite newOrPrerequisite()
-	{
-		return new CompositePrerequisite(orReduce, false);
+	public static CompositePrerequisite newOrPrerequisite() {
+		return new CompositePrerequisite((x, y) -> x || y, false);
 	}
 
-	public void add(MovePrerequisite prerequisite)
-	{
+	public void add(MovePrerequisite prerequisite) {
 		prerequisites.add(prerequisite);
 	}
 
 	@Override
-	public boolean apply(ChessSquare self, ChessBoard board, ChessSquare target)
-	{
+	public boolean apply(ChessSquare self, ChessBoard board, ChessSquare target) {
 		return prerequisites //
 				.stream() //
 				.map(x -> x.apply(self, board, target)) //
