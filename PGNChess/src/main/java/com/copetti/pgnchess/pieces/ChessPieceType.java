@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.copetti.pgnchess.board.ChessBoard;
 import com.copetti.pgnchess.board.ChessSquare;
+import com.copetti.pgnchess.pieces.moves.BishopMoveStrategy;
 import com.copetti.pgnchess.pieces.moves.ChessMoveStrategy;
 import com.copetti.pgnchess.pieces.moves.PawnMoveStrategy;
 import com.copetti.pgnchess.pieces.moves.RookMoveStrategy;
@@ -15,7 +16,7 @@ public enum ChessPieceType
 {
 	PAWN("p", new PawnMoveStrategy()), //
 	ROOK("r", new RookMoveStrategy()), //
-	BISHOP("b", null), //
+	BISHOP("b", new BishopMoveStrategy()), //
 	KNIGHT("n", null), //
 	QUEEN("q", null), //
 	KING("k", null); //

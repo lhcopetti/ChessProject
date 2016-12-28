@@ -1,4 +1,4 @@
-package com.copetti.pgnchess.pieces;
+package com.copetti.pgnchess.pieces.moves;
 
 import java.util.Set;
 

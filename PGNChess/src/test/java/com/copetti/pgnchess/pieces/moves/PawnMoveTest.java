@@ -1,4 +1,4 @@
-package com.copetti.pgnchess.pieces;
+package com.copetti.pgnchess.pieces.moves;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,6 +7,9 @@ import java.util.Set;
 import com.copetti.pgnchess.board.ChessBoard;
 import com.copetti.pgnchess.board.ChessSquare;
 import com.copetti.pgnchess.board.builder.ChessBoardBuilder;
+import com.copetti.pgnchess.pieces.ChessColor;
+import com.copetti.pgnchess.pieces.ChessPiece;
+import com.copetti.pgnchess.pieces.ChessPieceType;
 
 public class PawnMoveTest extends ChessPieceMoveTest {
 

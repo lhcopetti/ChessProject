@@ -9,7 +9,6 @@ import com.copetti.pgnchess.board.ChessSquare;
 import com.copetti.pgnchess.board.builder.ChessBoardBuilder;
 import com.copetti.pgnchess.pieces.ChessColor;
 import com.copetti.pgnchess.pieces.ChessPiece;
-import com.copetti.pgnchess.pieces.ChessPieceMoveTest;
 import com.copetti.pgnchess.pieces.ChessPieceType;
 
 
