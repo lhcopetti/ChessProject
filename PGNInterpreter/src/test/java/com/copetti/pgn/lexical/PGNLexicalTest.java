@@ -19,19 +19,19 @@ public class PGNLexicalTest {
 	}
 
 	@Test
-	public void testSimpleMoves() {
+	public void testKnightMoveInvalid() {
 
 		PGNTokenizer tokenizer = new PGNTokenizer();
+		List<PGNToken> knightMove = tokenizer.tokenize("Ncc6");
+		assertFalse(new PGNLexical().execute(knightMove));
+	}
 
+	@Test
+	public void testKnightMove() {
+
+		PGNTokenizer tokenizer = new PGNTokenizer();
 		List<PGNToken> knightMove = tokenizer.tokenize("Nc6");
 		assertTrue(new PGNLexical().execute(knightMove));
-
-		// List<PGNToken> knightMove = tokenizer.tokenize("");
-		//
-		// List<PGNToken> kingMove = tokenizer.tokenize("");
-
-//		List<PGNToken> pawnMove = tokenizer.tokenize("");
-//		assertTrue(new PGNLexical().execute(pawnMove));
 	}
 
 }

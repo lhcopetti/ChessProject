@@ -27,4 +27,10 @@ public enum TokenTypes {
 				.filter(x -> x.name().replaceAll("_", "").toLowerCase().equals(name)) //
 				.findFirst(); //
 	}
+
+	@Override
+	public String toString() {
+		return this.name().replaceAll("CHESS_", "").toLowerCase();
+	}
+
 }

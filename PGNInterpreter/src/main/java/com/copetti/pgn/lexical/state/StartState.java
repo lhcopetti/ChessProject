@@ -7,17 +7,19 @@ import com.copetti.pgn.tokenizer.PGNToken;
 
 public class StartState extends LexicalState {
 
-	
-	Optional<LexicalState> onExecute(List<PGNToken> tokens)
-	{
-		PGNToken head = tokens.get(0);
-		
-		switch(head.getTokenType())
-		{
-		case CHESS_FILE:
-			return new ChessPieceState(tokens);
-		}
-		
+	public StartState(List<PGNToken> tokens) {
+		super(tokens);
 	}
-	
+
+	public Optional<LexicalState> onExecute() {
+
+		switch (peek().get().getTokenType()) {
+		case CHESS_PIECE:
+			return Optional.of(new ChessPieceState(tokens));
+
+		default:
+			return Optional.empty();
+
+		}
+	}
 }

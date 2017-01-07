@@ -40,4 +40,9 @@ public class PGNToken {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return tokenType + " " + tokenValue;
+	}
+
 }
