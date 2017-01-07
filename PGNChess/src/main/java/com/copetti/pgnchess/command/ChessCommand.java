@@ -4,7 +4,6 @@ package com.copetti.pgnchess.command;
 public abstract class ChessCommand
 {
 
-	
 	public boolean execute()
 	{
 		if (!canExecute())
