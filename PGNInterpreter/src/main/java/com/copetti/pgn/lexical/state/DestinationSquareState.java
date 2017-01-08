@@ -5,40 +5,31 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import com.copetti.pgn.command.CommandBuilder;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
+import com.copetti.pgncommon.chess.board.ChessSquare;
+import com.copetti.pgncommon.chess.token.ChessFile;
+import com.copetti.pgncommon.chess.token.ChessRank;
 
 public class DestinationSquareState extends LexicalState {
 
-	protected DestinationSquareState(List<PGNToken> tokens) {
-		super(tokens);
+	protected DestinationSquareState(List<PGNToken> tokens, CommandBuilder command) {
+		super(tokens, command);
 	}
 
 	@Override
 	protected Optional<LexicalState> onExecute() {
 
-		if (tokenSize() < 2) {
-			System.out.println("Número de tokens insuficientes");
-			return Optional.empty();
-		}
-
 		PGNToken file = pop();
 		PGNToken rank = pop();
 
-		if (file.getTokenType() != TokenTypes.CHESS_FILE) {
-			System.out.println("Token do tipo errado recebido. Esperado: " + TokenTypes.CHESS_FILE + " Recebido: "
-					+ file.getTokenType());
-			return Optional.empty();
-		}
-
-		if (rank.getTokenType() != TokenTypes.CHESS_RANK) {
-			System.out.println("Token do tipo errado recebido. Esperado: " + TokenTypes.CHESS_RANK + " Recebido: "
-					+ rank.getTokenType());
-			return Optional.empty();
-		}
+		ChessFile f = ChessFile.of(file.getTokenValue()).get();
+		ChessRank r = ChessRank.of(rank.getTokenValue()).get();
+		command.setDestinationSquare(new ChessSquare(f, r));
 
 		System.out.println("Destination Square equals to: " + file.getTokenValue() + rank.getTokenValue());
-		return Optional.of(new EndState(tokens));
+		return Optional.of(new EndState(tokens, command));
 	}
 
 	@Override

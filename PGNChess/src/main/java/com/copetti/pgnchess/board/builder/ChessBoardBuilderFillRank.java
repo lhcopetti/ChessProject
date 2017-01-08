@@ -4,8 +4,8 @@ import java.util.Map;
 
 import com.copetti.pgnchess.board.ChessFile;
 import com.copetti.pgnchess.board.ChessRank;
-import com.copetti.pgnchess.board.ChessSquare;
 import com.copetti.pgnchess.pieces.ChessPiece;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 public class ChessBoardBuilderFillRank implements ChessBoardBuilderFillWith {
 

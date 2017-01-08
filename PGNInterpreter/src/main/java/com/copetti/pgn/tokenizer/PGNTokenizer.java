@@ -1,7 +1,6 @@
 package com.copetti.pgn.tokenizer;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +42,7 @@ public class PGNTokenizer {
 	public List<PGNToken> tokenize(String input) {
 
 		if (input.isEmpty())
-			throw new InputMismatchException("The empty string is not a valid input for the PGNTokenizer");
+			return new ArrayList<>();
 
 		String currentInput = input;
 		Optional<PGNToken> tok;

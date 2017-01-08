@@ -1,7 +1,7 @@
 package com.copetti.pgnchess.main;
 
-import com.copetti.pgnchess.board.ChessBoard;
 import com.copetti.pgnchess.board.message.RequestPrint;
+import com.copetti.pgncommon.chess.board.ChessBoard;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;

@@ -30,4 +30,5 @@ public class ChessRank implements TokenInterface {
 	public String getValue() {
 		return String.valueOf(rank);
 	}
+
 }

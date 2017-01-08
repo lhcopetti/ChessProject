@@ -3,15 +3,23 @@ package com.copetti.pgn.lexical.state;
 import java.util.List;
 import java.util.Optional;
 
+import com.copetti.pgn.command.CommandBuilder;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
+
+import lombok.AccessLevel;
+import lombok.Getter;
 
 public abstract class LexicalState {
 
 	protected List<PGNToken> tokens;
 
-	protected LexicalState(List<PGNToken> tokens) {
+	@Getter(value = AccessLevel.PUBLIC)
+	protected CommandBuilder command;
+
+	protected LexicalState(List<PGNToken> tokens, CommandBuilder command) {
 		this.tokens = tokens;
+		this.command = command;
 	}
 
 	public Optional<LexicalState> execute() {
@@ -39,7 +47,7 @@ public abstract class LexicalState {
 		}
 
 		for (int i = 0; i < list.size(); ++i)
-			if (list.get(0) != tokens.get(0).getTokenType()) {
+			if (list.get(i) != tokens.get(i).getTokenType()) {
 				System.out.println("Tokens não possuem o tipo correto. Esperado: " + list + " Recebido: " + tokens);
 				return false;
 			}
@@ -79,4 +87,5 @@ public abstract class LexicalState {
 	protected List<TokenTypes> enforceTokenOrder() {
 		return null;
 	}
+
 }

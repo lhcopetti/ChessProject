@@ -34,4 +34,20 @@ public class PGNLexicalTest {
 		assertTrue(new PGNLexical().execute(knightMove));
 	}
 
+	@Test
+	public void testBishopMove() {
+
+		PGNTokenizer tokenizer = new PGNTokenizer();
+		List<PGNToken> bishopMove = tokenizer.tokenize("Ba1");
+		assertTrue(new PGNLexical().execute(bishopMove));
+	}
+
+	@Test
+	public void testPawnMove() {
+
+		PGNTokenizer tokenizer = new PGNTokenizer();
+		List<PGNToken> bishopMove = tokenizer.tokenize("e4");
+		assertTrue(new PGNLexical().execute(bishopMove));
+	}
+
 }

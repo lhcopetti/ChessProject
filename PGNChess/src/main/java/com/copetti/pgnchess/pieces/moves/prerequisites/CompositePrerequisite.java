@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BinaryOperator;
 
-import com.copetti.pgnchess.board.ChessBoard;
-import com.copetti.pgnchess.board.ChessSquare;
+import com.copetti.pgncommon.chess.board.ChessBoard;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 public class CompositePrerequisite extends MovePrerequisite {
 

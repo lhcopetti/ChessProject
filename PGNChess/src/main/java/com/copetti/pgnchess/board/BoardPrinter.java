@@ -1,6 +1,7 @@
 package com.copetti.pgnchess.board;
 
 import com.copetti.pgnchess.pieces.ChessPiece;
+import com.copetti.pgncommon.chess.board.ChessBoard;
 
 
 public class BoardPrinter

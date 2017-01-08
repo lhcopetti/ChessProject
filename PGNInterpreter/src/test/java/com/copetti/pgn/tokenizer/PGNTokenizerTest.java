@@ -1,8 +1,8 @@
 package com.copetti.pgn.tokenizer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.util.InputMismatchException;
 import java.util.List;
 
 import org.junit.Before;
@@ -22,9 +22,8 @@ public class PGNTokenizerTest {
 		tok.tokenize(null);
 	}
 
-	@Test(expected = InputMismatchException.class)
 	public void testEmpty() {
-		tok.tokenize("");
+		assertTrue(tok.tokenize("").isEmpty());
 	}
 
 	@Test
