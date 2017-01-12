@@ -35,6 +35,14 @@ public class PGNLexicalTest {
 	}
 
 	@Test
+	public void testKnightMoveExecuter() throws Exception {
+
+		PGNTokenizer tokenizer = new PGNTokenizer();
+		List<PGNToken> knightMove = tokenizer.tokenize("Nc6");
+		new PGNLexical().executer(knightMove);
+	}
+	
+	@Test
 	public void testBishopMove() {
 
 		PGNTokenizer tokenizer = new PGNTokenizer();
@@ -48,6 +56,46 @@ public class PGNLexicalTest {
 		PGNTokenizer tokenizer = new PGNTokenizer();
 		List<PGNToken> bishopMove = tokenizer.tokenize("e4");
 		assertTrue(new PGNLexical().execute(bishopMove));
+	}
+
+	@Test
+	public void testKnightCapture() {
+
+		PGNTokenizer tokenizer = new PGNTokenizer();
+		List<PGNToken> bishopMove = tokenizer.tokenize("Nxf6");
+		assertTrue(new PGNLexical().execute(bishopMove));
+	}
+
+	@Test
+	public void testPawnCapture() {
+
+		PGNTokenizer tokenizer = new PGNTokenizer();
+		assertTrue(new PGNLexical().execute(tokenizer.tokenize("exf6")));
+	}
+
+	@Test
+	public void testRookMoveWithAmbiguityInRank() {
+
+		PGNTokenizer tokenizer = new PGNTokenizer();
+		assertTrue(new PGNLexical().execute(tokenizer.tokenize("Rah7")));
+	}
+
+	@Test
+	public void testRookMoveWithAmbiguityInFile() {
+
+		PGNTokenizer tokenizer = new PGNTokenizer();
+		assertTrue(new PGNLexical().execute(tokenizer.tokenize("R8a5")));
+	}
+
+	@Test
+	public void testQueenMoveWithAmbiguityInFileAndRank() {
+
+		/*
+		 * http://chess.stackexchange.com/questions/1817/how-are-pgn-ambiguities
+		 * -handled
+		 */
+		PGNTokenizer tokenizer = new PGNTokenizer();
+		assertTrue(new PGNLexical().execute(tokenizer.tokenize("Qh8g7")));
 	}
 
 }

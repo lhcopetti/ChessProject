@@ -9,6 +9,7 @@ public class CommandBuilder {
 
 	private @Getter ChessPiece chessPiece;
 	private @Getter ChessSquare targetSquare;
+	private @Getter boolean capture;
 
 	public void setPieceType(ChessPiece chessPiece) {
 		this.chessPiece = chessPiece;
@@ -24,6 +25,10 @@ public class CommandBuilder {
 			chessPiece = ChessPiece.PAWN;
 		return new MoveCommand(chessPiece, targetSquare);
 
+	}
+
+	public void setCapture() {
+		capture = true;
 	}
 
 }

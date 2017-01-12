@@ -1,9 +1,12 @@
 package com.copetti.pgn.lexical.state;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Stack;
 
 import com.copetti.pgn.command.CommandBuilder;
 import com.copetti.pgn.command.PGNCommand;
+import com.copetti.pgn.tokenizer.PGNToken;
 
 import lombok.Getter;
 
@@ -17,7 +20,21 @@ public class LexicalStateManager {
 		currentState = null;
 	}
 
-	public boolean execute(StartState startState) {
+	public List<LexicalState> executer(Class<? extends LexicalState> start, List<PGNToken> tokens) throws Exception {
+
+		Stack<LexicalState> result = new Stack<>();
+
+		LexicalState state = start.newInstance();
+
+		if (state.evaluate(result, tokens)) {
+			result.add(0, state);
+			return result;
+		}
+
+		return null;
+	}
+
+	public boolean execute(LexicalState startState) {
 
 		currentState = startState;
 
