@@ -1,51 +1,28 @@
 package com.copetti.pgn.lexical.state;
 
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.Stack;
 
-import com.copetti.pgn.command.CommandBuilder;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
-import com.copetti.pgncommon.chess.board.ChessSquare;
 import com.copetti.pgncommon.chess.token.ChessFile;
 import com.copetti.pgncommon.chess.token.ChessRank;
 
 public class DestinationSquareState extends LexicalState {
 
+	private ChessFile file;
+	private ChessRank rank;
+
 	public DestinationSquareState() {
 
 	}
 
-	protected DestinationSquareState(List<PGNToken> tokens, CommandBuilder command) {
-		super(tokens, command);
-	}
+	public DestinationSquareState(String destSquare) {
 
-	@Override
-	protected Optional<LexicalState> onExecute() {
-
-		PGNToken file = pop();
-		PGNToken rank = pop();
-
-		ChessFile f = ChessFile.of(file.getTokenValue()).get();
-		ChessRank r = ChessRank.of(rank.getTokenValue()).get();
-		command.setDestinationSquare(new ChessSquare(f, r));
-
-		System.out.println("Destination Square equals to: " + file.getTokenValue() + rank.getTokenValue());
-		return Optional.of(new EndState(tokens, command));
-	}
-
-	@Override
-	protected int minimumTokenSize() {
-		return 2;
-	}
-
-	@Override
-	protected List<TokenTypes> enforceTokenOrder() {
-
-		return Collections.unmodifiableList(Arrays.asList(TokenTypes.CHESS_FILE, TokenTypes.CHESS_RANK));
+		this.file = ChessFile.of(destSquare.substring(0, 1)).get();
+		this.rank = ChessRank.of(destSquare.substring(1)).get();
 	}
 
 	@Override
@@ -58,18 +35,58 @@ public class DestinationSquareState extends LexicalState {
 		if (tokens.size() < 2)
 			return false;
 
-		PGNToken file = tokens.remove(0);
-		PGNToken rank = tokens.remove(0);
-
-		if (file.getTokenType() != TokenTypes.CHESS_FILE)
+		if (tokens.get(0).getTokenType() != TokenTypes.CHESS_FILE)
 			return false;
 
-		if (rank.getTokenType() != TokenTypes.CHESS_RANK)
+		if (tokens.get(1).getTokenType() != TokenTypes.CHESS_RANK)
 			return false;
 
-		consumedTokens.add(file);
-		consumedTokens.add(rank);
+		file = ChessFile.of(tokens.remove(0).getTokenValue()).get();
+		rank = ChessRank.of(tokens.remove(0).getTokenValue()).get();
 		return true;
 	}
 
+	@Override
+	public Collection<? extends PGNToken> getConsumedTokens() {
+
+		return Arrays.asList( //
+				PGNToken.of(TokenTypes.CHESS_FILE, file.getValue()), //
+				PGNToken.of(TokenTypes.CHESS_FILE, rank.getValue()));
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((file == null) ? 0 : file.hashCode());
+		result = prime * result + ((rank == null) ? 0 : rank.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof DestinationSquareState))
+			return false;
+		DestinationSquareState other = (DestinationSquareState) obj;
+		if (file == null) {
+			if (other.file != null)
+				return false;
+		} else if (!file.equals(other.file))
+			return false;
+		if (rank == null) {
+			if (other.rank != null)
+				return false;
+		} else if (!rank.equals(other.rank))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toStringChild() {
+		return file.toString() + rank.toString();
+	}
 }

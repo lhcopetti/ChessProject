@@ -1,25 +1,15 @@
 package com.copetti.pgn.lexical.state;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.Stack;
 
-import com.copetti.pgn.command.CommandBuilder;
 import com.copetti.pgn.tokenizer.PGNToken;
 
 public class EndState extends LexicalState {
 
 	public EndState() {
-	}
-
-	protected EndState(List<PGNToken> tokens, CommandBuilder command) {
-		super(tokens, command);
-	}
-
-	@Override
-	protected Optional<LexicalState> onExecute() {
-		return Optional.empty();
 	}
 
 	@Override
@@ -41,5 +31,15 @@ public class EndState extends LexicalState {
 	@Override
 	protected boolean acceptEmptyTokenList() {
 		return true;
+	}
+
+	@Override
+	public Collection<? extends PGNToken> getConsumedTokens() {
+		return Collections.emptyList();
+	}
+
+	@Override
+	protected String toStringChild() {
+		return "";
 	}
 }

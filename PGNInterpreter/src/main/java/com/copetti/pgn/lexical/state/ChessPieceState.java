@@ -1,60 +1,28 @@
 package com.copetti.pgn.lexical.state;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.Stack;
 
-import com.copetti.pgn.command.CommandBuilder;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
-import com.copetti.pgncommon.chess.token.ChessPiece;
 
 public class ChessPieceState extends LexicalState {
 
-	protected ChessPieceState(List<PGNToken> tokens, CommandBuilder command) {
-		super(tokens, command);
-	}
+	private PGNToken chessPiece;
 
 	public ChessPieceState() {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.copetti.pgn.lexical.state.LexicalState#onExecute() Nf3 Ndf3 N1f2
-	 * Nd1f2
-	 */
-
-	@Override
-	public Optional<LexicalState> onExecute() {
-
-		PGNToken token = pop();
-		System.out.println("Pop token: " + token);
-
-		if (!secondPeek().isPresent()) {
-			System.out.println("Número de tokens não é suficiente. " + tokens);
-			return Optional.empty();
-		}
-
-		PGNToken head = peek().get();
-
-		switch (head.getTokenType()) {
-		case CHESS_FILE:
-			command.setPieceType(ChessPiece.of(token.getTokenValue()).get());
-			return Optional.of(new DestinationSquareState(tokens, command));
-		case CHESS_CAPTURE:
-			command.setCapture();
-			return Optional.of(new CaptureState(tokens, command));
-		default:
-			return Optional.empty();
-		}
+	public ChessPieceState(PGNToken token) {
+		this.chessPiece = token;
 	}
 
 	@Override
 	public List<Class<? extends LexicalState>> getSuccessors() {
-		return Arrays.asList(DestinationSquareState.class);
+		return Arrays.asList(DestinationSquareState.class, CaptureState.class);
 	}
 
 	@Override
@@ -65,7 +33,43 @@ public class ChessPieceState extends LexicalState {
 		if (head.getTokenType() != TokenTypes.CHESS_PIECE)
 			return false;
 
-		consumedTokens.add(tokens.remove(0));
+		tokens.remove(0);
+		chessPiece = head;
 		return true;
+	}
+
+	@Override
+	public Collection<? extends PGNToken> getConsumedTokens() {
+		return Arrays.asList(chessPiece);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((chessPiece == null) ? 0 : chessPiece.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof ChessPieceState))
+			return false;
+		ChessPieceState other = (ChessPieceState) obj;
+		if (chessPiece == null) {
+			if (other.chessPiece != null)
+				return false;
+		} else if (!chessPiece.equals(other.chessPiece))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toStringChild() {
+		return chessPiece.getTokenValue();
 	}
 }

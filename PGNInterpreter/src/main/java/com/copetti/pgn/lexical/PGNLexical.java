@@ -1,5 +1,6 @@
 package com.copetti.pgn.lexical;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.copetti.pgn.command.PGNCommand;
@@ -7,6 +8,7 @@ import com.copetti.pgn.lexical.state.LexicalState;
 import com.copetti.pgn.lexical.state.LexicalStateManager;
 import com.copetti.pgn.lexical.state.StartState;
 import com.copetti.pgn.tokenizer.PGNToken;
+import com.copetti.pgn.tokenizer.PGNTokenizer;
 
 import lombok.Getter;
 
@@ -14,35 +16,43 @@ public class PGNLexical {
 
 	private @Getter PGNCommand command;
 
-	public boolean execute(List<PGNToken> tokens) {
+	public List<LexicalState> execute(String rawInput) {
 
-		if (tokens.isEmpty())
-			return false;
+		PGNTokenizer tokenizer = new PGNTokenizer();
+		List<PGNToken> tokens = tokenizer.tokenize(rawInput);
 
-		LexicalStateManager manager = new LexicalStateManager();
-
-		if (!manager.execute(new StartState(tokens)))
-			return false;
-
-		command = manager.getCommand();
-
-		return true;
+		return execute(tokens);
 	}
 
-	public boolean executer(List<PGNToken> tokens) throws Exception {
+	public List<LexicalState> execute(List<PGNToken> tokens) {
 
 		if (tokens.isEmpty())
-			return false;
+			return Collections.emptyList();
 
-		LexicalStateManager manager = new LexicalStateManager();
+		List<LexicalState> states = null;
 
-		List<LexicalState> executer = manager.executer(StartState.class, tokens);
+		try {
+			LexicalStateManager manager = new LexicalStateManager();
+			states = manager.execute(StartState.class, tokens);
 
-		if (executer.isEmpty())
-			return false;
+		} catch (Exception e) {
+			System.err.println("Exceção não tratada: " + e.getMessage());
+			return Collections.emptyList();
+		}
 
-		System.out.println("Return is: " + executer);
-		return true;
+		if (null == states)
+			return null;
+
+		if (states.size() < 2) {
+			System.out.println("Tamanho dos estados léxicos é menor que o mínimo para conter [Start, End]");
+			return states;
+		}
+
+		states.remove(0);
+		states.remove(states.size() - 1);
+
+		System.out.println("Return is: " + states);
+		return states;
 	}
 
 }

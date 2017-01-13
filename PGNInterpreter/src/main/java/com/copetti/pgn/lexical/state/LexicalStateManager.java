@@ -20,7 +20,7 @@ public class LexicalStateManager {
 		currentState = null;
 	}
 
-	public List<LexicalState> executer(Class<? extends LexicalState> start, List<PGNToken> tokens) throws Exception {
+	public List<LexicalState> execute(Class<? extends LexicalState> start, List<PGNToken> tokens) throws Exception {
 
 		Stack<LexicalState> result = new Stack<>();
 
@@ -34,32 +34,32 @@ public class LexicalStateManager {
 		return null;
 	}
 
-	public boolean execute(LexicalState startState) {
-
-		currentState = startState;
-
-		while (true) {
-			Optional<LexicalState> nextState = currentState.execute();
-
-			if (!nextState.isPresent())
-				break;
-
-			currentState = nextState.get();
-		}
-
-		if (!currentState.getClass().equals(EndState.class)) {
-			System.out.println("Término abrupto de leitura de máquina de estados");
-			return false;
-		}
-
-		CommandBuilder builder = currentState.getCommand();
-
-		if ((command = builder.build()) == null) {
-			System.out.println("Falha ao construir comando!");
-			return false;
-		}
-
-		return true;
-	}
+//	public boolean execute(LexicalState startState) {
+//
+//		currentState = startState;
+//
+//		while (true) {
+//			Optional<LexicalState> nextState = currentState.execute();
+//
+//			if (!nextState.isPresent())
+//				break;
+//
+//			currentState = nextState.get();
+//		}
+//
+//		if (!currentState.getClass().equals(EndState.class)) {
+//			System.out.println("Término abrupto de leitura de máquina de estados");
+//			return false;
+//		}
+//
+//		CommandBuilder builder = currentState.getCommand();
+//
+//		if ((command = builder.build()) == null) {
+//			System.out.println("Falha ao construir comando!");
+//			return false;
+//		}
+//
+//		return true;
+//	}
 
 }
