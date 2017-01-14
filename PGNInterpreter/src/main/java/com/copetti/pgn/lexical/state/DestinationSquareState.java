@@ -51,7 +51,7 @@ public class DestinationSquareState extends LexicalState {
 
 		return Arrays.asList( //
 				PGNToken.of(TokenTypes.CHESS_FILE, file.getValue()), //
-				PGNToken.of(TokenTypes.CHESS_FILE, rank.getValue()));
+				PGNToken.of(TokenTypes.CHESS_RANK, rank.getValue()));
 	}
 
 	@Override

@@ -22,11 +22,6 @@ public class PGNTokenizer {
 	public PGNTokenizer() {
 
 		executor = new TokenizerExecutor();
-		// Set<Class<? extends TokenInterface>> subTypesOf = new
-		// Reflections("com.copetti.pgncommon.chess")
-		// .get
-		//
-		// subTypesOf.forEach(x -> executor.addTokenizer(x.getme));
 
 		executor.addTokenizer(ChessPiece::of);
 		executor.addTokenizer(ChessFile::of);

@@ -26,7 +26,7 @@ public abstract class LexicalState {
 
 			// Restore
 			result.pop();
-			tokens.addAll(ls.getConsumedTokens());
+			tokens.addAll(0, ls.getConsumedTokens());
 
 		}
 

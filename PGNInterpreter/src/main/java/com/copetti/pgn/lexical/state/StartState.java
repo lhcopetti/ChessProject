@@ -15,7 +15,7 @@ public class StartState extends LexicalState {
 
 	@Override
 	public List<Class<? extends LexicalState>> getSuccessors() {
-		return Arrays.asList(ChessPieceState.class, DestinationSquareState.class, PawnCaptureState.class);
+		return Arrays.asList(ChessPieceState.class, DestinationSquareState.class, PawnFileState.class);
 	}
 
 	protected boolean doConsume(Stack<LexicalState> result, List<PGNToken> tokens) {

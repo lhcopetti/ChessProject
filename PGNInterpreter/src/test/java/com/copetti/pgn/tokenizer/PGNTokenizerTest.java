@@ -170,4 +170,19 @@ public class PGNTokenizerTest {
 						PGNToken.of(TokenTypes.CHESS_BIG_O, "O"), }, //
 				tokens.toArray());
 	}
+
+	@Test
+	public void testQueenMoveWithAmbiguity() {
+		List<PGNToken> tokens = tok.tokenize("Qh8g7");
+
+		assertArrayEquals(
+				new PGNToken[] { //
+						PGNToken.of(TokenTypes.CHESS_PIECE, "Q"), //
+						PGNToken.of(TokenTypes.CHESS_FILE, "h"), //
+						PGNToken.of(TokenTypes.CHESS_RANK, "8"), //
+						PGNToken.of(TokenTypes.CHESS_FILE, "g"), //
+						PGNToken.of(TokenTypes.CHESS_RANK, "7"), }, //
+				tokens.toArray());
+	}
+
 }

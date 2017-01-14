@@ -7,22 +7,25 @@ import java.util.Stack;
 
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
+import com.copetti.pgncommon.chess.token.ChessPiece;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class ChessPieceState extends LexicalState {
 
-	private PGNToken chessPiece;
-
-	public ChessPieceState() {
-
-	}
-
-	public ChessPieceState(PGNToken token) {
-		this.chessPiece = token;
-	}
+	private ChessPiece piece;
 
 	@Override
 	public List<Class<? extends LexicalState>> getSuccessors() {
-		return Arrays.asList(DestinationSquareState.class, CaptureState.class);
+		return Arrays.asList( //
+				DestinationSquareState.class, //
+				CaptureState.class, //
+				DesambiguateRankState.class, //
+				DesambiguateFileState.class);
 	}
 
 	@Override
@@ -34,20 +37,20 @@ public class ChessPieceState extends LexicalState {
 			return false;
 
 		tokens.remove(0);
-		chessPiece = head;
+		piece = ChessPiece.of(head.getTokenValue()).get();
 		return true;
 	}
 
 	@Override
 	public Collection<? extends PGNToken> getConsumedTokens() {
-		return Arrays.asList(chessPiece);
+		return Arrays.asList(PGNToken.of(TokenTypes.CHESS_PIECE, piece.getValue()));
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((chessPiece == null) ? 0 : chessPiece.hashCode());
+		result = prime * result + ((piece == null) ? 0 : piece.hashCode());
 		return result;
 	}
 
@@ -60,16 +63,16 @@ public class ChessPieceState extends LexicalState {
 		if (!(obj instanceof ChessPieceState))
 			return false;
 		ChessPieceState other = (ChessPieceState) obj;
-		if (chessPiece == null) {
-			if (other.chessPiece != null)
+		if (piece == null) {
+			if (other.piece != null)
 				return false;
-		} else if (!chessPiece.equals(other.chessPiece))
+		} else if (!piece.equals(other.piece))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toStringChild() {
-		return chessPiece.getTokenValue();
+		return piece.getValue();
 	}
 }

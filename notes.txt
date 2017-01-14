@@ -1,0 +1,10 @@
+Semantics:
+
+Only pawns can promote
+
+Knight invalid move: Ncc6 
+	A knight in the c file cannot move to the same file.
+	A knight can only move two files/rank apart
+	
+Pawns can only capture the adjacent files
+	exd5 valid, exh8 invalid.
