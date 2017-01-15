@@ -1,10 +1,9 @@
 package com.copetti.pgn.command;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.copetti.pgncommon.chess.board.ChessColor;
 import com.copetti.pgncommon.chess.board.ChessSquare;
 import com.copetti.pgncommon.chess.token.ChessFile;
 import com.copetti.pgncommon.chess.token.ChessPiece;

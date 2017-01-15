@@ -4,7 +4,10 @@ import java.util.Optional;
 
 import com.copetti.pgncommon.chess.TokenInterface;
 
-public class ChessCheckMate implements TokenInterface {
+public enum ChessCheckMate implements TokenInterface {
+
+	CHESS_MATE("#");
+
 	private String value;
 
 	private ChessCheckMate(String input) {
@@ -16,7 +19,7 @@ public class ChessCheckMate implements TokenInterface {
 		if (!input.equals("#"))
 			return Optional.empty();
 
-		return Optional.of(new ChessCheckMate(input));
+		return Optional.of(ChessCheckMate.CHESS_MATE);
 	}
 
 	@Override

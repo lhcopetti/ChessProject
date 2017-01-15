@@ -27,7 +27,7 @@ public class DestinationSquareState extends LexicalState {
 
 	@Override
 	public List<Class<? extends LexicalState>> getSuccessors() {
-		return Arrays.asList(EndState.class);
+		return Arrays.asList(EndState.class, CheckState.class, CheckmateState.class, PromotionState.class);
 	}
 
 	@Override
