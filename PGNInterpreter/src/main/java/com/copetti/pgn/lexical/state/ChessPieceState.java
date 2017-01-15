@@ -5,19 +5,20 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
 
+import com.copetti.pgn.lexical.state.container.ChessPieceContainer;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
 import com.copetti.pgncommon.chess.token.ChessPiece;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class ChessPieceState extends LexicalState {
+@AllArgsConstructor
+public class ChessPieceState extends LexicalState implements ChessPieceContainer {
 
-	private ChessPiece piece;
+	private @Getter ChessPiece piece;
 
 	@Override
 	public List<Class<? extends LexicalState>> getSuccessors() {

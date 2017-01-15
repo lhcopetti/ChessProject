@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.Test;
 
 import com.copetti.pgn.lexical.PGNLexical;
-import com.copetti.pgncommon.chess.token.ChessCheck;
 import com.copetti.pgncommon.chess.token.ChessFile;
 import com.copetti.pgncommon.chess.token.ChessPiece;
 import com.copetti.pgncommon.chess.token.ChessRank;

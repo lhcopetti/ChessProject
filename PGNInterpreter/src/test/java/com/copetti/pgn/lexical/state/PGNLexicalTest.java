@@ -33,4 +33,19 @@ public class PGNLexicalTest {
 
 	}
 
+	@Test
+	public void testCommandWithMovementCaptureAndPromotionWithMate() {
+
+		List<LexicalState> lex = new PGNLexical().execute("axb8=Q#");
+
+		PawnFileState pawn = new PawnFileState(ChessFile.A);
+		CaptureState capture = new CaptureState();
+		DestinationSquareState dest = new DestinationSquareState("b8");
+		PromotionState promotion = new PromotionState(ChessPiece.QUEEN);
+		CheckmateState mate = new CheckmateState();
+
+		assertEquals(Arrays.asList(pawn, capture, dest, promotion, mate), lex);
+
+	}
+
 }

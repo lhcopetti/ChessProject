@@ -10,10 +10,12 @@ import com.copetti.pgn.tokenizer.TokenTypes;
 import com.copetti.pgncommon.chess.token.ChessFile;
 import com.copetti.pgncommon.chess.token.ChessRank;
 
+import lombok.Getter;
+
 public class DestinationSquareState extends LexicalState {
 
-	private ChessFile file;
-	private ChessRank rank;
+	private @Getter ChessFile file;
+	private @Getter ChessRank rank;
 
 	public DestinationSquareState() {
 
