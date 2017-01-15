@@ -1,6 +1,6 @@
 package com.copetti.pgnchess.game;
 
-import com.copetti.pgnchess.board.ChessBoard;
+import com.copetti.pgncommon.chess.board.ChessBoard;
 
 import akka.actor.UntypedActor;
 

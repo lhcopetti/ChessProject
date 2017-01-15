@@ -3,9 +3,10 @@ package com.copetti.pgnchess.pieces.moves;
 import java.util.Set;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-import com.copetti.pgnchess.board.ChessSquare;
+import com.copetti.pgncommon.chess.board.ChessSquare;
+
+import static org.junit.Assert.*;
 
 public abstract class ChessPieceMoveTest {
 

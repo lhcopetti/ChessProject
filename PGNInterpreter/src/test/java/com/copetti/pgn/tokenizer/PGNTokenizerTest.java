@@ -1,8 +1,8 @@
 package com.copetti.pgn.tokenizer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.util.InputMismatchException;
 import java.util.List;
 
 import org.junit.Before;
@@ -22,9 +22,8 @@ public class PGNTokenizerTest {
 		tok.tokenize(null);
 	}
 
-	@Test(expected = InputMismatchException.class)
 	public void testEmpty() {
-		tok.tokenize("");
+		assertTrue(tok.tokenize("").isEmpty());
 	}
 
 	@Test
@@ -171,4 +170,19 @@ public class PGNTokenizerTest {
 						PGNToken.of(TokenTypes.CHESS_BIG_O, "O"), }, //
 				tokens.toArray());
 	}
+
+	@Test
+	public void testQueenMoveWithAmbiguity() {
+		List<PGNToken> tokens = tok.tokenize("Qh8g7");
+
+		assertArrayEquals(
+				new PGNToken[] { //
+						PGNToken.of(TokenTypes.CHESS_PIECE, "Q"), //
+						PGNToken.of(TokenTypes.CHESS_FILE, "h"), //
+						PGNToken.of(TokenTypes.CHESS_RANK, "8"), //
+						PGNToken.of(TokenTypes.CHESS_FILE, "g"), //
+						PGNToken.of(TokenTypes.CHESS_RANK, "7"), }, //
+				tokens.toArray());
+	}
+
 }

@@ -2,8 +2,8 @@ package com.copetti.pgnchess.board.builder;
 
 import java.util.Map;
 
-import com.copetti.pgnchess.board.ChessSquare;
 import com.copetti.pgnchess.pieces.ChessPiece;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 public class ChessBoardBuilderAt {
 

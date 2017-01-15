@@ -4,12 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.copetti.pgnchess.board.ChessBoard;
-import com.copetti.pgnchess.board.ChessSquare;
 import com.copetti.pgnchess.math.UnitVectorInterpoler;
 import com.copetti.pgnchess.math.Vector;
 import com.copetti.pgnchess.pieces.moves.prerequisites.CapturePrerequisite;
 import com.copetti.pgnchess.pieces.moves.prerequisites.EmptySquarePrerequisite;
+import com.copetti.pgncommon.chess.board.ChessBoard;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 
 public abstract class ChessMoveStrategy

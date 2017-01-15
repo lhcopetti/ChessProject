@@ -1,8 +1,10 @@
-package com.copetti.pgnchess.board;
+package com.copetti.pgncommon.chess.board;
 
 import java.util.Map;
 
-import com.copetti.pgnchess.pieces.ChessPiece;
+import com.copetti.pgncommon.chess.token.ChessFile;
+import com.copetti.pgncommon.chess.token.ChessPiece;
+import com.copetti.pgncommon.chess.token.ChessRank;
 
 public class ChessBoard {
 	private Map<ChessSquare, ChessPiece> pieces;

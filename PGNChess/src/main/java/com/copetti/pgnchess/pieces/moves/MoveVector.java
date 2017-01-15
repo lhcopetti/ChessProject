@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import com.copetti.pgnchess.board.ChessBoard;
-import com.copetti.pgnchess.board.ChessSquare;
 import com.copetti.pgnchess.pieces.moves.prerequisites.MovePrerequisite;
+import com.copetti.pgncommon.chess.board.ChessBoard;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 import lombok.Getter;
 

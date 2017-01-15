@@ -1,6 +1,6 @@
 package com.copetti.pgnchess.pgn.command;
 
-import com.copetti.pgnchess.board.ChessSquare;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 import lombok.Getter;
 

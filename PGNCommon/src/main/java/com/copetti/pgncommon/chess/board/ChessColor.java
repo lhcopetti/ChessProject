@@ -1,4 +1,4 @@
-package com.copetti.pgnchess.pieces;
+package com.copetti.pgncommon.chess.board;
 
 public enum ChessColor {
 	WHITE {

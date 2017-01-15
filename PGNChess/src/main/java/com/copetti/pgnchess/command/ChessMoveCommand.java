@@ -1,6 +1,6 @@
 package com.copetti.pgnchess.command;
 
-import com.copetti.pgnchess.board.ChessSquare;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 
 public class ChessMoveCommand extends ChessCommand

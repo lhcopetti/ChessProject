@@ -1,4 +1,7 @@
-package com.copetti.pgnchess.board;
+package com.copetti.pgncommon.chess.board;
+
+import com.copetti.pgncommon.chess.token.ChessFile;
+import com.copetti.pgncommon.chess.token.ChessRank;
 
 import lombok.Getter;
 
@@ -27,24 +30,24 @@ public class ChessSquare {
 
 		if (sq.length() > 2)
 			throw new IllegalArgumentException(
-					"ChessSquaren não pode ser inicializado com: " + sq + ". Tamanho: " + sq.length());
+					"ChessSquare não pode ser inicializado com: " + sq + ". Tamanho: " + sq.length());
 
 		ChessFile file = ChessFile.valueOf(("" + sq.charAt(0)).toUpperCase());
-		ChessRank rank = new ChessRank(Integer.valueOf("" + sq.charAt(1)));
+		ChessRank rank = ChessRank.of("" + sq.charAt(1)).get();
 		init(file, rank);
 	}
 
 	private void init(ChessFile file, ChessRank rank) {
 		this.x = file.ordinal();
-		this.y = rank.getValue() - 1;
+		this.y = rank.getRank() - 1;
 	}
 
 	public ChessFile getFile() {
-		return ChessFile.fromOrdinal(x);
+		return ChessFile.fromOrdinal(x).get();
 	}
 
 	public ChessRank getRank() {
-		return new ChessRank(y + 1);
+		return ChessRank.of(String.valueOf(y + 1)).get();
 	}
 
 	@Override

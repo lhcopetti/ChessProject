@@ -4,7 +4,9 @@ import java.util.Optional;
 
 import com.copetti.pgncommon.chess.TokenInterface;
 
-public class ChessCapture implements TokenInterface {
+public enum ChessCapture implements TokenInterface {
+
+	CAPTURE_SIGN("x");
 
 	private String value;
 
@@ -17,7 +19,7 @@ public class ChessCapture implements TokenInterface {
 		if (!input.equals("x"))
 			return Optional.empty();
 
-		return Optional.of(new ChessCapture(input));
+		return Optional.of(ChessCapture.CAPTURE_SIGN);
 	}
 
 	@Override

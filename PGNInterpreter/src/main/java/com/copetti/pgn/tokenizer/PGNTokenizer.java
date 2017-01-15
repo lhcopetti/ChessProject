@@ -1,7 +1,6 @@
 package com.copetti.pgn.tokenizer;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,11 +22,6 @@ public class PGNTokenizer {
 	public PGNTokenizer() {
 
 		executor = new TokenizerExecutor();
-		// Set<Class<? extends TokenInterface>> subTypesOf = new
-		// Reflections("com.copetti.pgncommon.chess")
-		// .get
-		//
-		// subTypesOf.forEach(x -> executor.addTokenizer(x.getme));
 
 		executor.addTokenizer(ChessPiece::of);
 		executor.addTokenizer(ChessFile::of);
@@ -43,7 +37,7 @@ public class PGNTokenizer {
 	public List<PGNToken> tokenize(String input) {
 
 		if (input.isEmpty())
-			throw new InputMismatchException("The empty string is not a valid input for the PGNTokenizer");
+			return new ArrayList<>();
 
 		String currentInput = input;
 		Optional<PGNToken> tok;

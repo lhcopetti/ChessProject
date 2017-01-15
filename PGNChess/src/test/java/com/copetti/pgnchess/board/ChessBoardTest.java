@@ -5,9 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.copetti.pgnchess.board.builder.ChessBoardBuilder;
-import com.copetti.pgnchess.pieces.ChessColor;
 import com.copetti.pgnchess.pieces.ChessPiece;
 import com.copetti.pgnchess.pieces.ChessPieceType;
+import com.copetti.pgncommon.chess.board.ChessBoard;
+import com.copetti.pgncommon.chess.board.ChessColor;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 public class ChessBoardTest {
 

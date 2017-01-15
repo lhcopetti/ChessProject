@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.copetti.pgncommon.chess.board.ChessColor;
+
 
 public class ChessColorTest
 {

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.copetti.pgncommon.chess.board.ChessSquare;
+
 public class ChessSquareTest {
 
 	private ChessSquare _a1;

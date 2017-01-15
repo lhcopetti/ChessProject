@@ -26,4 +26,17 @@ public enum ChessFile implements TokenInterface {
 		return getPgnNotation();
 	}
 
+	public static Optional<ChessFile> fromOrdinal(int ordinal) {
+
+		return Arrays //
+				.stream(ChessFile.values()). //
+				filter(x -> x.ordinal() == ordinal). //
+				findFirst();
+	}
+	
+	@Override
+	public String toString() {
+		return getPgnNotation();
+	}
+
 }

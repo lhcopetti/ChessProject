@@ -2,12 +2,12 @@ package com.copetti.pgnchess.pieces;
 
 import java.util.Set;
 
-import com.copetti.pgnchess.board.ChessBoard;
-import com.copetti.pgnchess.board.ChessSquare;
 import com.copetti.pgnchess.pieces.moves.BishopMoveStrategy;
 import com.copetti.pgnchess.pieces.moves.ChessMoveStrategy;
 import com.copetti.pgnchess.pieces.moves.PawnMoveStrategy;
 import com.copetti.pgnchess.pieces.moves.RookMoveStrategy;
+import com.copetti.pgncommon.chess.board.ChessBoard;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 import lombok.Getter;
 

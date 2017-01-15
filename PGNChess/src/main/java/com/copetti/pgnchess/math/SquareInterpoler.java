@@ -2,7 +2,7 @@ package com.copetti.pgnchess.math;
 
 import java.util.Set;
 
-import com.copetti.pgnchess.board.ChessSquare;
+import com.copetti.pgncommon.chess.board.ChessSquare;
 
 public class SquareInterpoler {
 
