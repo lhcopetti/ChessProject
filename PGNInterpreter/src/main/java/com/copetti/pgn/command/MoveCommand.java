@@ -1,12 +1,18 @@
 package com.copetti.pgn.command;
 
-import com.copetti.pgncommon.chess.board.ChessBoard;
-import com.copetti.pgncommon.chess.board.ChessSquare;
-import com.copetti.pgncommon.chess.token.ChessPiece;
+import java.util.List;
 
-public class MoveCommand extends PGNCommand {
+import com.copetti.pgn.board.ChessBoard;
+import com.copetti.pgn.board.ChessSquare;
+import com.copetti.pgn.command.decorator.CommandDecorator;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
-	private ChessSquare destSquare;
+import lombok.Getter;
+
+public class MoveCommand extends ChessCommand {
+
+	private @Getter ChessSquare destSquare;
+	private List<CommandDecorator> decorators;
 
 	public MoveCommand(ChessPiece chessPiece, ChessSquare destination) {
 		super(chessPiece);
@@ -18,29 +24,13 @@ public class MoveCommand extends PGNCommand {
 		return null;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((destSquare == null) ? 0 : destSquare.hashCode());
-		return result;
+	public void addDecorator(CommandDecorator decorator) {
+		decorators.add(decorator);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof MoveCommand))
-			return false;
-		MoveCommand other = (MoveCommand) obj;
-		if (destSquare == null) {
-			if (other.destSquare != null)
-				return false;
-		} else if (!destSquare.equals(other.destSquare))
-			return false;
-		return super.equals(obj);
+	protected boolean canExecute(ChessBoard input) {
+		return false;
 	}
 
 }

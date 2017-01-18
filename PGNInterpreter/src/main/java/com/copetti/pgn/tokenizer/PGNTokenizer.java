@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.copetti.pgncommon.chess.token.ChessBigO;
-import com.copetti.pgncommon.chess.token.ChessCapture;
-import com.copetti.pgncommon.chess.token.ChessCheck;
-import com.copetti.pgncommon.chess.token.ChessCheckMate;
-import com.copetti.pgncommon.chess.token.ChessDash;
-import com.copetti.pgncommon.chess.token.ChessFile;
-import com.copetti.pgncommon.chess.token.ChessPiece;
-import com.copetti.pgncommon.chess.token.ChessPromotion;
-import com.copetti.pgncommon.chess.token.ChessRank;
+import com.copetti.pgn.tokenizer.tokens.ChessBigO;
+import com.copetti.pgn.tokenizer.tokens.ChessCapture;
+import com.copetti.pgn.tokenizer.tokens.ChessCheck;
+import com.copetti.pgn.tokenizer.tokens.ChessCheckMate;
+import com.copetti.pgn.tokenizer.tokens.ChessDash;
+import com.copetti.pgn.tokenizer.tokens.ChessFile;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
+import com.copetti.pgn.tokenizer.tokens.ChessPromotion;
+import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
 public class PGNTokenizer {
 

@@ -8,14 +8,14 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.lexical.PGNLexical;
 import com.copetti.pgn.lexical.state.CaptureState;
 import com.copetti.pgn.lexical.state.CastleLongState;
 import com.copetti.pgn.lexical.state.CastleShortState;
 import com.copetti.pgn.lexical.state.DestinationSquareState;
 import com.copetti.pgn.lexical.state.LexicalState;
-import com.copetti.pgncommon.chess.board.ChessSquare;
-import com.copetti.pgncommon.chess.token.ChessPiece;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public class LexicalStateCollectionTest {
 
@@ -56,7 +56,7 @@ public class LexicalStateCollectionTest {
 	public void getDestinationSquareStateTest() {
 		List<LexicalState> l = new PGNLexical().execute("e4");
 		LexicalStateCollection coll = new LexicalStateCollection(l);
-		assertEquals(new ChessSquare("e4"), coll.getDestinationSquareState());
+		assertEquals(new ChessSquare("e4"), coll.getDestinationSquare());
 	}
 
 	@Test

@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
-import com.copetti.pgncommon.chess.token.ChessRank;
+import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

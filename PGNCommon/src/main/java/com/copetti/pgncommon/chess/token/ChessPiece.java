@@ -3,7 +3,7 @@ package com.copetti.pgncommon.chess.token;
 import java.util.Arrays;
 import java.util.Optional;
 
-import com.copetti.pgncommon.chess.TokenInterface;
+import com.copetti.pgn.tokenizer.TokenInterface;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

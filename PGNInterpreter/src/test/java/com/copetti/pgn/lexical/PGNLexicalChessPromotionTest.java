@@ -1,4 +1,4 @@
-package com.copetti.pgn.lexical.state;
+package com.copetti.pgn.lexical;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,9 +7,15 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.copetti.pgn.lexical.PGNLexical;
-import com.copetti.pgncommon.chess.token.ChessFile;
-import com.copetti.pgncommon.chess.token.ChessPiece;
+import com.copetti.pgn.lexical.state.CaptureState;
+import com.copetti.pgn.lexical.state.CheckState;
+import com.copetti.pgn.lexical.state.CheckmateState;
+import com.copetti.pgn.lexical.state.DestinationSquareState;
+import com.copetti.pgn.lexical.state.LexicalState;
+import com.copetti.pgn.lexical.state.PawnFileState;
+import com.copetti.pgn.lexical.state.PromotionState;
+import com.copetti.pgn.tokenizer.tokens.ChessFile;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public class PGNLexicalChessPromotionTest {
 

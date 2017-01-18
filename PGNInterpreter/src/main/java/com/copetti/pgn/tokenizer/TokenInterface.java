@@ -1,4 +1,4 @@
-package com.copetti.pgncommon.chess;
+package com.copetti.pgn.tokenizer;
 
 public interface TokenInterface {
 

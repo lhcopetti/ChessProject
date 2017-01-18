@@ -7,7 +7,14 @@ import com.copetti.pgncommon.chess.token.ChessPiece;
 import com.copetti.pgncommon.chess.token.ChessRank;
 
 public class ChessBoard {
+
 	private Map<ChessSquare, ChessPiece> pieces;
+
+	private ChessColor nextToPlay;
+	private CastleInformation castleInfo;
+	private HalfMoveCounter halfMoveCounter;
+	private ChessSquare enPassantTarget;
+	private FullMoveCounter fullMoveNumber;
 
 	public ChessBoard(Map<ChessSquare, ChessPiece> map) {
 		pieces = map;

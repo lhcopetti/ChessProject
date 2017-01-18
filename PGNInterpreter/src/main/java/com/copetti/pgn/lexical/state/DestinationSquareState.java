@@ -7,8 +7,8 @@ import java.util.Stack;
 
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
-import com.copetti.pgncommon.chess.token.ChessFile;
-import com.copetti.pgncommon.chess.token.ChessRank;
+import com.copetti.pgn.tokenizer.tokens.ChessFile;
+import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
 import lombok.Getter;
 

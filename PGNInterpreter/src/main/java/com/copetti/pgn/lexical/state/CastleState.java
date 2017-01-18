@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 import com.copetti.pgn.lexical.state.container.ChessPieceContainer;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
-import com.copetti.pgncommon.chess.token.ChessBigO;
-import com.copetti.pgncommon.chess.token.ChessDash;
-import com.copetti.pgncommon.chess.token.ChessPiece;
+import com.copetti.pgn.tokenizer.tokens.ChessBigO;
+import com.copetti.pgn.tokenizer.tokens.ChessDash;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public abstract class CastleState extends LexicalState implements ChessPieceContainer {
 

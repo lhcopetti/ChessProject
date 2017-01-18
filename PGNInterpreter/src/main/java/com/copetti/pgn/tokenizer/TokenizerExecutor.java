@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-import com.copetti.pgncommon.chess.TokenInterface;
-
 public class TokenizerExecutor {
 
 	private List<Function<String, Optional<? extends TokenInterface>>> tokenizers;

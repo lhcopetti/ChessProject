@@ -1,6 +1,6 @@
 package com.copetti.pgn.lexical.state.container;
 
-import com.copetti.pgncommon.chess.token.ChessPiece;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public interface ChessPieceContainer {
 

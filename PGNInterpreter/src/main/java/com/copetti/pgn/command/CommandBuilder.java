@@ -1,7 +1,7 @@
 package com.copetti.pgn.command;
 
-import com.copetti.pgncommon.chess.board.ChessSquare;
-import com.copetti.pgncommon.chess.token.ChessPiece;
+import com.copetti.pgn.board.ChessSquare;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.Getter;
 
@@ -23,7 +23,8 @@ public class CommandBuilder {
 
 		if (chessPiece == null)
 			chessPiece = ChessPiece.PAWN;
-		return new MoveCommand(chessPiece, targetSquare);
+		// return new MoveCommand(chessPiece, targetSquare);
+		return null;
 
 	}
 
