@@ -34,9 +34,4 @@ public class ChessBoard {
 	public ColoredChessPiece at(ChessSquare chessSquare) {
 		return pieces.get(chessSquare);
 	}
-
-	public ChessBoard(Map<ChessSquare, ColoredChessPiece> piece) {
-		throw new UnsupportedOperationException();
-	}
-
 }

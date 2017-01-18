@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.copetti.pgn.board.CastleInformation;
-import com.copetti.pgn.board.serializer.ChessBoardSerializer;
 
 public class CastleInformationSerializerTest {
 

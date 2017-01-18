@@ -6,10 +6,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CastleInformation {
 
-	private @Getter boolean wCanCastleKingSide;
-	private @Getter boolean wCanCastleQueenSide;
+	private @Getter boolean kingCastleAvaiableForWhite;
+	private @Getter boolean queenCastleAvaiableForWhite;
 
-	private @Getter boolean bCanCastleKingSide;
-	private @Getter boolean bCanCastleQueenSide;
+	private @Getter boolean kingCastleAvailableForBlack;
+	private @Getter boolean queenCastleAvailableForBlack;
 
 }

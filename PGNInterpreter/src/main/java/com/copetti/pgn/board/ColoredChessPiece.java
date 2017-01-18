@@ -2,8 +2,10 @@ package com.copetti.pgn.board;
 
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@AllArgsConstructor
 public class ColoredChessPiece {
 
 	private @Getter ChessPiece piece;

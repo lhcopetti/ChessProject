@@ -3,7 +3,6 @@ package com.copetti.pgn.board.builder;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.tokenizer.tokens.ChessFile;
@@ -29,8 +28,8 @@ public class ChessBoardBuilder {
 		return new ChessBoardBuilderAt(pieces, square);
 	}
 
-	public ChessBoard build() {
-		return new ChessBoard(pieces);
+	public Map<ChessSquare, ColoredChessPiece> build() {
+		return pieces;
 	}
 
 	public ChessBoardBuilderFillRank fill(ChessRank chessRank) {
