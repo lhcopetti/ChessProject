@@ -10,7 +10,7 @@ public class ChessColorTest {
 
 	@Test
 	public void testNextToPlayIsBlack() {
-		assertEquals("w", new FENSerializer().serialize(ChessColor.BLACK));
+		assertEquals("b", new FENSerializer().serialize(ChessColor.BLACK));
 	}
 
 	@Test

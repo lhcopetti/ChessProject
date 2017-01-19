@@ -9,6 +9,8 @@ public enum ChessFile implements TokenInterface {
 
 	A, B, C, D, E, F, G, H;
 
+	private static ChessFile[] chessFile = ChessFile.values();
+
 	public static Optional<ChessFile> of(String input) {
 
 		return Arrays //
@@ -34,9 +36,21 @@ public enum ChessFile implements TokenInterface {
 				findFirst();
 	}
 
+	public static ChessFile last() {
+		return chessFile[chessFile.length - 1];
+	}
+
 	@Override
 	public String toString() {
 		return getPgnNotation();
+	}
+
+	public ChessFile next() {
+		return chessFile[(ordinal() + 1) % chessFile.length];
+	}
+
+	public static ChessFile first() {
+		return chessFile[0];
 	}
 
 }

@@ -16,6 +16,9 @@ public class ChessRank implements TokenInterface {
 
 	private @Getter int rank;
 
+	private static List<ChessRank> values = values();
+	private static int last = values.get(values.size() - 1).getRank();
+
 	public static Optional<ChessRank> of(String input) {
 		int result;
 		try {
@@ -66,6 +69,11 @@ public class ChessRank implements TokenInterface {
 				.rangeClosed(1, 8) //
 				.mapToObj(v -> new ChessRank(v)) //
 				.collect(Collectors.toList());
+	}
+
+	public ChessRank previous() {
+		int prevRank = rank - 1 >= 0 ? rank - 1 : last;
+		return new ChessRank(prevRank);
 	}
 
 }
