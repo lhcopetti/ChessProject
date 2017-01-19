@@ -1,5 +1,7 @@
 package com.copetti.pgn.board;
 
+import java.util.function.Function;
+
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +36,13 @@ public class ColoredChessPiece {
 		if (piece != other.piece)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+
+		Function<String, String> f = color == ChessColor.WHITE ? String::toUpperCase : String::toLowerCase;
+		return f.apply(piece.getPgnNotation());
 	}
 
 }

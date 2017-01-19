@@ -32,8 +32,8 @@ public class ChessSquare {
 			throw new IllegalArgumentException(
 					"ChessSquare não pode ser inicializado com: " + sq + ". Tamanho: " + sq.length());
 
-		ChessFile file = ChessFile.of(("" + sq.charAt(0)).toUpperCase()).get();
-		ChessRank rank = ChessRank.of("" + sq.charAt(1)).get();
+		ChessFile file = ChessFile.of(sq.substring(0, 1)).get();
+		ChessRank rank = ChessRank.of(sq.substring(1)).get();
 		init(file, rank);
 	}
 

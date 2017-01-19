@@ -11,6 +11,7 @@ import org.junit.Test;
 import com.copetti.pgn.board.ChessColor;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
+import com.copetti.pgn.tokenizer.tokens.ChessFile;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
@@ -20,41 +21,53 @@ public class VanillaChessFactoryTest {
 	public void testNewBoardFactory() {
 		Map<ChessSquare, ColoredChessPiece> map = new VanillaChessFactory().newBoard();
 
-		assertThatRankIsFilled(ChessRank.of("7").get(), new ColoredChessPiece(ChessPiece.PAWN, ChessColor.BLACK));
-		assertThatRankIsFilled(ChessRank.of("2").get(), new ColoredChessPiece(ChessPiece.PAWN, ChessColor.BLACK));
+		assertThatRankIsFilled(map, ChessRank.of("7").get(), new ColoredChessPiece(ChessPiece.PAWN, ChessColor.BLACK));
+		assertThatRankIsFilled(map, ChessRank.of("2").get(), new ColoredChessPiece(ChessPiece.PAWN, ChessColor.WHITE));
 
-		assertThatRankIsOfColor(ChessRank.of("1").get(), ChessColor.WHITE);
-		assertThatRankIsOfColor(ChessRank.of("8").get(), ChessColor.BLACK);
+		assertThatRankIsOfColor(map, ChessRank.of("1").get(), ChessColor.WHITE);
+		assertThatRankIsOfColor(map, ChessRank.of("8").get(), ChessColor.BLACK);
 
-		assertFileIs(ChessRank.of("1").get(), Arrays.asList(ChessPiece.ROOK, ChessPiece.KNIGHT, ChessPiece.BISHOP,
+		assertFileIs(map, ChessRank.of("1").get(), Arrays.asList(ChessPiece.ROOK, ChessPiece.KNIGHT, ChessPiece.BISHOP,
 				ChessPiece.QUEEN, ChessPiece.KING, ChessPiece.BISHOP, ChessPiece.KNIGHT, ChessPiece.ROOK));
-		assertFileIs(ChessRank.of("8").get(), Arrays.asList(ChessPiece.ROOK, ChessPiece.KNIGHT, ChessPiece.BISHOP,
+		assertFileIs(map, ChessRank.of("8").get(), Arrays.asList(ChessPiece.ROOK, ChessPiece.KNIGHT, ChessPiece.BISHOP,
 				ChessPiece.QUEEN, ChessPiece.KING, ChessPiece.BISHOP, ChessPiece.KNIGHT, ChessPiece.ROOK));
 
-		assertRankIsEmpty(ChessRank.of("3").get());
-		assertRankIsEmpty(ChessRank.of("4").get());
-		assertRankIsEmpty(ChessRank.of("5").get());
-		assertRankIsEmpty(ChessRank.of("6").get());
+		assertRankIsEmpty(map, ChessRank.of("3").get());
+		assertRankIsEmpty(map, ChessRank.of("4").get());
+		assertRankIsEmpty(map, ChessRank.of("5").get());
+		assertRankIsEmpty(map, ChessRank.of("6").get());
 	}
 
-	private void assertRankIsEmpty(ChessRank chessRank) {
-		// TODO Auto-generated method stub
+	private void assertRankIsEmpty(Map<ChessSquare, ColoredChessPiece> map, ChessRank chessRank) {
+		for (ChessFile f : ChessFile.values())
+			assertTrue(map.get(new ChessSquare(f, chessRank)) == null);
+	}
+
+	private void assertFileIs(Map<ChessSquare, ColoredChessPiece> map, ChessRank chessRank, List<ChessPiece> asList) {
+
+		for (int i = 0; i < ChessFile.values().length; i++) {
+			ChessSquare cs = new ChessSquare(ChessFile.fromOrdinal(i).get(), chessRank);
+			ChessPiece piece = map.get(cs).getPiece();
+			assertEquals(piece, asList.get(i));
+		}
 
 	}
 
-	private void assertFileIs(ChessRank chessRank, List<ChessPiece> asList) {
-		// TODO Auto-generated method stub
+	private void assertThatRankIsOfColor(Map<ChessSquare, ColoredChessPiece> map, ChessRank rank, ChessColor color) {
 
+		for (ChessFile f : ChessFile.values()) {
+			ChessSquare cs = new ChessSquare(f, rank);
+			assertTrue(map.get(cs).getColor() == color);
+		}
 	}
 
-	private void assertThatRankIsOfColor(ChessRank chessRank, ChessColor white) {
-		// TODO Auto-generated method stub
+	private void assertThatRankIsFilled(Map<ChessSquare, ColoredChessPiece> map, ChessRank chessRank,
+			ColoredChessPiece coloredChessPiece) {
 
-	}
-
-	private void assertThatRankIsFilled(ChessRank chessRank, ColoredChessPiece coloredChessPiece) {
-		// TODO Auto-generated method stub
-
+		for (ChessFile f : ChessFile.values()) {
+			ChessSquare cs = new ChessSquare(f, chessRank);
+			assertEquals(map.get(cs), coloredChessPiece);
+		}
 	}
 
 }

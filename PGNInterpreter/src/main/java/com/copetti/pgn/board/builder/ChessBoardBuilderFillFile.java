@@ -23,7 +23,7 @@ public class ChessBoardBuilderFillFile implements ChessBoardBuilderFillWith {
 		for (ChessRank c : ChessRank.values())
 			pieces.put(new ChessSquare(chessFile, c), piece);
 
-		return new ChessBoardBuilder(pieces);
+		return new ChessBoardBuilder(pieces, null);
 	}
 
 }
