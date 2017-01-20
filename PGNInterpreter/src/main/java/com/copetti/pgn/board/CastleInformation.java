@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @AllArgsConstructor
+@EqualsAndHashCode
 public class CastleInformation {
 
 	private @Getter boolean whiteKingCastle;
@@ -28,34 +29,4 @@ public class CastleInformation {
 		return new FENSerializer().serialize(this);
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (blackKingCastle ? 1231 : 1237);
-		result = prime * result + (blackQueenCastle ? 1231 : 1237);
-		result = prime * result + (whiteKingCastle ? 1231 : 1237);
-		result = prime * result + (whiteQueenCastle ? 1231 : 1237);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof CastleInformation))
-			return false;
-		CastleInformation other = (CastleInformation) obj;
-		if (blackKingCastle != other.blackKingCastle)
-			return false;
-		if (blackQueenCastle != other.blackQueenCastle)
-			return false;
-		if (whiteKingCastle != other.whiteKingCastle)
-			return false;
-		if (whiteQueenCastle != other.whiteQueenCastle)
-			return false;
-		return true;
-	}
 }
