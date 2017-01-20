@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
-import com.copetti.pgncommon.chess.token.ChessCapture;
+import com.copetti.pgn.tokenizer.tokens.ChessCapture;
 
 public class CaptureState extends LexicalState {
 

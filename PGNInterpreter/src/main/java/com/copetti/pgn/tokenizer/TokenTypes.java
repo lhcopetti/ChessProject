@@ -3,8 +3,6 @@ package com.copetti.pgn.tokenizer;
 import java.util.Arrays;
 import java.util.Optional;
 
-import com.copetti.pgncommon.chess.TokenInterface;
-
 public enum TokenTypes {
 
 	CHESS_FILE, //

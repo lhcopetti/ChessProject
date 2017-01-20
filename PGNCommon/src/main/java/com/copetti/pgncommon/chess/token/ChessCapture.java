@@ -2,7 +2,7 @@ package com.copetti.pgncommon.chess.token;
 
 import java.util.Optional;
 
-import com.copetti.pgncommon.chess.TokenInterface;
+import com.copetti.pgn.tokenizer.TokenInterface;
 
 public enum ChessCapture implements TokenInterface {
 

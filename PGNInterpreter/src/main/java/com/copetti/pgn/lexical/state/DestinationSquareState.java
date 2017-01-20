@@ -7,13 +7,15 @@ import java.util.Stack;
 
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
-import com.copetti.pgncommon.chess.token.ChessFile;
-import com.copetti.pgncommon.chess.token.ChessRank;
+import com.copetti.pgn.tokenizer.tokens.ChessFile;
+import com.copetti.pgn.tokenizer.tokens.ChessRank;
+
+import lombok.Getter;
 
 public class DestinationSquareState extends LexicalState {
 
-	private ChessFile file;
-	private ChessRank rank;
+	private @Getter ChessFile file;
+	private @Getter ChessRank rank;
 
 	public DestinationSquareState() {
 

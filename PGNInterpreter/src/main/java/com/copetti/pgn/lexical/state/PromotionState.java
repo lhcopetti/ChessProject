@@ -7,8 +7,8 @@ import java.util.Stack;
 
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
-import com.copetti.pgncommon.chess.token.ChessPiece;
-import com.copetti.pgncommon.chess.token.ChessPromotion;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
+import com.copetti.pgn.tokenizer.tokens.ChessPromotion;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class PromotionState extends LexicalState {
 
 	private @Getter ChessPiece piece;

@@ -5,16 +5,18 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
 
+import com.copetti.pgn.lexical.state.container.ChessPieceContainer;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
-import com.copetti.pgncommon.chess.token.ChessFile;
+import com.copetti.pgn.tokenizer.tokens.ChessFile;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class PawnFileState extends LexicalState {
+public class PawnFileState extends LexicalState implements ChessPieceContainer {
 
 	private ChessFile file;
 
@@ -62,6 +64,11 @@ public class PawnFileState extends LexicalState {
 			return false;
 
 		return true;
+	}
+
+	@Override
+	public ChessPiece getPiece() {
+		return ChessPiece.PAWN;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.copetti.pgn.lexical.state;
+package com.copetti.pgn.lexical;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +8,9 @@ import java.util.List;
 import org.junit.Test;
 
 import com.copetti.pgn.lexical.PGNLexical;
+import com.copetti.pgn.lexical.state.CastleLongState;
+import com.copetti.pgn.lexical.state.CastleShortState;
+import com.copetti.pgn.lexical.state.LexicalState;
 
 public class PGNLexicalChessCastleTest {
 

@@ -3,7 +3,6 @@ package com.copetti.pgn.interpreter;
 import java.util.List;
 
 import com.copetti.pgn.command.PGNCommand;
-import com.copetti.pgn.lexical.PGNLexical;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.PGNTokenizer;
 
@@ -19,14 +18,16 @@ public class PGNInterpreter {
 			return null;
 		}
 
-		PGNLexical lexical = new PGNLexical();
+		// PGNLexical lexical = new PGNLexical();
 
-		if (!lexical.execute(tokens)) {
-			System.out.println("Falha na análise léxica para os tokens: " + tokens);
-			return null;
-		}
+		// if (!lexical.execute(tokens)) {
+		// System.out.println("Falha na análise léxica para os tokens: " +
+		// tokens);
+		// return null;
+		// }
 
-		return lexical.getCommand();
+		// return lexical.getCommand();
+		return null;
 
 	}
 
