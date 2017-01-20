@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
-import com.copetti.pgn.board.factory.VanillaChessFactory;
+import com.copetti.pgn.board.factory.VanillaChessBoardFactory;
 import com.copetti.pgn.board.factory.VisualChessBoardFactory;
 
 public class FENSerializerBoardTest {
@@ -21,7 +21,7 @@ public class FENSerializerBoardTest {
 		// rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 
 		String fenBoard = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-		Map<ChessSquare, ColoredChessPiece> newBoard = new VanillaChessFactory().newBoard();
+		Map<ChessSquare, ColoredChessPiece> newBoard = new VanillaChessBoardFactory().newBoard();
 		assertEquals(fenBoard, ser.serialize(newBoard));
 	}
 

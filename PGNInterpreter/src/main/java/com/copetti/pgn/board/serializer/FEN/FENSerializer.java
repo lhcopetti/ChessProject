@@ -1,5 +1,7 @@
 package com.copetti.pgn.board.serializer.FEN;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -22,18 +24,18 @@ public class FENSerializer implements ChessBoardSerializer {
 		return null;
 	}
 
-	protected String serialize(CastleInformation castleInformation) {
+	public String serialize(CastleInformation castleInformation) {
 
 		String ret = "";
 
-		if (castleInformation.isKingCastleAvaiableForWhite())
+		if (castleInformation.isWhiteKingCastle())
 			ret += "K";
-		if (castleInformation.isQueenCastleAvaiableForWhite())
+		if (castleInformation.isWhiteQueenCastle())
 			ret += "Q";
 
-		if (castleInformation.isKingCastleAvailableForBlack())
+		if (castleInformation.isBlackKingCastle())
 			ret += "k";
-		if (castleInformation.isQueenCastleAvailableForBlack())
+		if (castleInformation.isBlackQueenCastle())
 			ret += "q";
 
 		return ret.isEmpty() ? "-" : ret;
@@ -57,12 +59,12 @@ public class FENSerializer implements ChessBoardSerializer {
 
 	protected String serialize(Map<ChessSquare, ColoredChessPiece> map) {
 
-		String result = "";
+		List<String> result = new ArrayList<>();
 
 		for (ChessRank r : new ReverseIterator<>(ChessRank.values()))
-			result += serializeRank(map, r);
+			result.add(serializeRank(map, r));
 
-		return result;
+		return String.join("/", result);
 	}
 
 	private String serializeRank(Map<ChessSquare, ColoredChessPiece> map, ChessRank r) {
@@ -72,21 +74,19 @@ public class FENSerializer implements ChessBoardSerializer {
 
 		for (ChessFile f : ChessFile.values()) {
 			ColoredChessPiece cp = map.get(new ChessSquare(f, r));
+
 			if (cp == null) {
 				counter++;
 				continue;
-			} else {
-				line += counter > 0 ? counter : "";
-				line += getFENPieceRepresentation(cp);
-				counter = 0;
 			}
+
+			line += counter > 0 ? counter : "";
+			line += getFENPieceRepresentation(cp);
+			counter = 0;
 		}
 
 		if (counter > 0)
 			line += counter;
-
-		if (!r.equals(ChessRank.first()))
-			line += "/";
 
 		return line;
 	}

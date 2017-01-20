@@ -5,11 +5,11 @@ import java.util.Map;
 import com.copetti.pgn.board.ChessColor;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
-import com.copetti.pgn.board.builder.ChessBoardBuilder;
+import com.copetti.pgn.board.map.ChessBoardBuilder;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
-public class VanillaChessFactory {
+public class VanillaChessBoardFactory {
 
 	public Map<ChessSquare, ColoredChessPiece> newBoard() {
 		ChessBoardBuilder b = ChessBoardBuilder.newBuilder();

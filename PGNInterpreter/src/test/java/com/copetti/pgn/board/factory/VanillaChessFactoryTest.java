@@ -13,7 +13,7 @@ public class VanillaChessFactoryTest {
 
 	@Test
 	public void testNewBoardFactory() {
-		Map<ChessSquare, ColoredChessPiece> map = new VanillaChessFactory().newBoard();
+		Map<ChessSquare, ColoredChessPiece> map = new VanillaChessBoardFactory().newBoard();
 
 		String initialSetup = "rnbqkbnr" + "pppppppp" + "--------" + "--------" + "--------" + "--------" + "PPPPPPPP" + "RNBQKBNR";
 		Map<ChessSquare, ColoredChessPiece> mapVisaul = new VisualChessBoardFactory().newBoard(initialSetup);

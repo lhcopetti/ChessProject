@@ -1,4 +1,4 @@
-package com.copetti.pgn.board.builder;
+package com.copetti.pgn.board.map;
 
 import java.util.Map;
 
@@ -7,21 +7,20 @@ import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.tokenizer.tokens.ChessFile;
 import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
-public class ChessBoardBuilderFillFile implements ChessBoardBuilderFillWith {
+public class ChessBoardBuilderFillRank implements ChessBoardBuilderFillWith {
 
+	private ChessRank chessRank;
 	private Map<ChessSquare, ColoredChessPiece> pieces;
-	private ChessFile chessFile;
 
-	public ChessBoardBuilderFillFile(Map<ChessSquare, ColoredChessPiece> pieces, ChessFile chessFile) {
+	public ChessBoardBuilderFillRank(Map<ChessSquare, ColoredChessPiece> pieces, ChessRank chessRank) {
 		this.pieces = pieces;
-		this.chessFile = chessFile;
+		this.chessRank = chessRank;
 	}
 
-	@Override
 	public ChessBoardBuilder with(ColoredChessPiece piece) {
 
-		for (ChessRank c : ChessRank.values())
-			pieces.put(new ChessSquare(chessFile, c), piece);
+		for (ChessFile f : ChessFile.values())
+			pieces.put(new ChessSquare(f, chessRank), piece);
 
 		return new ChessBoardBuilder(pieces, null);
 	}

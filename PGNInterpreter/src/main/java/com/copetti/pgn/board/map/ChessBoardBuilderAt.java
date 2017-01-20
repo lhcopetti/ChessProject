@@ -1,4 +1,4 @@
-package com.copetti.pgn.board.builder;
+package com.copetti.pgn.board.map;
 
 import java.util.Map;
 
