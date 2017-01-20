@@ -116,5 +116,5 @@ public class FENSerializerBoardTest {
 		Map<ChessSquare, ColoredChessPiece> newBoard = new VisualChessBoardFactory().newBoard(initialSetup);
 		assertEquals(fenBoard, ser.serialize(newBoard));
 	}
-
+	
 }
