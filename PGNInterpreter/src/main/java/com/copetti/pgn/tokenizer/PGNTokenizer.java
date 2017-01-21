@@ -36,7 +36,7 @@ public class PGNTokenizer {
 
 	public List<PGNToken> tokenize(String input) {
 
-		if (input.isEmpty())
+		if (null == input || input.isEmpty())
 			return new ArrayList<>();
 
 		String currentInput = input;
@@ -48,6 +48,9 @@ public class PGNTokenizer {
 			tokens.add(token);
 			currentInput = currentInput.substring(token.getTokenValue().length());
 		}
+
+		if (!currentInput.isEmpty())
+			return new ArrayList<>();
 
 		return tokens;
 	}

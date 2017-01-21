@@ -7,10 +7,16 @@ import lombok.Getter;
 
 public abstract class ChessCommand {
 
-	private @Getter ChessPiece piece;
+	public enum CheckFlag {
+		FLAG_NONE, FLAG_CHECK, FLAG_MATE
+	}
 
-	public ChessCommand(ChessPiece chessPiece) {
+	private @Getter ChessPiece piece;
+	private @Getter CheckFlag flag;
+
+	public ChessCommand(ChessPiece chessPiece, CheckFlag flag) {
 		this.piece = chessPiece;
+		this.flag = flag;
 	}
 
 	public ChessBoard execute(ChessBoard input) {

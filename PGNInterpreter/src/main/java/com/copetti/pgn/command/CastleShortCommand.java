@@ -5,8 +5,8 @@ import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public class CastleShortCommand extends CastleCommand {
 
-	public CastleShortCommand() {
-		super(ChessPiece.KING);
+	public CastleShortCommand(CheckFlag flag) {
+		super(ChessPiece.KING, flag);
 	}
 
 	@Override

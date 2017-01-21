@@ -17,8 +17,7 @@ public class PGNTokenizerTest {
 		tok = new PGNTokenizer();
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void testNull() {
+	public void testNoNullPointerException() {
 		tok.tokenize(null);
 	}
 

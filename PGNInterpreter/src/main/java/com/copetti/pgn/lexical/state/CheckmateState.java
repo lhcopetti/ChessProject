@@ -5,15 +5,19 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
 
+import com.copetti.pgn.command.ChessCommand.CheckFlag;
+import com.copetti.pgn.lexical.state.container.CheckFlagContainer;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
 import com.copetti.pgn.tokenizer.tokens.ChessCheckMate;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @AllArgsConstructor
-public class CheckmateState extends LexicalState {
+@EqualsAndHashCode(callSuper = false)
+public class CheckmateState extends LexicalState implements CheckFlagContainer {
 
 	private @Getter ChessCheckMate mate;
 
@@ -47,25 +51,8 @@ public class CheckmateState extends LexicalState {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((mate == null) ? 0 : mate.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof CheckmateState))
-			return false;
-		CheckmateState other = (CheckmateState) obj;
-		if (mate != other.mate)
-			return false;
-		return true;
+	public CheckFlag getFlag() {
+		return CheckFlag.FLAG_MATE;
 	}
 
 }

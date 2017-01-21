@@ -1,6 +1,7 @@
 package com.copetti.pgn.command.factory;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -9,6 +10,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.copetti.pgn.board.ChessSquare;
+import com.copetti.pgn.command.ChessCommand.CheckFlag;
 import com.copetti.pgn.lexical.PGNLexical;
 import com.copetti.pgn.lexical.state.CaptureState;
 import com.copetti.pgn.lexical.state.CastleLongState;
@@ -31,6 +33,7 @@ public class LexicalStateCollectionTest {
 	public void isShortCastleCommandTest() {
 		LexicalStateCollection l = new LexicalStateCollection(Arrays.asList(new CastleShortState()));
 		assertTrue(l.isShortCastleCommand());
+		assertEquals(CheckFlag.FLAG_NONE, l.getFlag());
 	}
 
 	@Test
@@ -49,13 +52,17 @@ public class LexicalStateCollectionTest {
 	public void isPromotionStateTest() {
 		List<LexicalState> l = new PGNLexical().execute("e8=Q+");
 		LexicalStateCollection coll = new LexicalStateCollection(l);
-		assertTrue(coll.isPromotionCommand());
+		assertTrue(coll.isPromotion());
+		assertEquals(ChessPiece.PAWN, coll.getChessPiece());
+		assertEquals(ChessPiece.QUEEN, coll.getTargetPromotionPiece());
+		assertEquals(CheckFlag.FLAG_CHECK, coll.getFlag());
 	}
 
 	@Test
 	public void getDestinationSquareStateTest() {
 		List<LexicalState> l = new PGNLexical().execute("e4");
 		LexicalStateCollection coll = new LexicalStateCollection(l);
+		assertEquals(ChessPiece.PAWN, coll.getChessPiece());
 		assertEquals(new ChessSquare("e4"), coll.getDestinationSquare());
 	}
 
@@ -63,7 +70,9 @@ public class LexicalStateCollectionTest {
 	public void getChessPieceStateKnightTest() {
 		List<LexicalState> l = new PGNLexical().execute("Nxc6+");
 		LexicalStateCollection coll = new LexicalStateCollection(l);
+		assertTrue(coll.isCaptureCommand());
 		assertEquals(ChessPiece.KNIGHT, coll.getChessPiece());
+		assertEquals(CheckFlag.FLAG_CHECK, coll.getFlag());
 	}
 
 	@Test

@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
 
+import com.copetti.pgn.command.ChessCommand.CheckFlag;
+import com.copetti.pgn.lexical.state.container.CheckFlagContainer;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.TokenTypes;
 import com.copetti.pgn.tokenizer.tokens.ChessCheck;
@@ -14,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class CheckState extends LexicalState {
+public class CheckState extends LexicalState implements CheckFlagContainer {
 
 	public CheckState() {
 		this(ChessCheck.CHESS_CHECK);
@@ -66,6 +68,11 @@ public class CheckState extends LexicalState {
 		if (check != other.check)
 			return false;
 		return true;
+	}
+
+	@Override
+	public CheckFlag getFlag() {
+		return CheckFlag.FLAG_CHECK;
 	}
 
 }

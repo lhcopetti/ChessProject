@@ -4,8 +4,8 @@ import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public abstract class CastleCommand extends ChessCommand {
 
-	public CastleCommand(ChessPiece chessPiece) {
-		super(chessPiece);
+	public CastleCommand(ChessPiece chessPiece, CheckFlag flag) {
+		super(chessPiece, flag);
 	}
 
 }

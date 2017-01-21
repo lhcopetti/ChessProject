@@ -1,12 +1,13 @@
 package com.copetti.pgn.command;
 
 import com.copetti.pgn.board.ChessBoard;
+import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
-public class CastleLongCommand extends CastleCommand {
+public class CaptureCommand extends DisplacementCommand {
 
-	public CastleLongCommand(CheckFlag flag) {
-		super(ChessPiece.KING, flag);
+	public CaptureCommand(ChessPiece chessPiece, ChessSquare destSquare, CheckFlag flag) {
+		super(chessPiece, destSquare, flag);
 	}
 
 	@Override
