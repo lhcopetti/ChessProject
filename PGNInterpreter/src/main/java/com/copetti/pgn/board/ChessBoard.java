@@ -1,13 +1,19 @@
 package com.copetti.pgn.board;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.copetti.pgn.board.serializer.FEN.FENSerializer;
 import com.copetti.pgn.tokenizer.tokens.ChessFile;
 import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+@EqualsAndHashCode
 public class ChessBoard {
 
 	private Map<ChessSquare, ColoredChessPiece> pieces;
@@ -20,13 +26,19 @@ public class ChessBoard {
 	private @Getter FullMoveCounter fullMoveNumber;
 
 	public ChessBoard(Map<ChessSquare, ColoredChessPiece> pieces, ChessBoardContext ctx) {
-		this.pieces = pieces;
+
+		/* Defensive copy */
+		this.pieces = Collections.unmodifiableMap(pieces);
 
 		this.nextToPlay = ctx.getNextToPlay();
 		this.castleInfo = ctx.getCastleInfo();
 		this.halfMoveCounter = ctx.getHalfMoveCounter();
 		this.enPassantTarget = ctx.getEnPassantTarget();
 		this.fullMoveNumber = ctx.getFullMoveNumber();
+	}
+
+	public Map<ChessSquare, ColoredChessPiece> getPieces() {
+		return new HashMap<>(pieces);
 	}
 
 	public ColoredChessPiece at(int x, int y) {
@@ -50,55 +62,17 @@ public class ChessBoard {
 		return new FENSerializer().serialize(this);
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((castleInfo == null) ? 0 : castleInfo.hashCode());
-		result = prime * result + ((enPassantTarget == null) ? 0 : enPassantTarget.hashCode());
-		result = prime * result + ((fullMoveNumber == null) ? 0 : fullMoveNumber.hashCode());
-		result = prime * result + ((halfMoveCounter == null) ? 0 : halfMoveCounter.hashCode());
-		result = prime * result + ((nextToPlay == null) ? 0 : nextToPlay.hashCode());
-		result = prime * result + ((pieces == null) ? 0 : pieces.hashCode());
-		return result;
+	public boolean isEmptyAt(ChessSquare cs) {
+		return at(cs) == null;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof ChessBoard))
-			return false;
-		ChessBoard other = (ChessBoard) obj;
-		if (castleInfo == null) {
-			if (other.castleInfo != null)
-				return false;
-		} else if (!castleInfo.equals(other.castleInfo))
-			return false;
-		if (enPassantTarget == null) {
-			if (other.enPassantTarget != null)
-				return false;
-		} else if (!enPassantTarget.equals(other.enPassantTarget))
-			return false;
-		if (fullMoveNumber == null) {
-			if (other.fullMoveNumber != null)
-				return false;
-		} else if (!fullMoveNumber.equals(other.fullMoveNumber))
-			return false;
-		if (halfMoveCounter == null) {
-			if (other.halfMoveCounter != null)
-				return false;
-		} else if (!halfMoveCounter.equals(other.halfMoveCounter))
-			return false;
-		if (nextToPlay != other.nextToPlay)
-			return false;
-		if (pieces == null) {
-			if (other.pieces != null)
-				return false;
-		} else if (!pieces.equals(other.pieces))
-			return false;
-		return true;
+	public List<ChessSquare> getAllSquaresThatContains(ColoredChessPiece coloredChessPiece) {
+
+		return pieces.entrySet() //
+				.stream() //
+				.filter(entry -> entry.getValue().equals(coloredChessPiece)) //
+				.map(entry -> entry.getKey()) //
+				.collect(Collectors.toList());
+
 	}
 }

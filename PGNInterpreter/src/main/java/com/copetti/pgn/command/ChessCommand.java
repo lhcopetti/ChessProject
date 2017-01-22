@@ -1,6 +1,12 @@
 package com.copetti.pgn.command;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.copetti.pgn.board.ChessBoard;
+import com.copetti.pgn.board.ChessSquare;
+import com.copetti.pgn.board.ColoredChessPiece;
+import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.Getter;
@@ -25,6 +31,16 @@ public abstract class ChessCommand {
 
 		return doExecute(input);
 	}
+
+	// public final ChessSquare getTargetPieceSquare(ChessBoard input) {
+	//
+	// ColoredChessPiece cp = new ColoredChessPiece(piece,
+	// input.getNextToPlay());
+	// List<ChessSquare> pieces = input.getAllSquaresThatContains(cp);
+	//
+	// ChessMovementResolver cmr = new ChessMovementResolver(piece);
+	//
+	// }
 
 	protected abstract boolean canExecute(ChessBoard input);
 

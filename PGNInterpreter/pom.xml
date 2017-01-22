@@ -20,6 +20,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>one.util</groupId>
+			<artifactId>streamex</artifactId>
+			<version>0.6.4</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.reflections/reflections-maven -->
 		<dependency>
 			<groupId>org.reflections</groupId>
