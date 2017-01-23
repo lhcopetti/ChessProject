@@ -65,4 +65,9 @@ public class MoveVector {
 		this.isRepetable = true;
 	}
 
+	@Override
+	public String toString() {
+		return "(" + offset.getX() + ", " + offset.getY() + ")";
+	}
+
 }

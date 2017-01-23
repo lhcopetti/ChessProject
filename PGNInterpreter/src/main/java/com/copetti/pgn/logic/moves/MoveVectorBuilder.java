@@ -6,34 +6,33 @@ import java.util.List;
 import com.copetti.pgn.logic.moves.prerequisites.CompositePrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.MovePrerequisite;
 
-
-public class MoveVectorBuilder
-{
+public class MoveVectorBuilder {
 
 	private List<MovePrerequisite> prerequisites;
+	private boolean repeatable;
 
-	public MoveVectorBuilder()
-	{
+	public MoveVectorBuilder() {
 		prerequisites = new ArrayList<>();
+		repeatable = false;
 	}
 
-	public void setRepeatable()
-	{
+	public void setRepeatable() {
+		this.repeatable = true;
 	}
 
-	public void addPrerequisite(CompositePrerequisite composite)
-	{
+	public void addPrerequisite(CompositePrerequisite composite) {
 		prerequisites.add(composite);
 	}
 
-	public MoveVector build(int x, int y)
-	{
+	public MoveVector build(int x, int y) {
 		MoveVector moveVector = new MoveVector(x, y);
-		moveVector.setRepeatable();
+
+		if (repeatable)
+			moveVector.setRepeatable();
+
 		prerequisites //
 				.stream() //
-				.forEach(prerequisite -> moveVector
-						.addPrerequisite(prerequisite)); //
+				.forEach(prerequisite -> moveVector.addPrerequisite(prerequisite)); //
 
 		return moveVector;
 	}

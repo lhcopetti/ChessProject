@@ -2,7 +2,6 @@ package com.copetti.pgn.logic.moves;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.Map;
 import java.util.Set;
 
 import org.junit.Before;
@@ -10,7 +9,6 @@ import org.junit.Before;
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessColor;
 import com.copetti.pgn.board.ChessSquare;
-import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.board.factory.BoardTestFactory;
 import com.copetti.pgn.board.map.ChessBoardBuilder;
 import com.copetti.pgn.logic.ChessMovementResolver;

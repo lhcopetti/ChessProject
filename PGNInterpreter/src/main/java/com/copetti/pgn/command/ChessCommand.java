@@ -1,12 +1,6 @@
 package com.copetti.pgn.command;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.copetti.pgn.board.ChessBoard;
-import com.copetti.pgn.board.ChessSquare;
-import com.copetti.pgn.board.ColoredChessPiece;
-import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.Getter;
