@@ -21,7 +21,9 @@ public class HVMovement implements MoveContainer {
 	public Set<MoveVector> getAvailableMoves() {
 
 		MoveVectorBuilder builder = new MoveVectorBuilder();
-		builder.setRepeatable();
+
+		if (repeatable)
+			builder.setRepeatable();
 
 		CompositePrerequisite composite = CompositePrerequisite.newOrPrerequisite();
 		composite.add(new EmptySquarePrerequisite());

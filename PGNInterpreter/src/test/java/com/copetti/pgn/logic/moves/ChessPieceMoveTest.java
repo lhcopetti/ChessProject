@@ -21,10 +21,14 @@ public abstract class ChessPieceMoveTest {
 
 	@Test
 	public abstract void getMovesWithNoneAvailable();
-	
-	public final void assertContains(Set<ChessSquare> moves, ChessSquare c)
-	{
+
+	public final void assertContains(Set<ChessSquare> moves, ChessSquare c) {
 		assertTrue(moves.contains(c));
+	}
+
+	public final void assertContains(Set<ChessSquare> moves, String... cs) {
+		for (String c : cs)
+			assertContains(moves, new ChessSquare(c));
 	}
 
 }

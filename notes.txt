@@ -37,3 +37,4 @@ King moves
 Queen moves
 En passant capture 
 File and Rank desambiguation
+The strategies for each piece are passed via a static init (ugh!)
