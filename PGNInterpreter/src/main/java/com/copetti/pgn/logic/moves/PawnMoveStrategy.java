@@ -6,18 +6,14 @@ import java.util.Set;
 import com.copetti.pgn.logic.moves.prerequisites.CapturePrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.FirstMovePrerequisite;
 
+public class PawnMoveStrategy extends ChessMoveStrategy {
 
-public class PawnMoveStrategy extends ChessMoveStrategy
-{
-
-	public PawnMoveStrategy()
-	{
+	public PawnMoveStrategy() {
 
 	}
 
 	@Override
-	public Set<MoveVector> doGetMoves()
-	{
+	public Set<MoveVector> doGetMoves() {
 
 		Set<MoveVector> moves = new HashSet<>();
 

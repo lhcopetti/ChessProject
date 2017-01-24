@@ -8,3 +8,24 @@ Knight invalid move: Ncc6
 	
 Pawns can only capture the adjacent files
 	exd5 valid, exh8 invalid.
+	
+
+
+	
+	
+1. d4 c6 2. c4 Nf6 3. Nc3
+
+
+RBNQKBNR
+PPPPPPPP
+        
+        
+		
+pppppppp		
+rbnqkbnr
+
+
+Design:
+
+doGetMoves always allocates a new Set<MoveVector>. Is it mandatory to have a template method?
+Couldn't the subclass simply populate and unmodifiable set?
