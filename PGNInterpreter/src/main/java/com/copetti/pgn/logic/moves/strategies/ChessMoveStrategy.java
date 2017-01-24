@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.copetti.pgn.board.ChessBoard;
+import com.copetti.pgn.board.ChessColor;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.logic.math.UnitVectorInterpoler;
 import com.copetti.pgn.logic.math.Vector;
@@ -26,27 +27,40 @@ public abstract class ChessMoveStrategy {
 
 		Set<ChessSquare> availableMoves = new HashSet<>();
 
-		for (MoveVector m : doGetMoves()) {
-			int repetition = 1;
+		for (MoveVector moveVector : doGetMoves()) {
 
-			while (true) {
+			if (board.at(self).getColor() == ChessColor.BLACK)
+				moveVector.flip();
 
-				if (!targetSquareIsWithinBounds(m, self, repetition))
-					break;
+			Set<ChessSquare> moves = checkMove(moveVector, self, board);
+			availableMoves.addAll(moves);
+		}
 
-				ChessSquare target = m.add(self, repetition++);
+		return availableMoves;
+	}
 
-				if (!computeMoveValidity(self, board, target))
-					break;
+	private Set<ChessSquare> checkMove(MoveVector m, ChessSquare self, ChessBoard board) {
 
-				if (!m.checkPrerequisite(self, board, target))
-					break;
+		Set<ChessSquare> availableMoves = new HashSet<>();
+		int repetition = 1;
 
-				availableMoves.add(target);
+		while (true) {
 
-				if (!m.isRepetable())
-					break;
-			}
+			if (!targetSquareIsWithinBounds(m, self, repetition))
+				break;
+
+			ChessSquare target = m.add(self, repetition++);
+
+			if (!computeMoveValidity(self, board, target))
+				break;
+
+			if (!m.checkPrerequisite(self, board, target))
+				break;
+
+			availableMoves.add(target);
+
+			if (!m.isRepetable())
+				break;
 		}
 
 		return availableMoves;

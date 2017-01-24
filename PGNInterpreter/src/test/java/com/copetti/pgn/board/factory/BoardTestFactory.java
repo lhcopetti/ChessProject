@@ -21,13 +21,17 @@ public class BoardTestFactory {
 
 	}
 
-	public static ChessBoard createNew(Map<ChessSquare, ColoredChessPiece> board, ChessColor nextToPlay) {
+	public static ChessBoard createNew(Map<ChessSquare, ColoredChessPiece> board, ChessColor nextToPlay,
+			ChessSquare enPassant) {
 
-		ChessBoardContext ctx = new ChessBoardContext(nextToPlay, CastleInformation.none(), null,
+		ChessBoardContext ctx = new ChessBoardContext(nextToPlay, CastleInformation.none(), enPassant,
 				HalfMoveCounter.first(), FullMoveCounter.first());
 
 		return new ChessBoard(board, ctx);
+	}
 
+	public static ChessBoard createNew(Map<ChessSquare, ColoredChessPiece> board, ChessColor nextToPlay) {
+		return createNew(board, nextToPlay, null);
 	}
 
 }

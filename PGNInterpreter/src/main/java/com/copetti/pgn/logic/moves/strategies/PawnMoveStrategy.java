@@ -5,6 +5,8 @@ import java.util.Set;
 
 import com.copetti.pgn.logic.moves.MoveVector;
 import com.copetti.pgn.logic.moves.prerequisites.CapturePrerequisite;
+import com.copetti.pgn.logic.moves.prerequisites.CompositePrerequisite;
+import com.copetti.pgn.logic.moves.prerequisites.EnPassantPrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.FirstMovePrerequisite;
 
 public class PawnMoveStrategy extends ChessMoveStrategy {
@@ -24,12 +26,16 @@ public class PawnMoveStrategy extends ChessMoveStrategy {
 		moveTwice.addPrerequisite(new FirstMovePrerequisite());
 		moves.add(moveTwice);
 
+		CompositePrerequisite composite = CompositePrerequisite.newOrPrerequisite();
+		composite.add(new CapturePrerequisite());
+		composite.add(new EnPassantPrerequisite());
+
 		MoveVector capture = new MoveVector(1, 1);
-		capture.addPrerequisite(new CapturePrerequisite());
+		capture.addPrerequisite(composite);
 		moves.add(capture);
 
 		MoveVector capture2 = new MoveVector(-1, 1);
-		capture2.addPrerequisite(new CapturePrerequisite());
+		capture2.addPrerequisite(composite);
 		moves.add(capture2);
 
 		return moves;

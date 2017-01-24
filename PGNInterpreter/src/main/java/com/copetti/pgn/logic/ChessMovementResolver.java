@@ -6,7 +6,6 @@ import java.util.Set;
 
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
-import com.copetti.pgn.logic.moves.KingMoveTest;
 import com.copetti.pgn.logic.moves.strategies.BishopMoveStrategy;
 import com.copetti.pgn.logic.moves.strategies.ChessMoveStrategy;
 import com.copetti.pgn.logic.moves.strategies.KingMoveStrategy;

@@ -9,8 +9,10 @@ import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.logic.moves.prerequisites.MovePrerequisite;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+@EqualsAndHashCode
 public class MoveVector {
 
 	private @Getter boolean isRepetable;
@@ -68,6 +70,10 @@ public class MoveVector {
 	@Override
 	public String toString() {
 		return "(" + offset.getX() + ", " + offset.getY() + ")";
+	}
+
+	public void flip() {
+		offset = new Point(-offset.x, -offset.y);
 	}
 
 }
