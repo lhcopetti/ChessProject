@@ -6,8 +6,9 @@ import java.util.Set;
 
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
+import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.strategies.BishopMoveStrategy;
-import com.copetti.pgn.logic.moves.strategies.ChessMoveStrategy;
+import com.copetti.pgn.logic.moves.strategies.ChessMoveExecutor;
 import com.copetti.pgn.logic.moves.strategies.KingMoveStrategy;
 import com.copetti.pgn.logic.moves.strategies.KnightMoveStrategy;
 import com.copetti.pgn.logic.moves.strategies.PawnMoveStrategy;
@@ -21,7 +22,7 @@ public class ChessMovementResolver {
 
 	private @Getter ChessPiece piece;
 
-	private static Map<ChessPiece, ChessMoveStrategy> moveStrategies;
+	private static Map<ChessPiece, MoveContainer> moveStrategies;
 
 	public ChessMovementResolver(ChessPiece piece) {
 
@@ -47,7 +48,9 @@ public class ChessMovementResolver {
 	}
 
 	public Set<ChessSquare> getMoves(ChessSquare cs, ChessBoard board) {
-		return moveStrategies.get(piece).getMoves(cs, board);
+
+		ChessMoveExecutor cme = new ChessMoveExecutor(moveStrategies.get(piece));
+		return cme.getMoves(cs, board);
 	}
 
 }

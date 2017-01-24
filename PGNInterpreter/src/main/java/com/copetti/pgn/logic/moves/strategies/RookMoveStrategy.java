@@ -3,9 +3,10 @@ package com.copetti.pgn.logic.moves.strategies;
 import java.util.Set;
 
 import com.copetti.pgn.logic.moves.HVMovement;
+import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.MoveVector;
 
-public class RookMoveStrategy extends ChessMoveStrategy {
+public class RookMoveStrategy implements MoveContainer {
 
 	private HVMovement move;
 
@@ -14,8 +15,8 @@ public class RookMoveStrategy extends ChessMoveStrategy {
 	}
 
 	@Override
-	protected Set<MoveVector> doGetMoves() {
-		return move.getAvailableMoves();
+	public Set<MoveVector> getMoveCollection() {
+		return move.getMoveCollection();
 	}
 
 }

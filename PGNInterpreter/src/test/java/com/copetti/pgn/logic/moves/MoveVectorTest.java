@@ -28,15 +28,15 @@ public class MoveVectorTest {
 		MoveVector first = new MoveVector(5, 5);
 		MoveVector second = new MoveVector(5, 5);
 
-		first.flip();
-		second.flip();
+		first = first.flip();
+		second = second.flip();
 		assertEquals(first, second);
 
 		MoveVector x = new MoveVector(new Point(22, 33), false);
 		x.addPrerequisite(new CapturePrerequisite());
 		MoveVector y = new MoveVector(new Point(-22, -33), false);
 		y.addPrerequisite(new CapturePrerequisite());
-		x.flip();
+		x = x.flip();
 
 		assertEquals(x, y);
 	}

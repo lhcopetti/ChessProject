@@ -5,9 +5,10 @@ import java.util.Set;
 
 import com.copetti.pgn.logic.moves.DiagonalMovement;
 import com.copetti.pgn.logic.moves.HVMovement;
+import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.MoveVector;
 
-public class QueenMoveStrategy extends ChessMoveStrategy {
+public class QueenMoveStrategy implements MoveContainer {
 
 	private DiagonalMovement diagonal;
 	private HVMovement hvMove;
@@ -18,11 +19,11 @@ public class QueenMoveStrategy extends ChessMoveStrategy {
 	}
 
 	@Override
-	protected Set<MoveVector> doGetMoves() {
+	public Set<MoveVector> getMoveCollection() {
 
 		Set<MoveVector> moves = new HashSet<>();
-		moves.addAll(diagonal.getAvailableMoves());
-		moves.addAll(hvMove.getAvailableMoves());
+		moves.addAll(diagonal.getMoveCollection());
+		moves.addAll(hvMove.getMoveCollection());
 
 		return moves;
 	}

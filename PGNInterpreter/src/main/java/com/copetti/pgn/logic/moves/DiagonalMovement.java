@@ -16,7 +16,7 @@ public class DiagonalMovement implements MoveContainer {
 	private @Getter boolean repeatable;
 
 	@Override
-	public Set<MoveVector> getAvailableMoves() {
+	public Set<MoveVector> getMoveCollection() {
 		MoveVectorBuilder builder = new MoveVectorBuilder();
 
 		if (repeatable)

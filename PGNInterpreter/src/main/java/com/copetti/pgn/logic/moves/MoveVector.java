@@ -9,15 +9,18 @@ import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.logic.moves.prerequisites.MovePrerequisite;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @EqualsAndHashCode
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MoveVector {
 
+	private Point offset;
 	private @Getter boolean isRepetable;
 	private List<MovePrerequisite> prerequisites;
-	private Point offset;
 
 	public MoveVector(int x, int y) {
 		this(new Point(x, y), false);
@@ -72,8 +75,8 @@ public class MoveVector {
 		return "(" + offset.getX() + ", " + offset.getY() + ")";
 	}
 
-	public void flip() {
-		offset = new Point(-offset.x, -offset.y);
+	public MoveVector flip() {
+		return new MoveVector(new Point(-offset.x, -offset.y), isRepetable, prerequisites);
 	}
 
 }

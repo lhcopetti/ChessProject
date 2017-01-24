@@ -9,28 +9,33 @@ import com.copetti.pgn.board.ChessColor;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.logic.math.UnitVectorInterpoler;
 import com.copetti.pgn.logic.math.Vector;
+import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.MoveVector;
 import com.copetti.pgn.logic.moves.prerequisites.CapturePrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.EmptySquarePrerequisite;
 
-public abstract class ChessMoveStrategy {
+public class ChessMoveExecutor {
 
 	EmptySquarePrerequisite emptyPrerequisite;
 	CapturePrerequisite capturePrerequisite;
+	MoveContainer moveContainer;
 
-	public ChessMoveStrategy() {
+	public ChessMoveExecutor(MoveContainer moveContainer) {
 		emptyPrerequisite = new EmptySquarePrerequisite();
 		capturePrerequisite = new CapturePrerequisite();
+		this.moveContainer = moveContainer;
 	}
 
 	public Set<ChessSquare> getMoves(ChessSquare self, ChessBoard board) {
 
 		Set<ChessSquare> availableMoves = new HashSet<>();
 
-		for (MoveVector moveVector : doGetMoves()) {
+		for (MoveVector m : moveContainer.getMoveCollection()) {
+
+			MoveVector moveVector = m;
 
 			if (board.at(self).getColor() == ChessColor.BLACK)
-				moveVector.flip();
+				moveVector = m.flip();
 
 			Set<ChessSquare> moves = checkMove(moveVector, self, board);
 			availableMoves.addAll(moves);
@@ -98,10 +103,9 @@ public abstract class ChessMoveStrategy {
 		if (intermediatePoints.isEmpty())
 			return true;
 
-		return intermediatePoints.stream().map(cs -> new ChessSquare((int) cs.getX(), (int) cs.getY()))
-				.allMatch(x -> emptyPrerequisite.apply(board, self, x));
+		return intermediatePoints //
+				.stream() //
+				.map(cs -> new ChessSquare((int) cs.getX(), (int) cs.getY())) //
+				.allMatch(x -> emptyPrerequisite.apply(board, self, x)); //
 	}
-
-	protected abstract Set<MoveVector> doGetMoves();
-
 }

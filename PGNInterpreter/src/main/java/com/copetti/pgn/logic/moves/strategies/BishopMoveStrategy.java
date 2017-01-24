@@ -3,9 +3,10 @@ package com.copetti.pgn.logic.moves.strategies;
 import java.util.Set;
 
 import com.copetti.pgn.logic.moves.DiagonalMovement;
+import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.MoveVector;
 
-public class BishopMoveStrategy extends ChessMoveStrategy {
+public class BishopMoveStrategy implements MoveContainer {
 
 	private DiagonalMovement move;
 
@@ -14,9 +15,8 @@ public class BishopMoveStrategy extends ChessMoveStrategy {
 	}
 
 	@Override
-	protected Set<MoveVector> doGetMoves() {
-		return move.getAvailableMoves();
-
+	public Set<MoveVector> getMoveCollection() {
+		return move.getMoveCollection();
 	}
 
 }

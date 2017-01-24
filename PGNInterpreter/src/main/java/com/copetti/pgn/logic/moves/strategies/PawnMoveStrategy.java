@@ -1,22 +1,21 @@
 package com.copetti.pgn.logic.moves.strategies;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.MoveVector;
 import com.copetti.pgn.logic.moves.prerequisites.CapturePrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.CompositePrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.EnPassantPrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.FirstMovePrerequisite;
 
-public class PawnMoveStrategy extends ChessMoveStrategy {
+public class PawnMoveStrategy implements MoveContainer {
+
+	Set<MoveVector> allMoves;
 
 	public PawnMoveStrategy() {
-
-	}
-
-	@Override
-	public Set<MoveVector> doGetMoves() {
 
 		Set<MoveVector> moves = new HashSet<>();
 
@@ -38,7 +37,13 @@ public class PawnMoveStrategy extends ChessMoveStrategy {
 		capture2.addPrerequisite(composite);
 		moves.add(capture2);
 
-		return moves;
+		allMoves = Collections.unmodifiableSet(moves);
+
+	}
+
+	@Override
+	public Set<MoveVector> getMoveCollection() {
+		return allMoves;
 	}
 
 }

@@ -18,7 +18,7 @@ public class HVMovement implements MoveContainer {
 	}
 
 	@Override
-	public Set<MoveVector> getAvailableMoves() {
+	public Set<MoveVector> getMoveCollection() {
 
 		MoveVectorBuilder builder = new MoveVectorBuilder();
 
