@@ -7,7 +7,6 @@ import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessBoardContext;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
-import com.copetti.pgn.command.decorator.PromotionDecorator;
 import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 

@@ -1,4 +1,4 @@
-package com.copetti.pgn.command.decorator;
+package com.copetti.pgn.command;
 
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 

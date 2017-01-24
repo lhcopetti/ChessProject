@@ -3,18 +3,13 @@ package com.copetti.pgn.lexical;
 import java.util.Collections;
 import java.util.List;
 
-import com.copetti.pgn.command.PGNCommand;
 import com.copetti.pgn.lexical.state.LexicalState;
 import com.copetti.pgn.lexical.state.LexicalStateManager;
 import com.copetti.pgn.lexical.state.StartState;
 import com.copetti.pgn.tokenizer.PGNToken;
 import com.copetti.pgn.tokenizer.PGNTokenizer;
 
-import lombok.Getter;
-
 public class PGNLexical {
-
-	private @Getter PGNCommand command;
 
 	public List<LexicalState> execute(String rawInput) {
 

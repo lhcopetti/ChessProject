@@ -15,7 +15,7 @@ import com.copetti.pgn.command.CastleShortCommand;
 import com.copetti.pgn.command.ChessCommand;
 import com.copetti.pgn.command.ChessCommand.CheckFlag;
 import com.copetti.pgn.command.MoveCommand;
-import com.copetti.pgn.command.decorator.PromotionDecorator;
+import com.copetti.pgn.command.PromotionDecorator;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public class PGNInterpreterTest {
