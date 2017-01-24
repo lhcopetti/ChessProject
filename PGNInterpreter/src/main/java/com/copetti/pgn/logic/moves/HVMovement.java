@@ -9,11 +9,11 @@ import com.copetti.pgn.logic.moves.prerequisites.EmptySquarePrerequisite;
 
 import lombok.Getter;
 
-public class HVMoveStrategy implements MoveContainer {
+public class HVMovement implements MoveContainer {
 
 	private @Getter boolean repeatable;
 
-	public HVMoveStrategy(boolean repeatable) {
+	public HVMovement(boolean repeatable) {
 		this.repeatable = repeatable;
 	}
 

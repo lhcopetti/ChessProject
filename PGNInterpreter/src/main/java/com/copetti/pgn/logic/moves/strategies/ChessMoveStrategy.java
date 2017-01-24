@@ -1,4 +1,4 @@
-package com.copetti.pgn.logic.moves;
+package com.copetti.pgn.logic.moves.strategies;
 
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +8,7 @@ import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.logic.math.UnitVectorInterpoler;
 import com.copetti.pgn.logic.math.Vector;
+import com.copetti.pgn.logic.moves.MoveVector;
 import com.copetti.pgn.logic.moves.prerequisites.CapturePrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.EmptySquarePrerequisite;
 

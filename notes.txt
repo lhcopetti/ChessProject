@@ -29,3 +29,11 @@ Design:
 
 doGetMoves always allocates a new Set<MoveVector>. Is it mandatory to have a template method?
 Couldn't the subclass simply populate and unmodifiable set?
+
+
+To Implement:
+
+King moves
+Queen moves
+En passant capture 
+File and Rank desambiguation

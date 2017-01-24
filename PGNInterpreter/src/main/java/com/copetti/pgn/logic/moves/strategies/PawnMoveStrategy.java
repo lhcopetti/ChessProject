@@ -1,8 +1,9 @@
-package com.copetti.pgn.logic.moves;
+package com.copetti.pgn.logic.moves.strategies;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import com.copetti.pgn.logic.moves.MoveVector;
 import com.copetti.pgn.logic.moves.prerequisites.CapturePrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.FirstMovePrerequisite;
 

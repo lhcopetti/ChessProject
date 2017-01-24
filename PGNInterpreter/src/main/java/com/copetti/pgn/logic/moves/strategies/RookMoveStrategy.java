@@ -1,13 +1,16 @@
-package com.copetti.pgn.logic.moves;
+package com.copetti.pgn.logic.moves.strategies;
 
 import java.util.Set;
 
+import com.copetti.pgn.logic.moves.HVMovement;
+import com.copetti.pgn.logic.moves.MoveVector;
+
 public class RookMoveStrategy extends ChessMoveStrategy {
 
-	private HVMoveStrategy move;
+	private HVMovement move;
 
 	public RookMoveStrategy() {
-		move = new HVMoveStrategy(true);
+		move = new HVMovement(true);
 	}
 
 	@Override

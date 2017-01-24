@@ -6,11 +6,12 @@ import java.util.Set;
 
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
-import com.copetti.pgn.logic.moves.BishopMoveStrategy;
-import com.copetti.pgn.logic.moves.ChessMoveStrategy;
-import com.copetti.pgn.logic.moves.KnightMoveStrategy;
-import com.copetti.pgn.logic.moves.PawnMoveStrategy;
-import com.copetti.pgn.logic.moves.RookMoveStrategy;
+import com.copetti.pgn.logic.moves.strategies.BishopMoveStrategy;
+import com.copetti.pgn.logic.moves.strategies.ChessMoveStrategy;
+import com.copetti.pgn.logic.moves.strategies.KnightMoveStrategy;
+import com.copetti.pgn.logic.moves.strategies.PawnMoveStrategy;
+import com.copetti.pgn.logic.moves.strategies.QueenMoveStrategy;
+import com.copetti.pgn.logic.moves.strategies.RookMoveStrategy;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.Getter;
@@ -35,6 +36,7 @@ public class ChessMovementResolver {
 		moveStrategies.put(ChessPiece.BISHOP, new BishopMoveStrategy());
 		moveStrategies.put(ChessPiece.ROOK, new RookMoveStrategy());
 		moveStrategies.put(ChessPiece.KNIGHT, new KnightMoveStrategy());
+		moveStrategies.put(ChessPiece.QUEEN, new QueenMoveStrategy());
 	}
 
 	public boolean isValidMovement(ChessBoard input, ChessSquare origin, ChessSquare destination) {
