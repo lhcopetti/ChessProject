@@ -33,8 +33,14 @@ Couldn't the subclass simply populate and unmodifiable set?
 
 To Implement:
 
-King moves
-Queen moves
-En passant capture 
+OK! King moves
+OK! Queen moves
+OK! En passant capture 
+
+Add exception when a move is requested for a color that is not in the turn to play.
+Test pawnMove Command (Set enpassant)
+Test knight move command
 File and Rank desambiguation
 The strategies for each piece are passed via a static init (ugh!)
+Create an executor class to execute the getMoves method (Change it to an interface).
+The prerequisites inside moveVector should not reside there. The flip method breaks the immutability

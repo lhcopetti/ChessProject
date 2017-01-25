@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
+import com.copetti.pgn.exception.PGNInterpreterException;
 import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.strategies.BishopMoveStrategy;
 import com.copetti.pgn.logic.moves.strategies.ChessMoveExecutor;
@@ -50,7 +51,13 @@ public class ChessMovementResolver {
 	public Set<ChessSquare> getMoves(ChessSquare cs, ChessBoard board) {
 
 		ChessMoveExecutor cme = new ChessMoveExecutor(moveStrategies.get(piece));
-		return cme.getMoves(cs, board);
+
+		try {
+			return cme.getMoves(cs, board);
+		} catch (PGNInterpreterException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

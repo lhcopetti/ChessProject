@@ -153,7 +153,7 @@ public class PawnMoveTest extends ChessPieceMoveTest {
 		b.setColor(ChessColor.WHITE);
 		b.at("e4").put(ChessPiece.PAWN);
 
-		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.WHITE, new ChessSquare("e3"));
+		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.BLACK, new ChessSquare("e3"));
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 
 		assertEquals(2, moves.size());
