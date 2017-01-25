@@ -11,6 +11,10 @@ import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.board.FullMoveCounter;
 import com.copetti.pgn.board.HalfMoveCounter;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BoardTestFactory {
 
 	public static ChessBoard createNew(String board, ChessColor nextToPlay) {
@@ -24,7 +28,7 @@ public class BoardTestFactory {
 	public static ChessBoard createNew(Map<ChessSquare, ColoredChessPiece> board, ChessColor nextToPlay,
 			ChessSquare enPassant) {
 
-		ChessBoardContext ctx = new ChessBoardContext(nextToPlay, CastleInformation.none(), enPassant,
+		ChessBoardContext ctx = new ChessBoardContext(nextToPlay, CastleInformation.all(), enPassant,
 				HalfMoveCounter.first(), FullMoveCounter.first());
 
 		return new ChessBoard(board, ctx);

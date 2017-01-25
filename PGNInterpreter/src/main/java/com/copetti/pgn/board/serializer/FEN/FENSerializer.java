@@ -21,7 +21,14 @@ public class FENSerializer implements ChessBoardSerializer {
 
 	@Override
 	public String serialize(ChessBoard b) {
-		return null;
+
+		return String.join(" ", //
+				serialize(b.getPieces()), //
+				serialize(b.getNextToPlay()), //
+				serialize(b.getCastleInfo()), //
+				serialize(b.getEnPassantTarget()), //
+				serialize(b.getHalfMoveCounter()), //
+				serialize(b.getFullMoveNumber()));
 	}
 
 	public String serialize(CastleInformation castleInformation) {
@@ -50,7 +57,7 @@ public class FENSerializer implements ChessBoardSerializer {
 	}
 
 	protected String serialize(ChessSquare enPassant) {
-		return enPassant.toString();
+		return enPassant == null ? "-" : enPassant.toString();
 	}
 
 	protected String serialize(ChessColor color) {
@@ -96,17 +103,5 @@ public class FENSerializer implements ChessBoardSerializer {
 		Function<String, String> f = cp.getColor() == ChessColor.WHITE ? String::toUpperCase : String::toLowerCase;
 		return f.apply(cp.getPiece().getPgnNotation());
 	}
-
-	// private ChessPiece getPiece(char c) {
-	// return ChessPiece.of(String.valueOf(c).toUpperCase()).get();
-	// }
-	//
-	// private ChessColor getColor(char c) {
-	//
-	// if (String.valueOf(c).toUpperCase().equals(String.valueOf(c)))
-	// return ChessColor.WHITE;
-	//
-	// return ChessColor.BLACK;
-	// }
 
 }

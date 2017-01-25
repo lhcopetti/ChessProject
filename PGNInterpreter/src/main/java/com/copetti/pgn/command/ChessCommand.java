@@ -1,6 +1,7 @@
 package com.copetti.pgn.command;
 
 import com.copetti.pgn.board.ChessBoard;
+import com.copetti.pgn.board.ChessBoardContext;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.Getter;
@@ -23,18 +24,22 @@ public abstract class ChessCommand {
 		if (!canExecute(input))
 			return null;
 
-		return doExecute(input);
+		ChessBoard cb = doExecute(input);
+
+		if (cb == null)
+			return null;
+
+		return postSuccessfulExecution(cb);
 	}
 
-	// public final ChessSquare getTargetPieceSquare(ChessBoard input) {
-	//
-	// ColoredChessPiece cp = new ColoredChessPiece(piece,
-	// input.getNextToPlay());
-	// List<ChessSquare> pieces = input.getAllSquaresThatContains(cp);
-	//
-	// ChessMovementResolver cmr = new ChessMovementResolver(piece);
-	//
-	// }
+	private ChessBoard postSuccessfulExecution(ChessBoard cb) {
+
+		ChessBoardContext ctx = new ChessBoardContext(cb.getNextToPlay().opposite(), cb.getCastleInfo(),
+				cb.getEnPassantTarget(), cb.getHalfMoveCounter(), cb.getFullMoveNumber());
+
+		return new ChessBoard(cb.getPieces(), ctx);
+
+	}
 
 	protected abstract boolean canExecute(ChessBoard input);
 
