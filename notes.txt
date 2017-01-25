@@ -36,8 +36,9 @@ To Implement:
 OK! King moves
 OK! Queen moves
 OK! En passant capture 
+OK! Add exception when a move is requested for a color that is not in the turn to play.
 
-Add exception when a move is requested for a color that is not in the turn to play.
+Create a command specific to pawns, so that we can treat enpassant movements easily.
 Test pawnMove Command (Set enpassant)
 Test knight move command
 File and Rank desambiguation
