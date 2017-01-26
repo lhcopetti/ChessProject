@@ -10,12 +10,13 @@ import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.board.factory.BoardTestFactory;
 import com.copetti.pgn.command.ChessCommand.CheckFlag;
+import com.copetti.pgn.exception.PGNInterpreterException;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public class MoveCommandTest {
 
 	@Test
-	public void testMoveForBishop() {
+	public void testMoveForBishop() throws PGNInterpreterException {
 
 		String board = //
 				"" + //

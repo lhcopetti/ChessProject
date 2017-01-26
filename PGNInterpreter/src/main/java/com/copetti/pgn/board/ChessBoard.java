@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.copetti.pgn.board.serializer.FEN.FENSerializer;
 import com.copetti.pgn.tokenizer.tokens.ChessFile;
+import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
 import lombok.EqualsAndHashCode;
@@ -74,5 +75,23 @@ public class ChessBoard {
 				.map(entry -> entry.getKey()) //
 				.collect(Collectors.toList());
 
+	}
+
+	public Map<ChessSquare, ColoredChessPiece> getAllPieces(ChessColor ofColor) {
+
+		return pieces //
+				.entrySet() //
+				.stream() //
+				.filter(x -> x.getValue().getColor() == ofColor) //
+				.collect(Collectors.toMap(x -> x.getKey(), y -> y.getValue())); //
+	}
+
+	public ChessSquare getKingPosition(ChessColor kingColor) {
+		return pieces.entrySet() //
+				.stream() //
+				.filter(x -> x.getValue().getPiece() == ChessPiece.KING && x.getValue().getColor() == kingColor) //
+				.findFirst() //
+				.get() //
+				.getKey(); //
 	}
 }

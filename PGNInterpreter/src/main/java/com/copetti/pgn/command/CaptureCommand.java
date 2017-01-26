@@ -12,16 +12,6 @@ public class CaptureCommand extends DisplacementCommand {
 	}
 
 	@Override
-	protected boolean canExecute(ChessBoard input) {
-		return false;
-	}
-
-	@Override
-	protected ChessBoard doExecute(ChessBoard input) {
-		return null;
-	}
-
-	@Override
 	protected boolean checkTargetSquare(ChessBoard board) {
 
 		ColoredChessPiece cp = board.at(getDestinationSquare());

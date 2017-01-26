@@ -25,7 +25,7 @@ public class KnightMoveTest extends ChessPieceMoveTest {
 		Map<ChessSquare, ColoredChessPiece> map = b.at("e4").put(ChessPiece.KNIGHT).build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.KNIGHT);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(e4, board);
 
@@ -58,7 +58,7 @@ public class KnightMoveTest extends ChessPieceMoveTest {
 				.build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.KNIGHT);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(e1, board);
 		assertTrue(moves.size() == 0);
@@ -78,7 +78,7 @@ public class KnightMoveTest extends ChessPieceMoveTest {
 				.build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.KNIGHT);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(h8, board);
 
@@ -106,7 +106,7 @@ public class KnightMoveTest extends ChessPieceMoveTest {
 				.build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.KNIGHT);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(e4, board);
 

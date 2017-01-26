@@ -1,10 +1,15 @@
 package com.copetti.pgn.command;
 
+import java.util.Map;
+
 import com.copetti.pgn.board.ChessBoard;
-import com.copetti.pgn.board.ChessBoardContext;
-import com.copetti.pgn.board.HalfMoveCounter;
+import com.copetti.pgn.board.ChessColor;
+import com.copetti.pgn.board.ChessSquare;
+import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.board.builder.ChessBoardContextBuilder;
-import com.copetti.pgn.board.map.ChessBoardBuilder;
+import com.copetti.pgn.exception.KingNotInCheckException;
+import com.copetti.pgn.exception.PGNInterpreterException;
+import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.Getter;
@@ -29,27 +34,65 @@ public abstract class ChessCommand {
 		this.flag = flag;
 	}
 
-	public ChessBoard execute(ChessBoard input) {
+	public ChessBoard execute(ChessBoard input) throws PGNInterpreterException {
 		if (!canExecute(input))
 			return null;
 
-		ChessBoard cb = doExecute(input);
+		ChessBoardContextBuilder builder = ChessBoardContextBuilder.newBuilder(input);
 
-		if (cb == null)
+		if (!doExecute(builder, input))
 			return null;
 
-		return postSuccessfulExecution(cb);
-	}
+		checkFlag(builder, input);
 
-	private ChessBoard postSuccessfulExecution(ChessBoard cb) {
-
-		ChessBoardContextBuilder builder = ChessBoardContextBuilder.newBuilder(cb);
-
-		updateNextToPlay(builder, cb);
-		updateHalfMoveCounter(builder, cb);
+		postSuccessfulExecution(builder, input);
 
 		return builder.build();
+	}
 
+	private void checkFlag(ChessBoardContextBuilder builder, ChessBoard input) throws PGNInterpreterException {
+
+		if (getFlag() == CheckFlag.FLAG_NONE)
+			return;
+
+		if (getFlag() == CheckFlag.FLAG_CHECK)
+			verifyCheckCondition(builder, input);
+
+	}
+
+	private void verifyCheckCondition(ChessBoardContextBuilder builder, ChessBoard input)
+			throws KingNotInCheckException {
+
+		ChessBoard board = builder.build();
+
+		Map<ChessSquare, ColoredChessPiece> all = board.getAllPieces(input.getNextToPlay());
+
+		ChessMovementResolver cmr = new ChessMovementResolver();
+
+		Object oppositeKingSquare = board.getKingPosition(input.getNextToPlay().opposite());
+
+		all.entrySet().stream() //
+				.filter(x -> cmr.getMoves(x.getKey(), board).contains(oppositeKingSquare)).findFirst()
+				.orElseThrow(() -> new KingNotInCheckException(input.getNextToPlay()));
+
+	}
+
+	private void postSuccessfulExecution(ChessBoardContextBuilder builder, ChessBoard cb) {
+
+		updateNextToPlay(builder, cb);
+		updateEnPassant(builder, cb);
+		updateHalfMoveCounter(builder, cb);
+		updateFullMove(builder, cb);
+	}
+
+	private void updateFullMove(ChessBoardContextBuilder builder, ChessBoard cb) {
+		if (cb.getNextToPlay() == ChessColor.BLACK)
+			builder.incrementFullMove();
+	}
+
+	protected void updateEnPassant(ChessBoardContextBuilder builder, ChessBoard cb) {
+		// builder.setEnpassant(null);
+		return;
 	}
 
 	private void updateNextToPlay(ChessBoardContextBuilder builder, ChessBoard cb) {
@@ -64,5 +107,5 @@ public abstract class ChessCommand {
 
 	protected abstract boolean canExecute(ChessBoard input);
 
-	protected abstract ChessBoard doExecute(ChessBoard input);
+	protected abstract boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input);
 }

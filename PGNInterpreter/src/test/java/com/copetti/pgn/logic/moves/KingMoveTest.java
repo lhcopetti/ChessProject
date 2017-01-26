@@ -24,7 +24,7 @@ public class KingMoveTest extends ChessPieceMoveTest {
 		Map<ChessSquare, ColoredChessPiece> map = b.at("d5").put(ChessPiece.KING).build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.KING);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(d5, board);
 
@@ -45,7 +45,7 @@ public class KingMoveTest extends ChessPieceMoveTest {
 				.build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.KING);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(a8, board);
 		assertTrue(moves.size() == 1);
@@ -65,7 +65,7 @@ public class KingMoveTest extends ChessPieceMoveTest {
 				.build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.KING);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(new ChessSquare("c7"), board);
 		assertTrue(moves.size() == 4);
@@ -84,7 +84,7 @@ public class KingMoveTest extends ChessPieceMoveTest {
 				.build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.KING);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(new ChessSquare("c7"), board);
 		assertTrue(moves.size() == 0);

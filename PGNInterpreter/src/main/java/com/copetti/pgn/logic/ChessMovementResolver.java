@@ -25,9 +25,7 @@ public class ChessMovementResolver {
 
 	private static Map<ChessPiece, MoveContainer> moveStrategies;
 
-	public ChessMovementResolver(ChessPiece piece) {
-
-		this.piece = piece;
+	public ChessMovementResolver() {
 
 		if (null == moveStrategies)
 			initMoveStrategies();
@@ -50,6 +48,7 @@ public class ChessMovementResolver {
 
 	public Set<ChessSquare> getMoves(ChessSquare cs, ChessBoard board) {
 
+		ChessPiece piece = board.at(cs).getPiece();
 		ChessMoveExecutor cme = new ChessMoveExecutor(moveStrategies.get(piece));
 
 		try {

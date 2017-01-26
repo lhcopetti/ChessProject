@@ -1,12 +1,11 @@
 package com.copetti.pgn.command;
 
 import java.util.List;
-import java.util.Map;
 
 import com.copetti.pgn.board.ChessBoard;
-import com.copetti.pgn.board.ChessBoardContext;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
+import com.copetti.pgn.board.builder.ChessBoardContextBuilder;
 import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
@@ -30,7 +29,7 @@ public abstract class DisplacementCommand extends ChessCommand {
 	protected abstract boolean checkTargetSquare(ChessBoard board);
 
 	@Override
-	protected boolean canExecute(ChessBoard input) {
+	protected final boolean canExecute(ChessBoard input) {
 
 		if (!checkTargetSquare(input))
 			return false;
@@ -45,19 +44,14 @@ public abstract class DisplacementCommand extends ChessCommand {
 	}
 
 	@Override
-	protected ChessBoard doExecute(ChessBoard input) {
+	protected boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input) {
 
 		if (null == targetCommand)
-			return null;
+			return false;
 
-		Map<ChessSquare, ColoredChessPiece> map = input.getPieces();
-		ColoredChessPiece cp = map.remove(targetCommand);
-		map.put(destinationSquare, cp);
-
-		ChessBoardContext ctx = new ChessBoardContext(input.getNextToPlay(), input.getCastleInfo(),
-				input.getEnPassantTarget(), input.getHalfMoveCounter(), input.getFullMoveNumber());
-
-		return new ChessBoard(map, ctx);
+		ColoredChessPiece cp = builder.getPieces().remove(targetCommand);
+		builder.getPieces().put(destinationSquare, cp);
+		return true;
 	}
 
 	protected final ChessSquare getCommandTarget(ChessBoard input) {
@@ -65,7 +59,7 @@ public abstract class DisplacementCommand extends ChessCommand {
 		ColoredChessPiece cp = new ColoredChessPiece(getPiece(), input.getNextToPlay());
 		List<ChessSquare> pieces = input.getAllSquaresThatContains(cp);
 
-		ChessMovementResolver cmr = new ChessMovementResolver(getPiece());
+		ChessMovementResolver cmr = new ChessMovementResolver();
 		return pieces //
 				.stream() //
 				.filter(x -> cmr.isValidMovement(input, x, getDestinationSquare())) //

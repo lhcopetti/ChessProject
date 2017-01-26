@@ -12,11 +12,13 @@ import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.board.FullMoveCounter;
 import com.copetti.pgn.board.HalfMoveCounter;
 
+import lombok.Getter;
+
 public class ChessBoardContextBuilder {
 
-	private Map<ChessSquare, ColoredChessPiece> pieces;
+	private @Getter Map<ChessSquare, ColoredChessPiece> pieces;
 
-	private ChessSquare chessSquare;
+	private ChessSquare enPassant;
 	private ChessColor nextToPlay;
 	private CastleInformation castle;
 	private HalfMoveCounter halfMove;
@@ -37,7 +39,7 @@ public class ChessBoardContextBuilder {
 
 	public ChessBoard build() {
 
-		ChessBoardContext ctx = new ChessBoardContext(nextToPlay, castle, chessSquare, halfMove, fullMove);
+		ChessBoardContext ctx = new ChessBoardContext(nextToPlay, castle, enPassant, halfMove, fullMove);
 		return new ChessBoard(pieces, ctx);
 
 	}
@@ -48,6 +50,14 @@ public class ChessBoardContextBuilder {
 
 	public void nextPlayer() {
 		nextToPlay = nextToPlay.opposite();
+	}
+
+	public void setEnpassant(ChessSquare chessSquare) {
+		enPassant = chessSquare;
+	}
+
+	public void incrementFullMove() {
+		fullMove = fullMove.next();
 	}
 
 }

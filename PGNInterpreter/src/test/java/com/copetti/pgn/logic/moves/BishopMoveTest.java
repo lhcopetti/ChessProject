@@ -27,7 +27,7 @@ public class BishopMoveTest extends ChessPieceMoveTest {
 
 		ChessBoard board = BoardTestFactory.createNew(b, ChessColor.WHITE);
 
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.BISHOP);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 
 		assertTrue(moves.size() == 13);
@@ -57,7 +57,7 @@ public class BishopMoveTest extends ChessPieceMoveTest {
 
 		ChessBoard board = BoardTestFactory.createNew(builder.build(), ChessColor.WHITE);
 
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.BISHOP);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 
 		assertTrue(moves.size() == 5);
@@ -80,7 +80,7 @@ public class BishopMoveTest extends ChessPieceMoveTest {
 		b.at("f5", "c6", "b1", "h1").put(ChessPiece.BISHOP);
 
 		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.BISHOP);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 
@@ -108,7 +108,7 @@ public class BishopMoveTest extends ChessPieceMoveTest {
 		b.at("e4", "d5", "f5", "d3", "f3").put(ChessPiece.BISHOP);
 
 		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.BISHOP);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 
 		assertEquals(0, moves.size());

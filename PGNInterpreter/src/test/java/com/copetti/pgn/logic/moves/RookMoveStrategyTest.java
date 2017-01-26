@@ -24,7 +24,7 @@ public class RookMoveStrategyTest extends ChessPieceMoveTest {
 		Map<ChessSquare, ColoredChessPiece> map = b.at("e4").put(ChessPiece.ROOK).build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.ROOK);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(e4, board);
 
@@ -58,7 +58,7 @@ public class RookMoveStrategyTest extends ChessPieceMoveTest {
 		b.at("h4").put(ChessPiece.PAWN);
 
 		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.ROOK);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 
@@ -83,7 +83,7 @@ public class RookMoveStrategyTest extends ChessPieceMoveTest {
 		b.at("c4").put(ChessPiece.PAWN);
 
 		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.ROOK);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 
 		assertTrue(moves.size() == 9);
@@ -112,7 +112,7 @@ public class RookMoveStrategyTest extends ChessPieceMoveTest {
 		b.at("a2").put(ChessPiece.PAWN);
 
 		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.ROOK);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 		assertTrue(moves.isEmpty());
 	}

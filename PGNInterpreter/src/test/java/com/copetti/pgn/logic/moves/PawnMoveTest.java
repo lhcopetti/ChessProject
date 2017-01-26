@@ -22,7 +22,7 @@ public class PawnMoveTest extends ChessPieceMoveTest {
 
 	@Before
 	public void setUp() {
-		cmr = new ChessMovementResolver(ChessPiece.PAWN);
+		cmr = new ChessMovementResolver();
 	}
 
 	@Override

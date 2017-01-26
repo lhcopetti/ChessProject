@@ -24,7 +24,7 @@ public class QueenMoveTest extends ChessPieceMoveTest {
 		Map<ChessSquare, ColoredChessPiece> map = b.at("e4").put(ChessPiece.QUEEN).build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.QUEEN);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(e4, board);
 
@@ -76,7 +76,7 @@ public class QueenMoveTest extends ChessPieceMoveTest {
 				.build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.QUEEN);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(a8, board);
 
@@ -104,7 +104,7 @@ public class QueenMoveTest extends ChessPieceMoveTest {
 				.build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.QUEEN);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(a8, board);
 
@@ -137,7 +137,7 @@ public class QueenMoveTest extends ChessPieceMoveTest {
 				.build();
 
 		ChessBoard board = BoardTestFactory.createNew(map, ChessColor.WHITE);
-		ChessMovementResolver cmr = new ChessMovementResolver(ChessPiece.QUEEN);
+		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(d5, board);
 
