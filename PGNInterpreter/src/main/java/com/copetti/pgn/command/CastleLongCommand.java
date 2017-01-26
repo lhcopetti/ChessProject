@@ -1,6 +1,7 @@
 package com.copetti.pgn.command;
 
 import com.copetti.pgn.board.ChessBoard;
+import com.copetti.pgn.board.builder.ChessBoardContextBuilder;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public class CastleLongCommand extends CastleCommand {
@@ -16,9 +17,9 @@ public class CastleLongCommand extends CastleCommand {
 	}
 
 	@Override
-	protected ChessBoard doExecute(ChessBoard input) {
+	protected boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 }

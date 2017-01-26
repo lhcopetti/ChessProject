@@ -21,4 +21,8 @@ public class HalfMoveCounter {
 		return String.valueOf(counter);
 	}
 
+	public HalfMoveCounter next() {
+		return new HalfMoveCounter(counter + 1);
+	}
+
 }

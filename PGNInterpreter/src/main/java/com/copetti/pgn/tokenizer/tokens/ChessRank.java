@@ -9,8 +9,10 @@ import com.copetti.pgn.tokenizer.TokenInterface;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+@EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChessRank implements TokenInterface {
 
@@ -20,6 +22,10 @@ public class ChessRank implements TokenInterface {
 
 	private static ChessRank last = values.get(values.size() - 1);
 	private static ChessRank first = values.get(0);
+
+	public static ChessRank fromIndex(int index) {
+		return ChessRank.of("" + (index + 1)).get();
+	}
 
 	public static Optional<ChessRank> of(String input) {
 		int result;
@@ -37,28 +43,6 @@ public class ChessRank implements TokenInterface {
 
 	public String getValue() {
 		return String.valueOf(rank);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + rank;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof ChessRank))
-			return false;
-		ChessRank other = (ChessRank) obj;
-		if (rank != other.rank)
-			return false;
-		return true;
 	}
 
 	@Override

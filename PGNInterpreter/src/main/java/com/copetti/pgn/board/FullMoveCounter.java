@@ -15,9 +15,13 @@ public class FullMoveCounter {
 	public static FullMoveCounter first() {
 		return new FullMoveCounter(1);
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.valueOf(counter);
+	}
+
+	public FullMoveCounter next() {
+		return new FullMoveCounter(counter + 1);
 	}
 }

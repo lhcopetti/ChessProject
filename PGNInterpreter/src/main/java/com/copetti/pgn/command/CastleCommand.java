@@ -7,5 +7,5 @@ public abstract class CastleCommand extends ChessCommand {
 	public CastleCommand(ChessPiece chessPiece, CheckFlag flag) {
 		super(chessPiece, flag);
 	}
-
+	
 }

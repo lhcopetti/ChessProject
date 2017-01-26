@@ -8,3 +8,40 @@ Knight invalid move: Ncc6
 	
 Pawns can only capture the adjacent files
 	exd5 valid, exh8 invalid.
+	
+
+
+	
+	
+1. d4 c6 2. c4 Nf6 3. Nc3
+
+
+RBNQKBNR
+PPPPPPPP
+        
+        
+		
+pppppppp		
+rbnqkbnr
+
+
+Design:
+
+doGetMoves always allocates a new Set<MoveVector>. Is it mandatory to have a template method?
+Couldn't the subclass simply populate and unmodifiable set?
+
+
+To Implement:
+
+OK! King moves
+OK! Queen moves
+OK! En passant capture 
+OK! Add exception when a move is requested for a color that is not in the turn to play.
+
+Create a command specific to pawns, so that we can treat enpassant movements easily.
+Test pawnMove Command (Set enpassant)
+Test knight move command
+File and Rank desambiguation
+The strategies for each piece are passed via a static init (ugh!)
+Create an executor class to execute the getMoves method (Change it to an interface).
+The prerequisites inside moveVector should not reside there. The flip method breaks the immutability
