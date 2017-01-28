@@ -1,5 +1,6 @@
 package com.copetti.pgn.logic.moves;
 
+import static com.copetti.pgn.logic.moves.ChessAssertiveLibrary.assertContains;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Map;

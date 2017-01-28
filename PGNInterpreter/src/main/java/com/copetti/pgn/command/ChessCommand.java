@@ -69,7 +69,7 @@ public abstract class ChessCommand {
 
 		ChessMovementResolver cmr = new ChessMovementResolver();
 
-		Object oppositeKingSquare = board.getKingPosition(input.getNextToPlay().opposite());
+		Object oppositeKingSquare = board.getKing(input.getNextToPlay().opposite());
 
 		all.entrySet().stream() //
 				.filter(x -> cmr.getMoves(x.getKey(), board).contains(oppositeKingSquare)).findFirst()

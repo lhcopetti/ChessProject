@@ -9,7 +9,6 @@ import com.copetti.pgn.board.ChessColor;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.exception.NoPieceSelectedAtSquareException;
-import com.copetti.pgn.exception.NotYourTurnException;
 import com.copetti.pgn.exception.PGNInterpreterException;
 import com.copetti.pgn.logic.math.UnitVectorInterpoler;
 import com.copetti.pgn.logic.math.Vector;
@@ -36,9 +35,6 @@ public class ChessMoveExecutor {
 
 		if (selfPiece == null)
 			throw new NoPieceSelectedAtSquareException(board, self);
-
-		if (board.getNextToPlay() != selfPiece.getColor())
-			throw new NotYourTurnException(board, self);
 
 		Set<ChessSquare> availableMoves = new HashSet<>();
 

@@ -86,7 +86,7 @@ public class ChessBoard {
 				.collect(Collectors.toMap(x -> x.getKey(), y -> y.getValue())); //
 	}
 
-	public ChessSquare getKingPosition(ChessColor kingColor) {
+	public ChessSquare getKing(ChessColor kingColor) {
 		return pieces.entrySet() //
 				.stream() //
 				.filter(x -> x.getValue().getPiece() == ChessPiece.KING && x.getValue().getColor() == kingColor) //

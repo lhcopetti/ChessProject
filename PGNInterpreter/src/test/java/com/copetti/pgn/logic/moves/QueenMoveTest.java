@@ -1,5 +1,6 @@
 package com.copetti.pgn.logic.moves;
 
+import static com.copetti.pgn.logic.moves.ChessAssertiveLibrary.assertContains;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
@@ -13,7 +14,6 @@ import com.copetti.pgn.board.factory.BoardTestFactory;
 import com.copetti.pgn.board.map.ChessBoardBuilder;
 import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
-
 public class QueenMoveTest extends ChessPieceMoveTest {
 
 	@Override
