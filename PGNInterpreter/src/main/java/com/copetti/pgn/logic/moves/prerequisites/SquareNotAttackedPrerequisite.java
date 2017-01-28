@@ -22,7 +22,7 @@ public class SquareNotAttackedPrerequisite extends MovePrerequisite {
 		return opponentPieces //
 				.entrySet() //
 				.stream() //
-				.noneMatch(x -> cmr.getMoves(x.getKey(), board).contains(target));
+				.noneMatch(x -> cmr.getAttackingMoves(x.getKey(), board).contains(target));
 	}
 
 }

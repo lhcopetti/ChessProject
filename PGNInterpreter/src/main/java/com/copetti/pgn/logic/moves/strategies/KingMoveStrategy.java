@@ -1,9 +1,11 @@
 package com.copetti.pgn.logic.moves.strategies;
 
+import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.copetti.pgn.logic.moves.DiagonalMovement;
+import com.copetti.pgn.logic.moves.DisplacementType;
 import com.copetti.pgn.logic.moves.HVMovement;
 import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.MoveVector;
@@ -26,10 +28,10 @@ public class KingMoveStrategy implements MoveContainer {
 		moves.addAll(diagonal.getMoveCollection());
 		moves.addAll(hvMove.getMoveCollection());
 
-		MoveVector queenCastle = new MoveVector(-2, 0);
+		MoveVector queenCastle = new MoveVector(new Point(-2, 0), false, DisplacementType.MOVEMENT);
 		queenCastle.addPrerequisite(new QueenSideCastlePrerequisite());
 
-		MoveVector kingCastle = new MoveVector(+2, 0);
+		MoveVector kingCastle = new MoveVector(new Point(+2, 0), false, DisplacementType.MOVEMENT);
 		kingCastle.addPrerequisite(new KingSideCastlePrerequisite());
 
 		moves.add(queenCastle);

@@ -18,7 +18,7 @@ public class MoveVectorTest {
 		Point x = new Point(22, 33);
 		Point y = new Point(22, 33);
 
-		assertEquals(new MoveVector(x, true), new MoveVector(y, true));
+		assertEquals(new MoveVector(x, true, DisplacementType.BOTH), new MoveVector(y, true, DisplacementType.BOTH));
 
 	}
 
@@ -32,9 +32,9 @@ public class MoveVectorTest {
 		second = second.flip();
 		assertEquals(first, second);
 
-		MoveVector x = new MoveVector(new Point(22, 33), false);
+		MoveVector x = new MoveVector(new Point(22, 33), false, DisplacementType.BOTH);
 		x.addPrerequisite(new CapturePrerequisite());
-		MoveVector y = new MoveVector(new Point(-22, -33), false);
+		MoveVector y = new MoveVector(new Point(-22, -33), false, DisplacementType.BOTH);
 		y.addPrerequisite(new CapturePrerequisite());
 		x = x.flip();
 

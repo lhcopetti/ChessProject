@@ -96,8 +96,8 @@ public class CastlingMovesTest {
 		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(board.getKing(ChessColor.WHITE), board);
-		assertEquals(2, moves.size());
-		assertContains(moves, "d1", "f1");
+		assertEquals(4, moves.size());
+		assertContains(moves, "d1", "f1", "d2", "f2");
 	}
 
 	@Test
@@ -109,8 +109,8 @@ public class CastlingMovesTest {
 		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(board.getKing(ChessColor.BLACK), board);
-		assertEquals(2, moves.size());
-		assertContains(moves, "d8", "f8");
+		assertEquals(4, moves.size());
+		assertContains(moves, "d8", "f8", "d7", "f7");
 	}
 
 	@Test
@@ -122,8 +122,8 @@ public class CastlingMovesTest {
 		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(board.getKing(ChessColor.WHITE), board);
-		assertEquals(2, moves.size());
-		assertContains(moves, "d1", "f1");
+		assertEquals(4, moves.size());
+		assertContains(moves, "d1", "f1", "e2", "f2");
 	}
 
 	@Test
@@ -135,8 +135,8 @@ public class CastlingMovesTest {
 		ChessMovementResolver cmr = new ChessMovementResolver();
 
 		Set<ChessSquare> moves = cmr.getMoves(board.getKing(ChessColor.BLACK), board);
-		assertEquals(2, moves.size());
-		assertContains(moves, "d8", "f8");
+		assertEquals(4, moves.size());
+		assertContains(moves, "d8", "f8", "e7", "f7");
 	}
 
 }

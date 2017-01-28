@@ -1,11 +1,14 @@
 package com.copetti.pgn.logic.moves.strategies;
 
+import java.awt.Point;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.copetti.pgn.logic.moves.DisplacementType;
 import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.MoveVector;
+import com.copetti.pgn.logic.moves.MoveVectorBuilder;
 import com.copetti.pgn.logic.moves.prerequisites.CapturePrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.CompositePrerequisite;
 import com.copetti.pgn.logic.moves.prerequisites.EnPassantPrerequisite;
@@ -19,9 +22,9 @@ public class PawnMoveStrategy implements MoveContainer {
 
 		Set<MoveVector> moves = new HashSet<>();
 
-		moves.add(new MoveVector(0, 1));
+		moves.add(new MoveVector(new Point(0, 1), false, DisplacementType.MOVEMENT));
 
-		MoveVector moveTwice = new MoveVector(0, 2);
+		MoveVector moveTwice = new MoveVector(new Point(0, 2), false, DisplacementType.MOVEMENT);
 		moveTwice.addPrerequisite(new FirstMovePrerequisite());
 		moves.add(moveTwice);
 
@@ -29,16 +32,14 @@ public class PawnMoveStrategy implements MoveContainer {
 		composite.add(new CapturePrerequisite());
 		composite.add(new EnPassantPrerequisite());
 
-		MoveVector capture = new MoveVector(1, 1);
-		capture.addPrerequisite(composite);
-		moves.add(capture);
+		MoveVectorBuilder builder = new MoveVectorBuilder();
 
-		MoveVector capture2 = new MoveVector(-1, 1);
-		capture2.addPrerequisite(composite);
-		moves.add(capture2);
+		builder.addPrerequisite(composite);
+		builder.setDisplacementType(DisplacementType.ATTACKING);
 
+		moves.add(builder.build(1, 1));
+		moves.add(builder.build(-1, 1));
 		allMoves = Collections.unmodifiableSet(moves);
-
 	}
 
 	@Override

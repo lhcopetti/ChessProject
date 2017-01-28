@@ -42,12 +42,22 @@ public class ChessMovementResolver {
 	}
 
 	public boolean isValidMovement(ChessBoard input, ChessSquare origin, ChessSquare destination) {
-
 		return getMoves(origin, input).contains(destination);
 	}
 
-	public Set<ChessSquare> getMoves(ChessSquare cs, ChessBoard board) {
+	public Set<ChessSquare> getAttackingMoves(ChessSquare cs, ChessBoard board) {
+		ChessPiece piece = board.at(cs).getPiece();
+		ChessMoveExecutor cme = new ChessMoveExecutor(moveStrategies.get(piece));
 
+		try {
+			return cme.getAttackingMoves(cs, board);
+		} catch (PGNInterpreterException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Set<ChessSquare> getMoves(ChessSquare cs, ChessBoard board) {
 		ChessPiece piece = board.at(cs).getPiece();
 		ChessMoveExecutor cme = new ChessMoveExecutor(moveStrategies.get(piece));
 
@@ -58,5 +68,4 @@ public class ChessMovementResolver {
 			return null;
 		}
 	}
-
 }

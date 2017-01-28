@@ -21,15 +21,17 @@ public class MoveVector {
 	private Point offset;
 	private @Getter boolean isRepetable;
 	private List<MovePrerequisite> prerequisites;
+	private @Getter DisplacementType moveType;
 
 	public MoveVector(int x, int y) {
-		this(new Point(x, y), false);
+		this(new Point(x, y), false, DisplacementType.BOTH);
 	}
 
-	public MoveVector(Point offset, boolean isRepetable) {
+	public MoveVector(Point offset, boolean isRepetable, DisplacementType type) {
 
 		this.isRepetable = isRepetable;
 		this.offset = offset;
+		this.moveType = type;
 
 		prerequisites = new ArrayList<>();
 	}
@@ -76,7 +78,7 @@ public class MoveVector {
 	}
 
 	public MoveVector flip() {
-		return new MoveVector(new Point(-offset.x, -offset.y), isRepetable, prerequisites);
+		return new MoveVector(new Point(-offset.x, -offset.y), isRepetable, prerequisites, moveType);
 	}
 
 }

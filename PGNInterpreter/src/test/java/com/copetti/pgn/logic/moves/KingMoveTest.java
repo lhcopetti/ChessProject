@@ -1,6 +1,7 @@
 package com.copetti.pgn.logic.moves;
 
 import static com.copetti.pgn.logic.moves.ChessAssertiveLibrary.assertContains;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
@@ -29,7 +30,7 @@ public class KingMoveTest extends ChessPieceMoveTest {
 
 		Set<ChessSquare> moves = cmr.getMoves(d5, board);
 
-		assertTrue(moves.size() == 8);
+		assertEquals(8, moves.size());
 		assertContains(moves, "c6", "d6", "e6", "c5", "e5", "c4", "d4", "e4");
 	}
 

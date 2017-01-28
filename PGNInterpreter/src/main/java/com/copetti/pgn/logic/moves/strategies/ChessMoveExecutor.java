@@ -3,6 +3,7 @@ package com.copetti.pgn.logic.moves.strategies;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessColor;
@@ -12,6 +13,7 @@ import com.copetti.pgn.exception.NoPieceSelectedAtSquareException;
 import com.copetti.pgn.exception.PGNInterpreterException;
 import com.copetti.pgn.logic.math.UnitVectorInterpoler;
 import com.copetti.pgn.logic.math.Vector;
+import com.copetti.pgn.logic.moves.DisplacementType;
 import com.copetti.pgn.logic.moves.MoveContainer;
 import com.copetti.pgn.logic.moves.MoveVector;
 import com.copetti.pgn.logic.moves.prerequisites.CapturePrerequisite;
@@ -29,7 +31,18 @@ public class ChessMoveExecutor {
 		this.moveContainer = moveContainer;
 	}
 
+	public Set<ChessSquare> getAttackingMoves(ChessSquare self, ChessBoard board) throws PGNInterpreterException {
+		return get(self, board,
+				x -> x.getMoveType() == DisplacementType.ATTACKING || x.getMoveType() == DisplacementType.BOTH);
+	}
+
 	public Set<ChessSquare> getMoves(ChessSquare self, ChessBoard board) throws PGNInterpreterException {
+		return get(self, board,
+				x -> x.getMoveType() == DisplacementType.BOTH || x.getMoveType() == DisplacementType.MOVEMENT);
+	}
+
+	private Set<ChessSquare> get(ChessSquare self, ChessBoard board, Predicate<MoveVector> filterPred)
+			throws PGNInterpreterException {
 
 		ColoredChessPiece selfPiece = board.at(self);
 
@@ -38,16 +51,20 @@ public class ChessMoveExecutor {
 
 		Set<ChessSquare> availableMoves = new HashSet<>();
 
-		for (MoveVector m : moveContainer.getMoveCollection()) {
+		moveContainer //
+				.getMoveCollection() //
+				.stream() //
+				.filter(filterPred) //
+				.forEach(m -> {
 
-			MoveVector moveVector = m;
+					MoveVector moveVector = m;
 
-			if (board.at(self).getColor() == ChessColor.BLACK)
-				moveVector = m.flip();
+					if (board.at(self).getColor() == ChessColor.BLACK)
+						moveVector = m.flip();
 
-			Set<ChessSquare> moves = checkMove(moveVector, self, board);
-			availableMoves.addAll(moves);
-		}
+					Set<ChessSquare> moves = checkMove(moveVector, self, board);
+					availableMoves.addAll(moves);
+				});
 
 		return availableMoves;
 	}

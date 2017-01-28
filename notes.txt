@@ -37,11 +37,17 @@ OK! King moves
 OK! Queen moves
 OK! En passant capture 
 OK! Add exception when a move is requested for a color that is not in the turn to play.
+OK! Create a command specific to pawns, so that we can treat enpassant movements easily.
+	Not needed.
+OK! Test pawnMove Command (Set enpassant)
+OK! Test knight move command (and capture)
+OK! Create an executor class to execute the getMoves method (Change it to an interface).
 
-Create a command specific to pawns, so that we can treat enpassant movements easily.
-Test pawnMove Command (Set enpassant)
-Test knight move command
+Use java curry in something. please....
+change direction to a type and then make chessfile understand it. simplify things for gods sake.
+MoveVector is growing. Do something about it?
+fix assertContains and assertEquals(Size, ridiculous)
 File and Rank desambiguation
+Test castleCommands
 The strategies for each piece are passed via a static init (ugh!)
-Create an executor class to execute the getMoves method (Change it to an interface).
 The prerequisites inside moveVector should not reside there. The flip method breaks the immutability
