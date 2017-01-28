@@ -35,7 +35,7 @@ public class PawnMoveStrategy implements MoveContainer {
 		MoveVectorBuilder builder = new MoveVectorBuilder();
 
 		builder.addPrerequisite(composite);
-		builder.setDisplacementType(DisplacementType.ATTACKING);
+		builder.setDisplacementType(DisplacementType.BOTH);
 
 		moves.add(builder.build(1, 1));
 		moves.add(builder.build(-1, 1));

@@ -16,6 +16,7 @@ import com.copetti.pgn.board.factory.BoardTestFactory;
 import com.copetti.pgn.board.map.ChessBoardBuilder;
 import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
+
 public class PawnMoveTest extends ChessPieceMoveTest {
 
 	private ChessMovementResolver cmr;
@@ -133,7 +134,7 @@ public class PawnMoveTest extends ChessPieceMoveTest {
 		b.setColor(ChessColor.BLACK);
 		b.at("d5").put(ChessPiece.PAWN);
 
-		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.WHITE, new ChessSquare("d6"));
+		ChessBoard board = BoardTestFactory.enPassantBoard(b.build(), ChessColor.WHITE, new ChessSquare("d6"));
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 
 		assertEquals(2, moves.size());
@@ -153,7 +154,7 @@ public class PawnMoveTest extends ChessPieceMoveTest {
 		b.setColor(ChessColor.WHITE);
 		b.at("e4").put(ChessPiece.PAWN);
 
-		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.BLACK, new ChessSquare("e3"));
+		ChessBoard board = BoardTestFactory.enPassantBoard(b.build(), ChessColor.BLACK, new ChessSquare("e3"));
 		Set<ChessSquare> moves = cmr.getMoves(c, board);
 
 		assertEquals(2, moves.size());
