@@ -15,7 +15,7 @@ import com.copetti.pgn.board.map.ChessBoardBuilder;
 import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
-public class RookMoveStrategyTest extends ChessPieceMoveTest {
+public class RookMoveTest extends ChessPieceMoveTest {
 
 	@Override
 	public void getMovesOnEmptyBoardTest() {

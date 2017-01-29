@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.command.CaptureCommand;
+import com.copetti.pgn.command.CastleCommand;
 import com.copetti.pgn.command.CastleLongCommand;
 import com.copetti.pgn.command.CastleShortCommand;
 import com.copetti.pgn.command.ChessCommand;
@@ -84,7 +85,7 @@ public class PGNInterpreterTest {
 		ChessCommand c = inter.parse("O-O");
 		assertThat(c, instanceOf(CastleShortCommand.class));
 
-		CastleShortCommand move = (CastleShortCommand) c;
+		CastleCommand move = (CastleCommand) c;
 
 		assertEquals(ChessPiece.KING, move.getPiece());
 		assertEquals(CheckFlag.FLAG_NONE, move.getFlag());

@@ -24,12 +24,15 @@ public class ChessBoardContextBuilder {
 	private HalfMoveCounter halfMove;
 	private FullMoveCounter fullMove;
 
+	private boolean gameOver;
+
 	private ChessBoardContextBuilder(ChessBoard board) {
 		pieces = new HashMap<>(board.getPieces());
 		nextToPlay = board.getNextToPlay();
 		castle = board.getCastleInfo();
 		halfMove = board.getHalfMoveCounter();
 		fullMove = board.getFullMoveNumber();
+		gameOver = false;
 	}
 
 	public static ChessBoardContextBuilder newBuilder(ChessBoard board) {
@@ -40,8 +43,15 @@ public class ChessBoardContextBuilder {
 	public ChessBoard build() {
 
 		ChessBoardContext ctx = new ChessBoardContext(nextToPlay, castle, enPassant, halfMove, fullMove);
-		return new ChessBoard(pieces, ctx);
+		return new ChessBoard(pieces, ctx, gameOver);
 
+	}
+
+	public void removeCastleFor(ChessColor color) {
+	}
+
+	public void setGameOver() {
+		gameOver = true;
 	}
 
 	public void incrementHalfMove() {
@@ -58,6 +68,14 @@ public class ChessBoardContextBuilder {
 
 	public void incrementFullMove() {
 		fullMove = fullMove.next();
+	}
+
+	public CastleInformation getCastle() {
+		return castle;
+	}
+
+	public void setCastle(CastleInformation remove) {
+		castle = remove;
 	}
 
 }

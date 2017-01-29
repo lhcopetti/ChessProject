@@ -11,7 +11,8 @@ import com.copetti.pgn.interpreter.PGNInterpreter;
 
 public class FENBoardComparison {
 
-	public static void validate(String fenBoardInput, String fenBoardOutput, String command) throws PGNInterpreterException{
+	public static void validate(String fenBoardInput, String fenBoardOutput, String command)
+			throws PGNInterpreterException {
 
 		ChessBoard board = new FENDeserializer().deserialize(fenBoardInput);
 
@@ -20,6 +21,13 @@ public class FENBoardComparison {
 
 		String outputBoardFEN = new FENSerializer().serialize(outputBoard);
 		assertEquals(fenBoardOutput, outputBoardFEN);
+	}
+
+	public static void tryCommand(String initialBoard, String pgnCommand) throws PGNInterpreterException {
+
+		ChessBoard board = new FENDeserializer().deserialize(initialBoard);
+		ChessCommand chessCommand = new PGNInterpreter().parse(pgnCommand);
+		chessCommand.execute(board);
 	}
 
 }

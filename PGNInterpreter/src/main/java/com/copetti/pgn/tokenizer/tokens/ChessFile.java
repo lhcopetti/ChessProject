@@ -53,4 +53,8 @@ public enum ChessFile implements TokenInterface {
 		return chessFile[0];
 	}
 
+	public ChessFile previous() {
+		return chessFile[(ordinal() - 1) < 0 ? chessFile.length - 1 : ordinal() - 1];
+	}
+
 }

@@ -1,12 +1,16 @@
 package com.copetti.pgn.command;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessColor;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.board.builder.ChessBoardContextBuilder;
+import com.copetti.pgn.exception.KingNotCheckmatedException;
 import com.copetti.pgn.exception.KingNotInCheckException;
 import com.copetti.pgn.exception.PGNInterpreterException;
 import com.copetti.pgn.logic.ChessMovementResolver;
@@ -35,6 +39,7 @@ public abstract class ChessCommand {
 	}
 
 	public ChessBoard execute(ChessBoard input) throws PGNInterpreterException {
+
 		if (!canExecute(input))
 			return null;
 
@@ -57,6 +62,41 @@ public abstract class ChessCommand {
 
 		if (getFlag() == CheckFlag.FLAG_CHECK)
 			verifyCheckCondition(builder, input);
+
+		if (getFlag() == CheckFlag.FLAG_MATE)
+			verifyMateCondition(builder, input);
+
+	}
+
+	private void verifyMateCondition(ChessBoardContextBuilder builder, ChessBoard input)
+			throws PGNInterpreterException {
+
+		ChessBoard board = builder.build();
+		ChessColor myColor = input.getNextToPlay();
+
+		Map<ChessSquare, ColoredChessPiece> all = board.getAllPieces(myColor);
+
+		boolean kingIsAttacked = false;
+		Set<ChessSquare> availableMoves = new HashSet<>();
+
+		ChessMovementResolver cmr = new ChessMovementResolver();
+
+		for (Entry<ChessSquare, ColoredChessPiece> entry : all.entrySet()) {
+			Set<ChessSquare> mov = cmr.getMoves(entry.getKey(), board);
+
+			if (mov.contains(board.getKing(myColor.opposite())))
+				kingIsAttacked = true;
+
+			availableMoves.addAll(mov);
+		}
+
+		if (!kingIsAttacked)
+			throw new KingNotInCheckException(input.getNextToPlay());
+
+		if (availableMoves.size() > 0) {
+			throw new KingNotCheckmatedException(input.getNextToPlay());
+			// avail
+		}
 
 	}
 
@@ -105,7 +145,7 @@ public abstract class ChessCommand {
 			builder.incrementHalfMove();
 	}
 
-	protected abstract boolean canExecute(ChessBoard input);
+	protected abstract boolean canExecute(ChessBoard input) throws PGNInterpreterException;
 
 	protected abstract boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input);
 }

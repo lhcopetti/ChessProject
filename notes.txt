@@ -43,6 +43,7 @@ OK! Test pawnMove Command (Set enpassant)
 OK! Test knight move command (and capture)
 OK! Create an executor class to execute the getMoves method (Change it to an interface).
 
+Remove the checking for attacking || both and movement || both. Encapsulate this logic inside the enum.
 Use java curry in something. please....
 change direction to a type and then make chessfile understand it. simplify things for gods sake.
 MoveVector is growing. Do something about it?

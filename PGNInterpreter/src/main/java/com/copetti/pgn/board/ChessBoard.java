@@ -26,7 +26,13 @@ public class ChessBoard {
 	private @Getter HalfMoveCounter halfMoveCounter;
 	private @Getter FullMoveCounter fullMoveNumber;
 
+	private @Getter boolean gameOver;
+
 	public ChessBoard(Map<ChessSquare, ColoredChessPiece> pieces, ChessBoardContext ctx) {
+		this(pieces, ctx, false);
+	}
+
+	public ChessBoard(Map<ChessSquare, ColoredChessPiece> pieces, ChessBoardContext ctx, boolean gameOver) {
 
 		/* Defensive copy */
 		this.pieces = Collections.unmodifiableMap(pieces);
@@ -36,6 +42,8 @@ public class ChessBoard {
 		this.halfMoveCounter = ctx.getHalfMoveCounter();
 		this.enPassantTarget = ctx.getEnPassantTarget();
 		this.fullMoveNumber = ctx.getFullMoveNumber();
+
+		this.gameOver = gameOver;
 	}
 
 	public Map<ChessSquare, ColoredChessPiece> getPieces() {

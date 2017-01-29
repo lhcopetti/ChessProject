@@ -1,25 +1,39 @@
 package com.copetti.pgn.command;
 
 import com.copetti.pgn.board.ChessBoard;
-import com.copetti.pgn.board.builder.ChessBoardContextBuilder;
+import com.copetti.pgn.board.ChessColor;
+import com.copetti.pgn.board.ChessSquare;
+import com.copetti.pgn.exception.CantCastleQueenSideException;
+import com.copetti.pgn.exception.PGNInterpreterException;
+import com.copetti.pgn.tokenizer.tokens.ChessFile;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 public class CastleLongCommand extends CastleCommand {
 
 	public CastleLongCommand(CheckFlag flag) {
-		super(ChessPiece.KING, flag);
+		super(ChessPiece.KING, flag, ChessFile.A);
 	}
 
 	@Override
-	protected boolean canExecute(ChessBoard input) {
-		// TODO Auto-generated method stub
-		return false;
+	protected ChessSquare getDestinationKingSquare(ChessSquare kingSquare) {
+		return new ChessSquare(kingSquare.getFile().previous().previous(), kingSquare.getRank());
 	}
 
 	@Override
-	protected boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input) {
-		// TODO Auto-generated method stub
-		return false;
+	protected ChessSquare getDestinationRookSquare(ChessSquare newKingSquare) {
+		return new ChessSquare(newKingSquare.getFile().next(), newKingSquare.getRank());
+	}
+
+	@Override
+	protected boolean checkCastleInformation(ChessBoard board) throws PGNInterpreterException {
+
+		ChessColor c = board.getNextToPlay();
+
+		if (c == ChessColor.WHITE && !board.getCastleInfo().isWhiteQueenCastle() || //
+				c == ChessColor.BLACK && !board.getCastleInfo().isBlackQueenCastle())
+			throw new CantCastleQueenSideException(board);
+			
+		return true;
 	}
 
 }

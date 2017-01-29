@@ -16,6 +16,13 @@ public class CastleInformation {
 	private @Getter boolean blackKingCastle;
 	private @Getter boolean blackQueenCastle;
 
+	public CastleInformation remove(ChessColor color) {
+		if (color == ChessColor.WHITE)
+			return new CastleInformation(false, false, isBlackKingCastle(), isBlackQueenCastle());
+
+		return new CastleInformation(isWhiteKingCastle(), isWhiteQueenCastle(), false, false);
+	}
+
 	public static CastleInformation all() {
 		return new CastleInformation(true, true, true, true);
 	}
