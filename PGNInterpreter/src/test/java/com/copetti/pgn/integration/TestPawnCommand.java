@@ -45,19 +45,4 @@ public class TestPawnCommand {
 		String pgnCommand = "exd5";
 		FENBoardComparison.validate(initialBoard, finalBoard, pgnCommand);
 	}
-
-	// @Test
-	// public void test() {
-	// Assert.fail();
-	// }
-	//
-	// @Test
-	// public void test() {
-	// Assert.fail();
-	// }
-	//
-	// @Test
-	// public void test() {
-	// Assert.fail();
-	// }
 }

@@ -1,19 +1,13 @@
 package com.copetti.pgn.command;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-
+import com.copetti.pgn.analysis.CheckBoardAnalyser;
+import com.copetti.pgn.analysis.CheckmateBoardAnalyser;
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessColor;
-import com.copetti.pgn.board.ChessSquare;
-import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.board.builder.ChessBoardContextBuilder;
 import com.copetti.pgn.exception.KingNotCheckmatedException;
 import com.copetti.pgn.exception.KingNotInCheckException;
 import com.copetti.pgn.exception.PGNInterpreterException;
-import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.Getter;
@@ -48,9 +42,9 @@ public abstract class ChessCommand {
 		if (!doExecute(builder, input))
 			return null;
 
-		checkFlag(builder, input);
-
 		postSuccessfulExecution(builder, input);
+
+		checkFlag(builder, input);
 
 		return builder.build();
 	}
@@ -65,56 +59,29 @@ public abstract class ChessCommand {
 
 		if (getFlag() == CheckFlag.FLAG_MATE)
 			verifyMateCondition(builder, input);
-
 	}
 
 	private void verifyMateCondition(ChessBoardContextBuilder builder, ChessBoard input)
 			throws PGNInterpreterException {
 
+		CheckmateBoardAnalyser analyser = new CheckmateBoardAnalyser();
+
 		ChessBoard board = builder.build();
-		ChessColor myColor = input.getNextToPlay();
 
-		Map<ChessSquare, ColoredChessPiece> all = board.getAllPieces(myColor);
-
-		boolean kingIsAttacked = false;
-		Set<ChessSquare> availableMoves = new HashSet<>();
-
-		ChessMovementResolver cmr = new ChessMovementResolver();
-
-		for (Entry<ChessSquare, ColoredChessPiece> entry : all.entrySet()) {
-			Set<ChessSquare> mov = cmr.getMoves(entry.getKey(), board);
-
-			if (mov.contains(board.getKing(myColor.opposite())))
-				kingIsAttacked = true;
-
-			availableMoves.addAll(mov);
+		if (!analyser.validateMateCondition(board, board.getNextToPlay())) {
+			throw new KingNotCheckmatedException(board.getNextToPlay(), analyser.getPiece(), analyser.getOriginSquare(),
+					analyser.getDestinationSquare());
 		}
-
-		if (!kingIsAttacked)
-			throw new KingNotInCheckException(input.getNextToPlay());
-
-		if (availableMoves.size() > 0) {
-			// throw new KingNotCheckmatedException(input.getNextToPlay());
-			// TODO implement checkmate validation
-		}
-
 	}
 
 	private void verifyCheckCondition(ChessBoardContextBuilder builder, ChessBoard input)
 			throws KingNotInCheckException {
 
 		ChessBoard board = builder.build();
+		CheckBoardAnalyser analyser = new CheckBoardAnalyser();
 
-		Map<ChessSquare, ColoredChessPiece> all = board.getAllPieces(input.getNextToPlay());
-
-		ChessMovementResolver cmr = new ChessMovementResolver();
-
-		Object oppositeKingSquare = board.getKing(input.getNextToPlay().opposite());
-
-		all.entrySet().stream() //
-				.filter(x -> cmr.getMoves(x.getKey(), board).contains(oppositeKingSquare)).findFirst()
-				.orElseThrow(() -> new KingNotInCheckException(input.getNextToPlay()));
-
+		if (!analyser.validateCheckCondition(board, board.getNextToPlay()))
+			throw new KingNotInCheckException(board.getNextToPlay());
 	}
 
 	private void postSuccessfulExecution(ChessBoardContextBuilder builder, ChessBoard cb) {

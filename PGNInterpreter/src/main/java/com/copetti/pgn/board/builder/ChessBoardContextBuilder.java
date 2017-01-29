@@ -78,4 +78,14 @@ public class ChessBoardContextBuilder {
 		castle = remove;
 	}
 
+	public boolean movePiece(ChessSquare origin, ChessSquare destination) {
+		ColoredChessPiece piece = pieces.remove(origin);
+
+		if (null == piece)
+			return false;
+
+		pieces.put(destination, piece);
+		return true;
+	}
+
 }
