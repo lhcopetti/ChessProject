@@ -3,10 +3,11 @@ package com.copetti.pgn.integration;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.copetti.pgn.exception.KingIsCheckmatedException;
 import com.copetti.pgn.exception.KingNotCheckmatedException;
 import com.copetti.pgn.exception.PGNInterpreterException;
 
-public class TestMateCommand {
+public class TestMateCommand extends TestChessCommandCheckFlag {
 
 	@Test
 	public void testCheckMateWithPawnPromotionToKnight() throws PGNInterpreterException {
@@ -50,6 +51,40 @@ public class TestMateCommand {
 
 		String initialBoard = "2N2rkr/8/Q7/8/8/8/8/6K1 w - - 0 1";
 		FENBoardComparison.tryCommand(initialBoard, "Ne7#");
+	}
+
+	@Test(expected = KingIsCheckmatedException.class)
+	public void testWhiteCheckmateWihoutMateFlag() throws PGNInterpreterException {
+
+		String initialBoard = "5rkr/8/Q7/8/8/1B1P1P1B/PPP1P1PP/R3K2R w - - 0 1";
+		String pgnCommand = "Qg6"; // as opposed to Qg6#
+		FENBoardComparison.tryCommand(initialBoard, pgnCommand);
+	}
+
+	@Override
+	public void testWithoutFlag() throws PGNInterpreterException {
+
+		expectedEx.expect(KingIsCheckmatedException.class);
+		String initialBoard = "5rkr/8/Q7/8/8/1B1P1P1B/PPP1P1PP/R3K2R w - - 0 1";
+		String pgnCommand = "Qg6"; // as opposed to Qg6#
+		FENBoardComparison.tryCommand(initialBoard, pgnCommand);
+	}
+
+	@Override
+	public void testWithCheckFlag() throws PGNInterpreterException {
+		expectedEx.expect(KingIsCheckmatedException.class);
+		String initialBoard = "5rkr/8/Q7/8/8/1B1P1P1B/PPP1P1PP/R3K2R w - - 0 1";
+		String pgnCommand = "Qg6+"; // as opposed to Qg6#
+		FENBoardComparison.tryCommand(initialBoard, pgnCommand);
+	}
+
+	@Override
+	public void testWithMateFlag() throws PGNInterpreterException {
+		String initialBoard = "5rkr/8/Q7/8/8/1B1P1P1B/PPP1P1PP/R3K2R w - - 0 1";
+		String finalBoard = "5rkr/8/6Q1/8/8/1B1P1P1B/PPP1P1PP/R3K2R b - - 1 1";
+		String pgnCommand = "Qg6#";
+		FENBoardComparison.validate(initialBoard, finalBoard, pgnCommand);
+
 	}
 
 }

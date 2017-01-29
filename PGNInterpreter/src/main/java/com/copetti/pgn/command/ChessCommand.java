@@ -5,6 +5,8 @@ import com.copetti.pgn.analysis.CheckmateBoardAnalyser;
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessColor;
 import com.copetti.pgn.board.builder.ChessBoardContextBuilder;
+import com.copetti.pgn.exception.KingIsCheckmatedException;
+import com.copetti.pgn.exception.KingIsInCheckException;
 import com.copetti.pgn.exception.KingNotCheckmatedException;
 import com.copetti.pgn.exception.KingNotInCheckException;
 import com.copetti.pgn.exception.PGNInterpreterException;
@@ -52,13 +54,28 @@ public abstract class ChessCommand {
 	private void checkFlag(ChessBoardContextBuilder builder, ChessBoard input) throws PGNInterpreterException {
 
 		if (getFlag() == CheckFlag.FLAG_NONE)
-			return;
+			verifiyNoFlagCondition(builder, input);
 
 		if (getFlag() == CheckFlag.FLAG_CHECK)
 			verifyCheckCondition(builder, input);
 
 		if (getFlag() == CheckFlag.FLAG_MATE)
 			verifyMateCondition(builder, input);
+	}
+
+	private void verifiyNoFlagCondition(ChessBoardContextBuilder builder, ChessBoard input)
+			throws PGNInterpreterException {
+
+		CheckBoardAnalyser analyser = new CheckBoardAnalyser();
+		ChessBoard board = builder.build();
+		if (!analyser.validateCheckCondition(board, board.getNextToPlay()))
+			return;
+
+		CheckmateBoardAnalyser mateAnalyser = new CheckmateBoardAnalyser();
+		if (mateAnalyser.validateMateCondition(board, board.getNextToPlay()))
+			throw new KingIsCheckmatedException(board.getNextToPlay());
+
+		throw new KingIsInCheckException(board.getNextToPlay());
 	}
 
 	private void verifyMateCondition(ChessBoardContextBuilder builder, ChessBoard input)
@@ -75,13 +92,19 @@ public abstract class ChessCommand {
 	}
 
 	private void verifyCheckCondition(ChessBoardContextBuilder builder, ChessBoard input)
-			throws KingNotInCheckException {
+			throws PGNInterpreterException {
 
 		ChessBoard board = builder.build();
 		CheckBoardAnalyser analyser = new CheckBoardAnalyser();
+		ChessColor checkColor = board.getNextToPlay();
 
-		if (!analyser.validateCheckCondition(board, board.getNextToPlay()))
-			throw new KingNotInCheckException(board.getNextToPlay());
+		if (!analyser.validateCheckCondition(board, checkColor))
+			throw new KingNotInCheckException(checkColor);
+
+		CheckmateBoardAnalyser mateAnalyser = new CheckmateBoardAnalyser();
+		if (mateAnalyser.validateMateCondition(board, checkColor))
+			throw new KingIsCheckmatedException(checkColor);
+
 	}
 
 	private void postSuccessfulExecution(ChessBoardContextBuilder builder, ChessBoard cb) {

@@ -20,14 +20,14 @@ public class MoveCommandTest {
 
 		String board = //
 				"" + //
-						"--------" + //
+						"k-------" + //
 						"--------" + //
 						"--------" + //
 						"--------" + //
 						"--------" + //
 						"--------" + //
 						"B-------" + //
-						"--------"; //
+						"K-------"; //
 		ChessBoard cb = BoardTestFactory.createNew(board, ChessColor.WHITE);
 		MoveCommand move = new MoveCommand(ChessPiece.BISHOP, new ChessSquare("c4"), CheckFlag.FLAG_NONE);
 		ChessBoard newCB = move.execute(cb);
