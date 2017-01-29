@@ -1,4 +1,4 @@
-package com.copetti.pgn.integration.pawn;
+package com.copetti.pgn.integration;
 
 import org.junit.Test;
 

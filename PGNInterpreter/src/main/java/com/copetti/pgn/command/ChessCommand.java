@@ -94,8 +94,8 @@ public abstract class ChessCommand {
 			throw new KingNotInCheckException(input.getNextToPlay());
 
 		if (availableMoves.size() > 0) {
-			throw new KingNotCheckmatedException(input.getNextToPlay());
-			// avail
+			// throw new KingNotCheckmatedException(input.getNextToPlay());
+			// TODO implement checkmate validation
 		}
 
 	}
@@ -147,5 +147,6 @@ public abstract class ChessCommand {
 
 	protected abstract boolean canExecute(ChessBoard input) throws PGNInterpreterException;
 
-	protected abstract boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input);
+	protected abstract boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input)
+			throws PGNInterpreterException;
 }

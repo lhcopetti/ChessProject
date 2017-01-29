@@ -6,6 +6,8 @@ import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
 import com.copetti.pgn.board.ColoredChessPiece;
 import com.copetti.pgn.board.builder.ChessBoardContextBuilder;
+import com.copetti.pgn.exception.InvalidPromotionPieceException;
+import com.copetti.pgn.exception.PGNInterpreterException;
 import com.copetti.pgn.logic.ChessMovementResolver;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
@@ -44,14 +46,30 @@ public abstract class DisplacementCommand extends ChessCommand {
 	}
 
 	@Override
-	protected boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input) {
+	protected boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input) throws PGNInterpreterException {
 
 		if (null == targetCommand)
 			return false;
 
 		ColoredChessPiece cp = builder.getPieces().remove(targetCommand);
+
+		ChessPiece targetPiece = checkForPromotion();
+		if (targetPiece != null)
+			cp = new ColoredChessPiece(targetPiece, cp.getColor());
+
 		builder.getPieces().put(destinationSquare, cp);
 		return true;
+	}
+
+	private ChessPiece checkForPromotion() throws PGNInterpreterException {
+
+		if (promotion == null)
+			return null;
+
+		if (promotion.getPiece() == ChessPiece.KING || promotion.getPiece() == ChessPiece.PAWN)
+			throw new InvalidPromotionPieceException(promotion.getPiece());
+
+		return promotion.getPiece();
 	}
 
 	protected final ChessSquare getCommandTarget(ChessBoard input) {
