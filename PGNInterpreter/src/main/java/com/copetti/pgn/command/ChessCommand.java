@@ -44,11 +44,24 @@ public abstract class ChessCommand {
 		if (!doExecute(builder, input))
 			return null;
 
+		if (ownKingInCheck(builder, input))
+			return null;
+
 		postSuccessfulExecution(builder, input);
 
 		checkFlag(builder, input);
 
 		return builder.build();
+	}
+
+	private boolean ownKingInCheck(ChessBoardContextBuilder builder, ChessBoard input) throws PGNInterpreterException {
+
+		CheckBoardAnalyser analyser = new CheckBoardAnalyser();
+
+		if (!analyser.validateCheckCondition(builder.build(), input.getNextToPlay()))
+			return false;
+
+		throw new KingIsInCheckException(input.getNextToPlay());
 	}
 
 	private void checkFlag(ChessBoardContextBuilder builder, ChessBoard input) throws PGNInterpreterException {
