@@ -16,7 +16,9 @@ import com.copetti.pgn.lexical.state.CastleLongState;
 import com.copetti.pgn.lexical.state.CastleShortState;
 import com.copetti.pgn.lexical.state.DestinationSquareState;
 import com.copetti.pgn.lexical.state.LexicalState;
+import com.copetti.pgn.tokenizer.tokens.ChessFile;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
+import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
 public class LexicalStateCollectionTest {
 
@@ -96,4 +98,27 @@ public class LexicalStateCollectionTest {
 		assertEquals(ChessPiece.KING, coll.getChessPiece());
 	}
 
+	@Test
+	public void getChessFileDesambiguationTest() {
+		List<LexicalState> l = new PGNLexical().execute("Qgxg7");
+		LexicalStateCollection coll = new LexicalStateCollection(l);
+		assertEquals(ChessFile.G, coll.getDesambiguationFile());
+		assertEquals(null, coll.getDesambiguationRank());
+	}
+
+	@Test
+	public void getChessRankDesambiguationTest() {
+		List<LexicalState> l = new PGNLexical().execute("Q7xg7");
+		LexicalStateCollection coll = new LexicalStateCollection(l);
+		assertEquals(null, coll.getDesambiguationFile());
+		assertEquals(ChessRank.of("7").get(), coll.getDesambiguationRank());
+	}
+
+	@Test
+	public void getChessFileAndRankDesambiguationTest() {
+		List<LexicalState> l = new PGNLexical().execute("Qh8xg7");
+		LexicalStateCollection coll = new LexicalStateCollection(l);
+		assertEquals(ChessFile.H, coll.getDesambiguationFile());
+		assertEquals(ChessRank.of("8").get(), coll.getDesambiguationRank());
+	}
 }

@@ -48,6 +48,9 @@ public class ChessCommandFactory {
 		if (col.isPromotion())
 			comm.setPromotion(new PromotionDecorator(col.getTargetPromotionPiece()));
 
+		comm.setDesambiguationFile(col.getDesambiguationFile());
+		comm.setDesambiguationRank(col.getDesambiguationRank());
+
 		return comm;
 	}
 

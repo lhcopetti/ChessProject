@@ -1,6 +1,7 @@
 package com.copetti.pgn.command;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.copetti.pgn.board.ChessBoard;
 import com.copetti.pgn.board.ChessSquare;
@@ -9,13 +10,18 @@ import com.copetti.pgn.board.builder.ChessBoardContextBuilder;
 import com.copetti.pgn.exception.InvalidPromotionPieceException;
 import com.copetti.pgn.exception.PGNInterpreterException;
 import com.copetti.pgn.logic.ChessMovementResolver;
+import com.copetti.pgn.tokenizer.tokens.ChessFile;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
+import com.copetti.pgn.tokenizer.tokens.ChessRank;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 public abstract class DisplacementCommand extends ChessCommand {
+
+	private @Setter @Getter ChessFile desambiguationFile;
+	private @Setter @Getter ChessRank desambiguationRank;
 
 	private @Getter ChessSquare targetCommand;
 	private @Getter ChessSquare destinationSquare;
@@ -78,9 +84,14 @@ public abstract class DisplacementCommand extends ChessCommand {
 		List<ChessSquare> pieces = input.getAllSquaresThatContains(cp);
 
 		ChessMovementResolver cmr = new ChessMovementResolver();
-		return pieces //
+
+		Stream<ChessSquare> filter = pieces //
 				.stream() //
-				.filter(x -> cmr.isValidMovement(input, x, getDestinationSquare())) //
-				.findFirst().orElse(null);
+				.filter(x -> cmr.isValidMovement(input, x, getDestinationSquare()))
+				.filter(x -> desambiguationFile != null ? x.getFile().equals(desambiguationFile) : true)
+				.filter(x -> desambiguationRank != null ? x.getRank().equals(desambiguationRank) : true);
+
+		return filter.findFirst().orElse(null);
 	}
+
 }

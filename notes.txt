@@ -43,6 +43,7 @@ OK! Test pawnMove Command (Set enpassant)
 OK! Test knight move command (and capture)
 OK! Create an executor class to execute the getMoves method (Change it to an interface).
 
+LexicalStateCollection. How could I use the Optional.ofNullable to remove the null checks from getDesambiguationFile and getDesambiguationRank
 Refactor the checkmate analyser and maybe use some functional api.
 Remove the checking for attacking || both and movement || both. Encapsulate this logic inside the enum.
 Use java curry in something. please....

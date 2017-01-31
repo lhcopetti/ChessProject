@@ -134,7 +134,7 @@ public abstract class ChessCommand {
 	}
 
 	protected void updateEnPassant(ChessBoardContextBuilder builder, ChessBoard cb) {
-		// builder.setEnpassant(null);
+		/* Hook method */
 		return;
 	}
 
