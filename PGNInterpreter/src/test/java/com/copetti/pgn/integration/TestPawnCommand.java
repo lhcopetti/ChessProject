@@ -50,8 +50,17 @@ public class TestPawnCommand {
 	/* https://lichess.org/urXzcfwv */
 	public void testBlackPawnCaptureFromRealGame() throws PGNInterpreterException {
 		String initialBoard = "rnbq1rk1/pp2ppbp/2pp1np1/3P4/4P3/2NB1N2/PPP2PPP/R1BQ1RK1 b - - 7 7";
-		String finalBoard = "rnbq1rk1/pp2ppbp/3p1np1/3p4/4P3/2NB1N2/PPP2PPP/R1BQ1RK1 w - - 7 8";
+		String finalBoard = "rnbq1rk1/pp2ppbp/3p1np1/3p4/4P3/2NB1N2/PPP2PPP/R1BQ1RK1 w - - 0 8";
 		String pgnCommand = "cxd5";
+		FENBoardComparison.validate(initialBoard, finalBoard, pgnCommand);
+	}
+
+	@Test
+	/* Lichess Study: https://en.lichess.org/study/QuFstlOs */
+	public void testWhitePawnEnPassantCaptureFromStudy() throws PGNInterpreterException {
+		String initialBoard = "1n1bb2r/r5kq/p1p1p3/1pPpPp1p/NB1P1PpN/PQ4P1/1P2B3/2K4R w - b6 38 30";
+		String finalBoard = "1n1bb2r/r5kq/pPp1p3/3pPp1p/NB1P1PpN/PQ4P1/1P2B3/2K4R b - - 0 30";
+		String pgnCommand = "cxb6";
 		FENBoardComparison.validate(initialBoard, finalBoard, pgnCommand);
 	}
 
@@ -60,6 +69,14 @@ public class TestPawnCommand {
 		String initialBoard = "k7/8/2pp4/3P4/8/8/8/K7 b - - 0 1";
 		String finalBoard = "k7/8/3p4/3p4/8/8/8/K7 w - - 0 2";
 		String pgnCommand = "cxd5";
+		FENBoardComparison.validate(initialBoard, finalBoard, pgnCommand);
+	}
+
+	@Test
+	public void testEnPassantCapture() throws PGNInterpreterException {
+		String initialBoard = "7k/8/8/Pp6/8/8/8/7K w - b6 0 2";
+		String finalBoard = "7k/8/1P6/8/8/8/8/7K b - - 0 2";
+		String pgnCommand = "axb6";
 		FENBoardComparison.validate(initialBoard, finalBoard, pgnCommand);
 	}
 }

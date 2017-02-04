@@ -64,7 +64,19 @@ public abstract class DisplacementCommand extends ChessCommand {
 			cp = new ColoredChessPiece(targetPiece, cp.getColor());
 
 		builder.getPieces().put(destinationSquare, cp);
+
+		if (isEnpassantCapture(input))
+			removeEnpassantCapturedPawn(builder);
+
 		return true;
+	}
+
+	private void removeEnpassantCapturedPawn(ChessBoardContextBuilder builder) {
+
+		ChessFile enPassantFile = getDestinationSquare().getFile();
+		ChessRank enPassantRank = targetCommand.getRank();
+
+		builder.getPieces().remove(new ChessSquare(enPassantFile, enPassantRank));
 	}
 
 	private ChessPiece checkForPromotion() throws PGNInterpreterException {
@@ -92,6 +104,10 @@ public abstract class DisplacementCommand extends ChessCommand {
 				.filter(x -> desambiguationRank != null ? x.getRank().equals(desambiguationRank) : true);
 
 		return filter.findFirst().orElse(null);
+	}
+
+	protected final boolean isEnpassantCapture(ChessBoard board) {
+		return getDestinationSquare().equals(board.getEnPassantTarget()) && getPiece() == ChessPiece.PAWN;
 	}
 
 }
