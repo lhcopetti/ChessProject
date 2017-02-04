@@ -32,7 +32,7 @@ public class LichessPGNGamePlayer {
 
 				board = newBoard;
 			} catch (Exception e) {
-				fail("Command " + s + " failed for the board: " + board.toString());
+				fail("Exception: " + e.getMessage() + ". Command " + s + " failed for the board: " + board.toString());
 			}
 		}
 
