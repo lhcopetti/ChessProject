@@ -45,4 +45,21 @@ public class TestPawnCommand {
 		String pgnCommand = "exd5";
 		FENBoardComparison.validate(initialBoard, finalBoard, pgnCommand);
 	}
+
+	@Test
+	/* https://lichess.org/urXzcfwv */
+	public void testBlackPawnCaptureFromRealGame() throws PGNInterpreterException {
+		String initialBoard = "rnbq1rk1/pp2ppbp/2pp1np1/3P4/4P3/2NB1N2/PPP2PPP/R1BQ1RK1 b - - 7 7";
+		String finalBoard = "rnbq1rk1/pp2ppbp/3p1np1/3p4/4P3/2NB1N2/PPP2PPP/R1BQ1RK1 w - - 7 8";
+		String pgnCommand = "cxd5";
+		FENBoardComparison.validate(initialBoard, finalBoard, pgnCommand);
+	}
+
+	@Test
+	public void testBlackPawnCaptureIsolated() throws PGNInterpreterException {
+		String initialBoard = "k7/8/2pp4/3P4/8/8/8/K7 b - - 0 1";
+		String finalBoard = "k7/8/3p4/3p4/8/8/8/K7 w - - 0 2";
+		String pgnCommand = "cxd5";
+		FENBoardComparison.validate(initialBoard, finalBoard, pgnCommand);
+	}
 }
