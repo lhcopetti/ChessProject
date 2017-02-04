@@ -75,6 +75,22 @@ public class PawnMoveTest extends ChessPieceMoveTest {
 	}
 
 	@Test
+	public void getMovesWithBlockedBoardByOppositeColoredPieces() {
+
+		ChessSquare c = new ChessSquare("e2");
+
+		ChessBoardBuilder b = ChessBoardBuilder.newBuilder();
+		b.at("e2").put(ChessPiece.PAWN);
+		b.setColor(ChessColor.BLACK);
+		b.at("e3").put(ChessPiece.PAWN);
+
+		ChessBoard board = BoardTestFactory.createNew(b.build(), ChessColor.WHITE);
+		Set<ChessSquare> moves = cmr.getMoves(c, board);
+
+		assertTrue(moves.isEmpty());
+	}
+
+	@Test
 	public void getMovesWithBlockedBoardForBlack() {
 
 		ChessSquare c = new ChessSquare("e7");
