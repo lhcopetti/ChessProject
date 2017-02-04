@@ -38,4 +38,9 @@ public class MoveCommand extends DisplacementCommand {
 		builder.setEnpassant(new ChessSquare(file, rank));
 	}
 
+	@Override
+	protected ChessCommandType getType() {
+		return ChessCommandType.MOVEMENT_COMMAND;
+	}
+
 }

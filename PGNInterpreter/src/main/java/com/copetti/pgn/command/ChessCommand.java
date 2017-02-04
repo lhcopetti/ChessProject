@@ -17,7 +17,7 @@ import lombok.Getter;
 public abstract class ChessCommand {
 
 	public enum ChessCommandType {
-		DISPLACEMENT_COMMAND, CAPTURE_COMMAND;
+		MOVEMENT_COMMAND, CAPTURE_COMMAND;
 	}
 
 	public enum CheckFlag {
@@ -26,8 +26,6 @@ public abstract class ChessCommand {
 
 	private @Getter ChessPiece piece;
 	private @Getter CheckFlag flag;
-
-	private ChessCommandType type;
 
 	public ChessCommand(ChessPiece chessPiece, CheckFlag flag) {
 		this.piece = chessPiece;
@@ -144,7 +142,9 @@ public abstract class ChessCommand {
 
 	private void updateHalfMoveCounter(ChessBoardContextBuilder builder, ChessBoard cb) {
 
-		if (piece != ChessPiece.PAWN && type != ChessCommandType.CAPTURE_COMMAND)
+		if (piece == ChessPiece.PAWN || getType() == ChessCommandType.CAPTURE_COMMAND)
+			builder.resetHalfMove();
+		else
 			builder.incrementHalfMove();
 	}
 
@@ -152,4 +152,6 @@ public abstract class ChessCommand {
 
 	protected abstract boolean doExecute(ChessBoardContextBuilder builder, ChessBoard input)
 			throws PGNInterpreterException;
+
+	protected abstract ChessCommandType getType();
 }

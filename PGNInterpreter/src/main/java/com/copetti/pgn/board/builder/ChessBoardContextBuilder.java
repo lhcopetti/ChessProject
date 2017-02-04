@@ -88,4 +88,8 @@ public class ChessBoardContextBuilder {
 		return true;
 	}
 
+	public void resetHalfMove() {
+		halfMove = HalfMoveCounter.first();
+	}
+
 }

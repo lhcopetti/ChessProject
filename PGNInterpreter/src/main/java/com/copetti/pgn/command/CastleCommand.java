@@ -75,4 +75,9 @@ public abstract class CastleCommand extends ChessCommand {
 		return true;
 	}
 
+	@Override
+	protected ChessCommandType getType() {
+		return ChessCommandType.MOVEMENT_COMMAND;
+	}
+
 }
