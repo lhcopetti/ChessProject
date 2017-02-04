@@ -1,0 +1,17 @@
+[Event "Casual game"]
+[Site "https://lichess.org/phybhkAw"]
+[Date "2017.02.04"]
+[White "lichess AI level 2"]
+[Black "lhcopetti"]
+[Result "0-1"]
+[WhiteElo "?"]
+[BlackElo "1095"]
+[PlyCount "94"]
+[Variant "Standard"]
+[TimeControl "300+3"]
+[ECO "A00"]
+[Opening "Mieses Opening: Reversed Rat"]
+[Termination "Normal"]
+[Annotator "lichess.org"]
+
+1. d3 e5 { A00 Mieses Opening: Reversed Rat } 2. Nf3 Bd6 3. e4 Nf6 4. Nc3 O-O 5. Be3 Bb4 6. a3 Bxc3+ 7. bxc3 Nc6 8. h3 d5 9. exd5 Nxd5 10. c4 Nxe3 11. Qc1 Nxf1 12. Rb1 f5 13. Rxf1 f4 14. Rh1 Nd4 15. Nxe5 f3 16. g4 Bd7 17. Qd2 Bc6 18. h4 Qe7 19. Kd1 Qxe5 20. Re1 Qf4 21. h5 Qxg4 22. Qe3 Qf4 23. Qxf4 Rxf4 24. Re7 Rh4 25. Rb2 Rxh5 26. Kd2 Rh2 27. Ke1 h5 28. a4 Re8 29. Re3 Rxe3+ 30. Kd2 Re5 31. Kc3 Ne2+ 32. Kd2 Rxf2 33. a5 Rh2 34. Rb1 f2 35. c5 Rg2 36. c4 Rg1 37. d4 Rxb1 38. a6 Re8 39. d5 Rd8 40. axb7 Rxb7 41. Kxe2 Rb2+ 42. Kf1 Bxd5 43. cxd5 Rxd5 44. c6 Rd1+ 45. Kg2 f1=Q+ 46. Kg3 Rg2+ 47. Kh4 Qh1# { Black wins by checkmate. } 0-1
