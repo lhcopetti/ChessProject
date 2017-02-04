@@ -12,13 +12,14 @@ import com.copetti.pgn.tokenizer.tokens.ChessFile;
 import com.copetti.pgn.tokenizer.tokens.ChessPiece;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public class PawnFileState extends LexicalState implements ChessPieceContainer {
 
-	private ChessFile file;
+	private @Getter ChessFile file;
 
 	@Override
 	public List<Class<? extends LexicalState>> getSuccessors() {
