@@ -56,3 +56,52 @@ File and Rank desambiguation
 Test castleCommands
 The strategies for each piece are passed via a static init (ugh!)
 The prerequisites inside moveVector should not reside there. The flip method breaks the immutability
+
+
+
+
+
+
+
+
+
+
+
+FENBoard = "8/3R4/1k6/1p6/p1pP3p/P1P1p1P1/1n2K2P/8 b - - 0 45";
+
+
+ChessBoardCell cell
+{
+	CellColor color;
+	ChessPiece piece; (Nulo em caso de estar vazia)
+}
+ChessBoard c;
+Matriz de células.
+
+br bn bb bq bk bb bn [br] -> [8, 0]
+[wp] wp wp wp wp wp wp wp -> [0, 1]
+__ __ __ __ __ __ __ __
+__ __ __ __ __ __ __ __
+__ __ __ __ __ __ __ __
+__ __ __ __ __ __ __ __
+bp bp bp bp bp bp bp bp
+br bn bb bk bq bb bn [br] -> [8, 8]
+
+c[0,0] = KNIGHT 
+
+Tamanho -> Gráfico
+
+
+
+
+
+Interpreter API:
+
+URL: https://2od867bsib.execute-api.us-west-2.amazonaws.com/prod
+
+
+Example payload: 
+{
+	"fenBoard" : "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+	"pgnCommand" : "e4"
+}
