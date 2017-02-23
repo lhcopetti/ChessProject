@@ -5,4 +5,4 @@ jdk:
 script:
     mvn -f PGNInterpreter clean verify
 after_success:
-    - mvn clean cobertura:cobertura coveralls:report
+    - mvn -f PGNInterpreter clean cobertura:cobertura coveralls:report
