@@ -1,4 +1,4 @@
-package com.copetti.lambda;
+package com.copetti.service;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.copetti.lambda;
+package com.copetti.service;
 
 import com.copetti.pgn.board.ChessBoard;
 

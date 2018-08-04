@@ -1,4 +1,4 @@
-package com.copetti.lambda;
+package com.copetti.service.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -7,6 +7,8 @@ import com.copetti.pgn.board.serializer.FEN.FENDeserializer;
 import com.copetti.pgn.command.ChessCommand;
 import com.copetti.pgn.exception.PGNInterpreterException;
 import com.copetti.pgn.interpreter.PGNInterpreter;
+import com.copetti.service.InterpreterRequest;
+import com.copetti.service.InterpreterResult;
 
 public class App implements RequestHandler<InterpreterRequest, InterpreterResult> {
 
